@@ -73,30 +73,40 @@ arrayOverlap.push(escala);
 canvas.add(escala);
 room.addEventListener("click", function () {
     $('.workPlace').empty();
+
     let formRoom = document.createElement('form'); // Create New Element Form
     // createform.setAttribute("action", ""); // Setting Action Attribute on Form
     // createform.setAttribute("method", "post"); // Setting Method Attribute on Form
     workplace.appendChild(formRoom);
     let headingRoom = document.createElement('h3'); // Heading of Form
     headingRoom.innerHTML = "Room";
+    headingRoom.setAttribute("class", "text-info");
     formRoom.appendChild(headingRoom);
     let line = document.createElement('hr'); // Giving Horizontal Row After Heading
     formRoom.appendChild(line);
     let linebreak = document.createElement('br');
     formRoom.appendChild(linebreak);
 
+
     let Recinto_name_label = document.createElement('label'); // Create Label for E-mail Field
     Recinto_name_label.innerHTML = "Name:";
+    Recinto_name_label.setAttribute("class", "text-info");
     formRoom.appendChild(Recinto_name_label);
     let recinto_name = document.createElement('input'); // Create Input Field for E-mail
     recinto_name.setAttribute("type", "text");
+    recinto_name.setAttribute("class", "form-control");
+    recinto_name.setAttribute("placeholder", "Enter the Name")
     formRoom.appendChild(recinto_name);
+    let namebreak = document.createElement('br');
+    formRoom.appendChild(namebreak);
 
     let widthlabel = document.createElement('label'); // Create Label for Name Field
-    widthlabel.innerHTML = "Weidth :"; // Set Field Labels
+    widthlabel.innerHTML = "Width :"; // Set Field Labels
     formRoom.appendChild(widthlabel);
     let inputWidth = document.createElement('input'); // Create Input Field for Name
     inputWidth.setAttribute("type", "text");
+    inputWidth.setAttribute("class", "form-control");
+    inputWidth.setAttribute("placeholder", "Enter the Width")
     // inputWidth.setAttribute("name", "dname");
     formRoom.appendChild(inputWidth);
     let linebreak1 = document.createElement('br');
@@ -106,20 +116,25 @@ room.addEventListener("click", function () {
     formRoom.appendChild(heightlabel);
     let inputHeight = document.createElement('input'); // Create Input Field for E-mail
     inputHeight.setAttribute("type", "text");
+    inputHeight.setAttribute("class", "form-control");
+    inputHeight.setAttribute("placeholder","Enter the Height");
     // inputHeight.setAttribute("name", "demail");
     formRoom.appendChild(inputHeight);
     let messagebreak = document.createElement('br');
     formRoom.appendChild(messagebreak);
     let botonCreate = document.createElement('button'); // Append Button
+    botonCreate.setAttribute("class", "btn btn-outline-success");
     botonCreate.setAttribute("type", "button");
     // submitelement.setAttribute("name", "dsubmit");
     botonCreate.innerHTML = "Create";
     formRoom.appendChild(botonCreate);
     let botonCancel = document.createElement('button'); // Append Button
     botonCancel.setAttribute("type", "button");
+    botonCancel.setAttribute("class", "btn btn-outline-danger");
     // submitelement.setAttribute("name", "dsubmit");
     botonCancel.innerHTML = "Cancel";
     formRoom.appendChild(botonCancel);
+
     botonCreate.addEventListener("click", function () {
         let topRoom = 100;
         let leftRoom = 50;
@@ -165,6 +180,7 @@ room.addEventListener("click", function () {
         workplace.appendChild(formWindow);
         let headingWindow = document.createElement('h3'); // Heading of Form
         headingWindow.innerHTML = "Window";
+        headingWindow.setAttribute("class", "text-info");
         formWindow.appendChild(headingWindow);
         let line = document.createElement('hr'); // Giving Horizontal Row After Heading
         formWindow.appendChild(line);
@@ -175,11 +191,16 @@ room.addEventListener("click", function () {
         formWindow.appendChild(window_name_label);
         let window_name = document.createElement('input'); // Create Input Field for E-mail
         window_name.setAttribute("type", "text");
+        window_name.setAttribute("class", "form-control");
+        window_name.setAttribute("placeholder", "Enter the name of the Window");
         formWindow.appendChild(window_name);
+        let namebreakWindow = document.createElement('br');
+        formWindow.appendChild(namebreakWindow);
         let sideLabel = document.createElement('label'); // Create Label for E-mail Field
         sideLabel.innerHTML = "Lado Pared (NSEO) :";
         formWindow.appendChild(sideLabel);
         let inputSide = document.createElement('select');
+        inputSide.setAttribute("class", "form-control");
         formWindow.appendChild(inputSide);
         let optionN = document.createElement('option');
         optionN.setAttribute('label', 'Norte');
@@ -199,15 +220,13 @@ room.addEventListener("click", function () {
         inputSide.appendChild(optionO);
         let messagebreak = document.createElement('br');
         formWindow.appendChild(messagebreak);
-
-
-
-
         let distanceLabel = document.createElement('label'); // Create Label for E-mail Field
         distanceLabel.innerHTML = "Distancia:";
         formWindow.appendChild(distanceLabel);
         let inputDistance = document.createElement('input'); // Create Input Field for E-mail
         inputDistance.setAttribute("type", "text");
+        inputDistance.setAttribute("class", "form-control");
+        inputDistance.setAttribute("placeholder", "Enter the Distance");
         // inputHeight.setAttribute("name", "demail");
         formWindow.appendChild(inputDistance);
         let messagebreak1 = document.createElement('br');
@@ -217,17 +236,21 @@ room.addEventListener("click", function () {
         formWindow.appendChild(widthlabel);
         let inputWidth = document.createElement('input'); // Create Input Field for Name
         inputWidth.setAttribute("type", "text");
+        inputWidth.setAttribute("class", "form-control");
+        inputWidth.setAttribute("placeholder", "Enter the Width");
         // inputWidth.setAttribute("name", "dname");
         formWindow.appendChild(inputWidth);
         let linebreak1 = document.createElement('br');
         formWindow.appendChild(linebreak1);
         let botonCreate = document.createElement('button'); // Append Button
         botonCreate.setAttribute("type", "button");
+        botonCreate.setAttribute("class", "btn btn-outline-success");
         // submitelement.setAttribute("name", "dsubmit");
         botonCreate.innerHTML = "Create";
         formWindow.appendChild(botonCreate);
         let botonCancel = document.createElement('button'); // Append Button
         botonCancel.setAttribute("type", "button");
+        botonCancel.setAttribute("class", "btn btn-outline-danger");
         // submitelement.setAttribute("name", "dsubmit");
         botonCancel.innerHTML = "Cancel";
         formWindow.appendChild(botonCancel);
@@ -235,11 +258,11 @@ room.addEventListener("click", function () {
 
         //Creating select options from local storage
 
-        let Select_Windows_Label = document.createElement('label'); // Create Label for E-mail Field
-        Select_Windows_Label.innerHTML = "Windows in Storage:";
-        formWindow.appendChild(Select_Windows_Label);
-        let windows_in_storage = document.createElement('select');
-        formWindow.appendChild(windows_in_storage);
+        //let Select_Windows_Label = document.createElement('label'); // Create Label for E-mail Field
+        //Select_Windows_Label.innerHTML = "Windows in Storage:";
+        //formWindow.appendChild(Select_Windows_Label);
+        //let windows_in_storage = document.createElement('select');
+        //formWindow.appendChild(windows_in_storage);
 
 
         //let window_from_LS = localStorage.getItem('Window');
@@ -305,7 +328,7 @@ room.addEventListener("click", function () {
                         }
                     });
                     if (!seSolapa) {
-                        swal("Validated Window", "The window is stored correctly", "success")
+       
                         arrayOverlap.push(wind1);
                         let Ventana1 = new Ventana(window_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
 
@@ -345,7 +368,7 @@ room.addEventListener("click", function () {
                         }
                     });
                     if (!seSolapa) {
-                        swal("Validated Window", "The window is stored correctly", "success")
+                  
                         arrayOverlap.push(wind1);
                         let Ventana2 = new Ventana(window_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
 
@@ -387,7 +410,7 @@ room.addEventListener("click", function () {
                         }
                     });
                     if (!seSolapa) {
-                        swal("Validated Window", "The window is stored correctly", "success")
+                
                         arrayOverlap.push(wind1);
                         let Ventana3 = new Ventana(window_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
 
@@ -437,7 +460,7 @@ room.addEventListener("click", function () {
                     });
                     if (!seSolapa) {
                         arrayOverlap.push(wind1);
-                        swal("Validated Window", "The window is stored correctly", "success")
+                     
                         let Ventana4 = new Ventana(window_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
 
                         MyPlano.Ventanas.push(Ventana4);
@@ -485,6 +508,7 @@ room.addEventListener("click", function () {
         workplace.appendChild(formDoor);
         let headingDoor = document.createElement('h3'); // Heading of Form
         headingDoor.innerHTML = "Door";
+        headingDoor.setAttribute("class", "text-info");
         formDoor.appendChild(headingDoor);
         let line = document.createElement('hr'); // Giving Horizontal Row After Heading
         formDoor.appendChild(line);
@@ -497,7 +521,11 @@ room.addEventListener("click", function () {
         formDoor.appendChild(Door_name_label);
         let door_name = document.createElement('input'); // Create Input Field for E-mail
         door_name.setAttribute("type", "text");
+        door_name.setAttribute("class", "form-control");
+        door_name.setAttribute("placeholder", "Enter the Name of the Door");
         formDoor.appendChild(door_name);
+        let namebreakDoor = document.createElement('br');
+        formDoor.appendChild(namebreakDoor);
 
 
 
@@ -505,6 +533,7 @@ room.addEventListener("click", function () {
         sideLabel.innerHTML = "Lado Pared (NSEO) :";
         formDoor.appendChild(sideLabel);
         let inputSide = document.createElement('select');
+        inputSide.setAttribute("class", "form-control");
         formDoor.appendChild(inputSide);
         let optionN = document.createElement('option');
         optionN.setAttribute('label', 'Norte');
@@ -529,6 +558,8 @@ room.addEventListener("click", function () {
         formDoor.appendChild(distanceLabel);
         let inputDistance = document.createElement('input'); // Create Input Field for E-mail
         inputDistance.setAttribute("type", "text");
+        inputDistance.setAttribute("class", "form-control");
+        inputDistance.setAttribute("placeholder", "Enter the Distance");
         // inputHeight.setAttribute("name", "demail");
         formDoor.appendChild(inputDistance);
         let messagebreak1 = document.createElement('br');
@@ -538,6 +569,8 @@ room.addEventListener("click", function () {
         formDoor.appendChild(widthlabel);
         let inputWidth = document.createElement('input'); // Create Input Field for Name
         inputWidth.setAttribute("type", "text");
+        inputWidth.setAttribute("class", "form-control");
+        inputWidth.setAttribute("placeholder", "Enter the Width");
         // inputWidth.setAttribute("name", "dname");
         formDoor.appendChild(inputWidth);
         let linebreak1 = document.createElement('br');
@@ -546,6 +579,7 @@ room.addEventListener("click", function () {
         doorOpeningLabel.innerHTML = "Door Opening :"; // Set Field Labels
         formDoor.appendChild(doorOpeningLabel);
         let doorOpeningInput = document.createElement('select'); // Create Input Field for Name
+        doorOpeningInput.setAttribute("class", "form-control");
         formDoor.appendChild(doorOpeningInput);
         let optionOutside = document.createElement('option');
         optionOutside.setAttribute('value', true);
@@ -561,6 +595,7 @@ room.addEventListener("click", function () {
         doorAxisLabel.innerHTML = "Door Axis :"; // Set Field Labels
         formDoor.appendChild(doorAxisLabel);
         let doorAxisInput = document.createElement('select'); // Create Input Field for Name
+        doorAxisInput.setAttribute("class", "form-control");
         formDoor.appendChild(doorAxisInput);
         let optionLeft = document.createElement('option');
         optionLeft.setAttribute('value', '');
@@ -574,11 +609,13 @@ room.addEventListener("click", function () {
         formDoor.appendChild(linebreak3);
         let botonCreate = document.createElement('button'); // Append Button
         botonCreate.setAttribute("type", "button");
+        botonCreate.setAttribute("class", "btn btn-outline-success");
         // submitelement.setAttribute("name", "dsubmit");
         botonCreate.innerHTML = "Create";
         formDoor.appendChild(botonCreate);
         let botonCancel = document.createElement('button'); // Append Button
         botonCancel.setAttribute("type", "button");
+        botonCancel.setAttribute("class", "btn btn-outline-danger");
         // submitelement.setAttribute("name", "dsubmit");
         botonCancel.innerHTML = "Cancel";
         formDoor.appendChild(botonCancel);
@@ -633,7 +670,7 @@ room.addEventListener("click", function () {
 
                     });
                     if (!seSolapa) {
-                        swal("Validated Door", "The door is stored correctly", "success")
+                 
                         arrayOverlap.push(door1);
 
                         let Puerta1 = new Puerta(door_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value, Boolean(doorAxisInput.value), Boolean(doorOpeningInput.value));
@@ -693,7 +730,7 @@ room.addEventListener("click", function () {
 
                     });
                     if (!seSolapa) {
-                        swal("Validated Door", "The door is stored correctly", "success")
+                   
                         arrayOverlap.push(door1);
 
                         let Puerta2 = new Puerta(door_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value, Boolean(doorAxisInput.value), Boolean(doorOpeningInput.value));
@@ -751,7 +788,7 @@ room.addEventListener("click", function () {
 
                     });
                     if (!seSolapa) {
-                        swal("Validated Door", "The door is stored correctly", "success")
+               
                         arrayOverlap.push(door1);
 
 
