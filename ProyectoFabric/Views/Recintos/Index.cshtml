@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ProyectoFabric.Models.Recinto>
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <span class="sub-title">Meet Our Team</span>
+                <h2 class="font-weight-bold text-black mb-5">Our Team</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (Recinto recinto in Model)
+            {
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="person">
+                        <div class="bio-img">
+                            <figure>
+                                <img class="icon flaticon-interior-design font-weight-light h2">
+                            </figure>
+                            <div class="social">
+                                <a asp-action="Edit" asp-route-id="@recinto.Id"><span class="icon-edit"></span></a>
+                                <a asp-action="Room_Insights" asp-route-id="@recinto.Id"><span class="icon-details"></span></a>
+                                <a asp-action="Delete" asp-route-id="@recinto.Id"><span class="icon-delete"></span></a>
+                            </div>
+                        </div>
+                        <h2>@recinto.Nombre</h2>
+                        <p>@recinto.Alto</p>
+                        <p>@recinto.Ancho</p>
+                        <span class="sub-title">Room: @recinto.Nombre</span>
+                        <a class="sub-title" asp-controller="Recintos" asp-action="Room_Insights"><span class="icon-eye"></span></a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

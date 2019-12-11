@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProyectoFabric.Models.Puerta>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <span class="sub-title">Meet Our Team</span>
+                <h2 class="font-weight-bold text-black mb-5">Our Team</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (Puerta puerta in Model)
+            {
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="person">
+                        <div class="bio-img">
+                            <figure>
+                                <img src="https://imageog.flaticon.com/icons/png/512/59/59805.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF" alt="Image" class="img-fluid">
+                            </figure>
+                            <div class="social">
+                                <a asp-action="Edit" asp-route-id="@puerta.Id"><span class="icon-edit"></span></a>
+                                <a asp-action="Details" asp-route-id="@puerta.Id"><span class="icon-details"></span></a>
+                                <a  asp-action="Delete" asp-route-id="@puerta.Id"><span class="icon-delete"></span></a>
+                            </div>
+                        </div>
+                        <h2>@puerta.Nombre</h2>
+                        <p>@puerta.Distance</p>
+                        <p>@puerta.DoorAxis</p> 
+                        <p>@puerta.DoorOpening</p>
+                        <span class="sub-title">Room: @puerta.Recinto.Nombre</span>
+                        <a class="sub-title" asp-controller="Recintos" asp-action="Room_Insights"><span class="icon-eye"></span></a>
+                    </div>
+                </div>
+            }
+          
+        </div>
+    </div>
+</div>
+
