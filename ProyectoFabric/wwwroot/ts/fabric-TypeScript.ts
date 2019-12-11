@@ -19,6 +19,27 @@ const puertas_dooropening:any = document.getElementsByClassName("puertas_doorope
 let canvas = new fabric.Canvas('canvas');
 let ctx = canvas.getContext();
 let arrayOverlap = [];
+let arrayGroup = [];
+let select = document.getElementById("sel1");
+
+
+function addToSelect() {
+    select.innerHTML = "";
+    let defaultValue = document.createElement("option");
+    defaultValue.innerHTML = "Select your Object";
+    select.appendChild(defaultValue);
+    for (let i = 0; i < arrayOverlap.length; i++) {
+        let opt = arrayOverlap[i].name;
+        let value = arrayOverlap[i].name;
+        let el = document.createElement("option");
+        el.innerHTML = opt;
+        el.value = value;
+        select.appendChild(el);
+    }
+
+}
+
+
 let topRoom = 100;
 let leftRoom = 50;
 var rect = new fabric.Rect({
