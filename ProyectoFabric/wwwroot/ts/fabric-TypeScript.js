@@ -33,6 +33,8 @@ var rect = new fabric.Rect({
     // lockUniScaling: true,
     // lockRotation: true,
     // selectable: false
+    //
+
 });
 if (rect.width > 350 || rect.height > 300) {
 }
