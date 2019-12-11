@@ -9,11 +9,16 @@ namespace ProyectoFabric.Models
 {
     public class AppUser:IdentityUser
     {
-        [MaxLength(40)]
+        [Required(ErrorMessage = "The Name is a Required Parameter")]
+        [StringLength(40, ErrorMessage = "The Name is Too Sort", MinimumLength = 4)]
+      
         public string Nombre { get; set; }
-        [MaxLength(60)]
+        [StringLength(40, ErrorMessage = "The Surname is Too Sort", MinimumLength = 4)]
+        [Required(ErrorMessage = "The Surname is a Required Parameter")]
+  
         public string Apellidos { get; set; }
-        [MaxLength(60)]
+        [Required(ErrorMessage = "The Company is a Required Parameter")]
+        [StringLength(40, ErrorMessage = "The Company Name is Too Sort", MinimumLength = 4)]
         public string Empresa { get; set; }
         List<Plano> Planos { get; set; }
     }

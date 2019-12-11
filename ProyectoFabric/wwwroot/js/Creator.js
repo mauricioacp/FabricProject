@@ -160,7 +160,7 @@ room.addEventListener("click", function () {
             swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
 
         } else {
-            swal("Validated Enclosure", "The enclosure is stored correctly", "success")
+            
             canvas.add(rect);
 
             let recinto1 = new Recinto(recinto_name.value, inputHeight.value, inputWidth.value);

@@ -62,11 +62,11 @@ namespace ProyectoFabric.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [MaxLength(40, ErrorMessage = "Máximo 40 caracteres")]
+            [MaxLength(40, ErrorMessage = "Max. 40 Caracters")]
             public string Nombre { get; set; }
-            [MaxLength(60, ErrorMessage = "Máximo 60 caracteres")]
+            [MaxLength(60, ErrorMessage = "Max. 60 Caracters")]
             public string Apellidos { get; set; }
-            [MaxLength(60, ErrorMessage = "Máximo 60 caracteres")]
+            [MaxLength(60, ErrorMessage = "Max. 60 Caracters")]
             public string Empresa { get; set; }
 
 
