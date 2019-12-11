@@ -1,4 +1,5 @@
-
+import { fabric } from "fabric";
+new fabric.Canvas("C");
 let recinto_nombre = document.getElementById("recinto_nombre").value;
 const recinto_alto = document.getElementById("recinto_alto").value;
 const recinto_ancho = document.getElementById("recinto_ancho").value;
