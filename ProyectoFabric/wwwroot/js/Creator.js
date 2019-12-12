@@ -58,23 +58,11 @@ let workplace = document.getElementsByClassName("workPlace")[0];
 let room = document.getElementById("room");
 let arrayOverlap = [];
 
-escala = new fabric.Rect({
-    left: 10,
-    top: 10,
-    fill: 'transparent',
-    stroke: 'solid black',
-    strokeWidth: 1,
-    strokeUniform: true,
-    width: 50,
-    height: 10,
-    selectable: false
-});
-arrayOverlap.push(escala);
-canvas.add(escala);
+
 room.addEventListener("click", function () {
     $('.workPlace').empty();
 
-
+  
     let formRoom = document.createElement('form'); // Create New Element Form
     // createform.setAttribute("action", ""); // Setting Action Attribute on Form
     // createform.setAttribute("method", "post"); // Setting Method Attribute on Form
