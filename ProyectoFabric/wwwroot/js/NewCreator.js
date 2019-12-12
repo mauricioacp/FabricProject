@@ -1,12 +1,12 @@
 ﻿
-class Recinto {
+class Recinto  {
     constructor(nombre, altura, anchura) {
         this.Nombre = nombre,
             this.Altura = altura,
             this.Anchura = anchura
     }
 }
-class Ventana {
+ class Ventana {
 
     constructor(nombre, distance, anchura, orientacion) {
         this.Nombre = nombre,
@@ -211,7 +211,7 @@ function createRoomForm(objeto, myplanorecinto) {
         let i = arrayOverlap.indexOf(rect);
         arrayOverlap.splice(i, 1);
         addToSelect();
-        if (!MyplanoObjectRecinto == null) {
+        if (!myplanorecinto == null) {
 
             MyPlano.Recinto.splice(MyPlano.Recinto.indexOf(myplanorecinto), 1);
         }
