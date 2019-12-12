@@ -74,6 +74,7 @@ canvas.add(escala);
 room.addEventListener("click", function () {
     $('.workPlace').empty();
 
+
     let formRoom = document.createElement('form'); // Create New Element Form
     // createform.setAttribute("action", ""); // Setting Action Attribute on Form
     // createform.setAttribute("method", "post"); // Setting Method Attribute on Form
@@ -125,6 +126,7 @@ room.addEventListener("click", function () {
     let botonCreate = document.createElement('button'); // Append Button
     botonCreate.setAttribute("class", "btn btn-outline-success");
     botonCreate.setAttribute("type", "button");
+    botonCreate.setAttribute("id", "create");
     // submitelement.setAttribute("name", "dsubmit");
     botonCreate.innerHTML = "Create";
     formRoom.appendChild(botonCreate);
@@ -157,21 +159,42 @@ room.addEventListener("click", function () {
         });
         //Límites ancho: 
         if (rect.width > 350 || rect.height > 300) {
+
             swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
 
-        } else {
-            
-            canvas.add(rect);
-
-            let recinto1 = new Recinto(recinto_name.value, inputHeight.value, inputWidth.value);
-            MyPlano.Recinto = recinto1;
+        }
+        else if (parseInt(recinto_name.value) || (recinto_name.value == ""))
+        {
+            swal("Name Validation", "You must enter a Name for the Room", "error");
+        }
+        else if (!parseInt(inputWidth.value))
+        {
+            swal("Width Validation", "You must enter a Number for the Width", "error");
         }
 
-    })
+        else if (!parseInt(inputHeight.value))
+        {
+            swal("Height Validation", "You must enter a Number for the Height ", "error");
+        } 
+
+            else {
+
+                canvas.add(rect);
+
+                let recinto1 = new Recinto(recinto_name.value, inputHeight.value, inputWidth.value);
+                MyPlano.Recinto = recinto1;
+            }
+
+        })
+
+    
     botonCancel.addEventListener("click", function () {
         formRoom.remove();
     })
+
+
     let wind = document.getElementById("window");
+
     wind.addEventListener("click", function () {
         $('.workPlace').empty();
         let formWindow = document.createElement('form'); // Create New Element Form
@@ -318,8 +341,24 @@ room.addEventListener("click", function () {
                 //Límites ancho: 
                 if ((wind1.width + parseInt(inputDistance.value)) > rect.width) {
                     swal("Overlap Error", "The object entered overlaps with the previous", "error");
+                }
+                else if (parseInt(window_name.value) || (window_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Window", "error");
+                }
+                else if (!parseInt(inputWidth.value))
+                {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+                }
+                else if (!parseInt(inputHeight.value))
+                {
+                    swal("Height Validation", "You must enter a number for the Height", "error");
+                }
+                else if (!parseInt(inputDistance.value))
+                {
+                    swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
 
-                } else {
+                else {
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
                         if (i.intersectsWithObject(wind1)) {
@@ -328,13 +367,17 @@ room.addEventListener("click", function () {
                         }
                     });
                     if (!seSolapa) {
-       
-                        arrayOverlap.push(wind1);
-                        let Ventana1 = new Ventana(window_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
 
-                        MyPlano.Ventanas.push(Ventana1);
-                        MiArray_Ventanas.push(Ventana1);
-                        canvas.add(wind1);
+
+                                arrayOverlap.push(wind1);
+
+                                
+                                let Ventana1 = new Ventana(window_name.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
+
+                                MyPlano.Ventanas.push(Ventana1);
+                                MiArray_Ventanas.push(Ventana1);
+                                canvas.add(wind1);
+                            
                     }
                 }
             }
@@ -356,10 +399,36 @@ room.addEventListener("click", function () {
                     selectable: false
                 });
                 let seSolapa = false;
-                if ((wind1.width * (-1) + parseInt(inputDistance.value)) > rect.width) {
+                if ((wind1.width * (-1) + parseInt(inputDistance.value)) > rect.width)
+                {
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
-                } else {
+                }
+
+                else if (parseInt(window_name.value) || (window_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Window", "error");
+                }
+
+                else if (parseInt(input)) {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+
+                }
+            
+                else if (!parseInt(inputWidth.value))
+                {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+
+                 }
+                else if (!parseInt(inputHeight.value))
+                {
+                swal("Height Validation", "You must enter a number for the Height", "error");
+                }
+                else if (!parseInt(inputDistance.value))
+                {
+                swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
+
+                else {
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
                         if (i.intersectsWithObject(wind1)) {
@@ -398,10 +467,26 @@ room.addEventListener("click", function () {
                 });
                 let seSolapa = false;
                 //Límites ancho: 
-                if ((wind1.height + parseInt(inputDistance.value)) > rect.height) {
+                if ((wind1.height + parseInt(inputDistance.value)) > rect.height)
+                {
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
-
-                } else {
+                }
+                else if (parseInt(window_name.value) || (window_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Window", "error");
+                }
+                else if (!parseInt(inputWidth.value))
+                {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+                }
+                else if (!parseInt(inputHeight.value))
+                {
+                    swal("Height Validation", "You must enter a number for the Height", "error");
+                }
+                else if (!parseInt(inputDistance.value))
+                {
+                    swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
+                else {
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
                         if (i.intersectsWithObject(wind1)) {
@@ -443,11 +528,32 @@ room.addEventListener("click", function () {
                 let seSolapa = false;
 
                 //Límites ancho: 
-                if ((wind1.height * (-1) + parseInt(inputDistance.value)) > rect.height) {
+                if ((wind1.height * (-1) + parseInt(inputDistance.value)) > rect.height)
+                {
 
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
-                } else {
+                }
+
+                else if (parseInt(window_name.value) || (window_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Window", "error");
+                }
+            
+                else if (!parseInt(inputWidth.value))
+                {
+                swal("Width Validation", "You must enter a number for the Width", "error");
+                 }
+                else if (!parseInt(inputHeight.value))
+                {
+                swal("Height Validation", "You must enter a number for the Height", "error");
+                }
+                else if (!parseInt(inputDistance.value))
+                {
+                swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
+
+
+                else {
 
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
@@ -489,16 +595,6 @@ room.addEventListener("click", function () {
     let door = document.getElementById("door");
     door.addEventListener("click", function () {
         $('.workPlace').empty();
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -656,9 +752,22 @@ room.addEventListener("click", function () {
                 if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.width) {
 
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
+                }
 
+                else if (parseInt(door_name.value) || (door_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Door", "error");
+                }
 
-                } else {
+                else if (!parseInt(inputWidth.value)) {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+                }
+               
+                else if (!parseInt(inputDistance.value)) {
+                    swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
+                else
+
+                {
 
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
@@ -713,12 +822,27 @@ room.addEventListener("click", function () {
 
                 let seSolapa = false;
                 //Límites ancho: 
-                if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.height) {
+                if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.height)
+                {
 
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
+                }
+                else if (parseInt(door_name.value) || (door_name.value == ""))
+                {
+                        swal("Name Validation", "You must enter a Name for the Door", "error");
+                    }
 
-                } else {
+                else if (!parseInt(inputWidth.value))
+                {
+                        swal("Width Validation", "You must enter a number for the Width", "error");
+                    }
+
+                else if (!parseInt(inputDistance.value))
+                     {
+                        swal("Distance Validation", "You must enter a number for the Distance", "error");
+                    }
+                 else {
 
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
@@ -775,8 +899,20 @@ room.addEventListener("click", function () {
 
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
+                }
 
-                } else {
+                else if (parseInt(door_name.value) || (door_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Door", "error");
+                }
+
+                else if (!parseInt(inputWidth.value)) {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+                }
+
+                else if (!parseInt(inputDistance.value)) {
+                    swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
+                else {
 
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
@@ -836,7 +972,21 @@ room.addEventListener("click", function () {
                     swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
 
-                } else {
+                }
+
+                else if (parseInt(door_name.value) || (door_name.value == "")) {
+                    swal("Name Validation", "You must enter a Name for the Door", "error");
+                }
+
+                else if (!parseInt(inputWidth.value)) {
+                    swal("Width Validation", "You must enter a number for the Width", "error");
+                }
+
+                else if (!parseInt(inputDistance.value)) {
+                    swal("Distance Validation", "You must enter a number for the Distance", "error");
+                }
+                else
+                {
 
                     //Condiciones Solapamiento:
                     arrayOverlap.forEach(function (i) {
