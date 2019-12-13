@@ -1,4 +1,40 @@
 
+class Recinto {
+    constructor(nombre, altura, anchura) {
+        this.Nombre = nombre,
+            this.Altura = altura,
+            this.Anchura = anchura;
+    }
+}
+class Ventana {
+    constructor(nombre, distance, anchura, orientacion) {
+        this.Nombre = nombre,
+            this.Distance = distance,
+            this.Anchura = anchura,
+            this.orientacion = orientacion;
+    }
+}
+class Puerta {
+    constructor(nombre, altura, anchura, orientacion, dooraxis, dooropening) {
+        this.Nombre = nombre,
+            this.Altura = altura,
+            this.Anchura = anchura,
+            this.Orientacion = orientacion,
+            this.DoorAxis = dooraxis,
+            this.DoorOpening = dooropening;
+    }
+}
+;
+class Plano {
+    constructor(Nombre, Recinto, Ventana, Puertas, userId) {
+        this.userId = userId;
+        this.Nombre = Nombre,
+            this.Recinto = Recinto,
+            this.Ventanas = [Ventana],
+            this.Puertas = [Puertas];
+    }
+    ;
+}
 let recinto_nombre = document.getElementById("recinto_nombre").value;
 const recinto_alto = document.getElementById("recinto_alto").value;
 const recinto_ancho = document.getElementById("recinto_ancho").value;
@@ -12,8 +48,9 @@ const puertas_wallside = document.getElementsByClassName("puertas_wallside");
 const puertas_width = document.getElementsByClassName("puertas_width");
 const puertas_dooraxis = document.getElementsByClassName("puertas_dooraxis");
 const puertas_dooropening = document.getElementsByClassName("puertas_dooropening");
-//let userId:any = document.getElementById("appUserId");
-//MyPlano.userId = userId.value;
+let userId = document.getElementById("appUserId").value;
+let MyPlano;
+//MyPlano.userId = userId;
 let botonRedimension = document.getElementById("botonRedimension");
 let workplace = document.getElementsByClassName("workPlace")[0];
 let room = document.getElementById("room");
@@ -22,6 +59,28 @@ let ctx = canvas.getContext();
 let arrayOverlap = [];
 let arrayGroup = [];
 let select = document.getElementById("sel1");
+select.addEventListener('change', function () {
+    //let valueselect:any = (select as HTMLInputElement).value;
+    let foundObject = arrayOverlap.find(element => element.name == this.value);
+    if (MyPlano.Ventanas[0] == null) {
+        MyPlano.Ventanas.splice(0, 1);
+    }
+    if (MyPlano.Puertas[0] == null) {
+        MyPlano.Puertas.splice(0, 1);
+    }
+    if (foundObject.type == "room") {
+        let MyplanoObjectRecinto = MyPlano.Recinto.name == this;
+        //createRoomForm(foundObject, MyplanoObjectRecinto);
+    }
+    if (foundObject.type == "window") {
+        let MyplanoObjectVentanas = MyPlano.Ventanas.find(element => element.name == this);
+        //createWindowForm(foundObject, MyplanoObjectVentanas);
+    }
+    if (foundObject.type == "door") {
+        let MyplanoObject = MyPlano.Puertas.find(element => element.name == this);
+        //createDoorForm(foundObject, MyplanoObject);
+    }
+});
 function addToSelect() {
     select.innerHTML = "";
     let defaultValue = document.createElement("option");
