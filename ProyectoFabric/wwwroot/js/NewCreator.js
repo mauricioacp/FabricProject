@@ -21,6 +21,7 @@ class Puerta {
             this.Altura = altura,
             this.Anchura = anchura,
             this.Orientacion = orientacion,
+
             this.DoorAxis = dooraxis,
             this.DoorOpening = dooropening
     }
@@ -36,7 +37,6 @@ class Plano {
     };
 }
 let userId = document.getElementById("appUserId").value;
-
 let MyPlano = new Plano();
 MyPlano.userId = userId;
 let canvas = new fabric.Canvas('canvas');
@@ -45,52 +45,58 @@ let workplace = document.getElementsByClassName("workPlace")[0];
 let select = document.getElementById("sel1");
 let room = document.getElementById("room");
 let arrayOverlap = [];
-let arrayGroup = [];
-
 let botonRedimension = document.getElementById("botonRedimension");
+let botonDeleteAll = document.getElementById("botonDeleteAll");
 
-botonRedimension.addEventListener('click', function () {
-    let group = new fabric.Group([
-        canvas.item(0).clone(),
-        canvas.item(1).clone(),
-        canvas.item(2).clone()
-
-    ]);
+botonDeleteAll.addEventListener('click', function () {
     canvas.clear().renderAll();
-    canvas.add(group);
+    arrayOverlap = [];
+    addToSelect();
 })
-
 
 select.addEventListener('change', function () {
 
     let foundObject = arrayOverlap.find(element => element.name == this.value);
-    if (MyPlano.Ventanas[0] == null) {
+    let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
+    let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
+   
 
+    if (MyPlano.Ventanas[0] == null) {
+        
         MyPlano.Ventanas.splice(0, 1);
+       
     }
     if (MyPlano.Puertas[0] == null) {
+       
 
         MyPlano.Puertas.splice(0, 1);
     }
 
 
     if (foundObject.type == "room") {
-
+        let i = arrayOverlap.indexOf(foundObject);
+        arrayOverlap.splice(i, 1);
+        MyPlano.Recinto.remove();
         let MyplanoObjectRecinto = MyPlano.Recinto.name == this.value;
+
         createRoomForm(foundObject, MyplanoObjectRecinto);
     }
 
     if (foundObject.type == "window") {
-
-        let MyplanoObjectVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
-        createWindowForm(foundObject, MyplanoObjectVentanas);
+        let i = arrayOverlap.indexOf(foundObject);
+        arrayOverlap.splice(i, 1);
+        let y = MyPlano.Ventanas.indexOf(foundVentanas);
+        MyPlano.Ventanas.splice(y, 1);
+        createWindowForm(foundObject, foundVentanas);
 
     }
 
     if (foundObject.type == "door") {
-
-        let MyplanoObject = MyPlano.Puertas.find(element => element.name == this.value);
-        createDoorForm(foundObject, MyplanoObject);
+        let i = arrayOverlap.indexOf(foundObject);
+        arrayOverlap.splice(i, 1);
+        let y = MyPlano.Puertas.indexOf(foundPuertas);
+        MyPlano.Puertas.splice(y, 1);
+        createDoorForm(foundObject, foundPuertas);
 
     }
 })
@@ -117,25 +123,7 @@ room.addEventListener("click", function () {
     })
 })
 
-
-function addToSelect() {
-    select.innerHTML = "";
-    let defaultValue = document.createElement("option");
-    defaultValue.innerHTML = "Select your Object";
-    select.appendChild(defaultValue);
-    for (let i = 0; i < arrayOverlap.length; i++) {
-        let opt = arrayOverlap[i].name;
-        let value = arrayOverlap[i].name;
-        let el = document.createElement("option");
-        el.innerHTML = opt;
-        el.value = value;
-        select.appendChild(el);
-    }
-
-}
-
-
-function createRoomForm(objeto, myplanorecinto) {
+function createRoomForm(Object, myplanorecinto) {
     $('.workPlace').empty();
 
     let formRoom = document.createElement('form');
@@ -196,35 +184,35 @@ function createRoomForm(objeto, myplanorecinto) {
     botonDelete.innerHTML = "Delete";
     formRoom.appendChild(botonDelete);
 
-    let rect = objeto;
+    let rect = Object;
 
     botonCreate.addEventListener("click", function () {
 
-        rect = createRoom(inputName, inputWidth, inputHeight);
-
+       rect=createRoom(inputName, inputWidth, inputHeight,formRoom);
+      
     })
 
     botonDelete.addEventListener("click", function () {
 
+        //if (!myplanorecinto == null) {
+
+        //    MyPlano.Recinto.splice(MyPlano.Recinto.indexOf(myplanorecinto), 1);
+        //}
+        //else {
+        //    MyPlano.Recinto.splice((MyPlano.Recinto.length - 1), 1);
+        //}
+
         formRoom.remove();
         canvas.remove(rect);
-        let i = arrayOverlap.indexOf(rect);
-        arrayOverlap.splice(i, 1);
         addToSelect();
-        if (!myplanorecinto == null) {
-
-            MyPlano.Recinto.splice(MyPlano.Recinto.indexOf(myplanorecinto), 1);
-        }
-        else {
-            MyPlano.Recinto.splice((MyPlano.Recinto.length - 1), 1);
-        }
-
     })
 }
 
 
-function createRoom(inputName, inputWidth, inputHeight) {
+function createRoom(inputName, inputWidth, inputHeight,formroom) {
 
+    let heightWind1 = 10;
+    let heightDoor = 10;
     let topRoom = 100;
     let leftRoom = 100;
 
@@ -240,11 +228,11 @@ function createRoom(inputName, inputWidth, inputHeight) {
         strokeUniform: true,
         width: parseInt(inputWidth.value),
         height: parseInt(inputHeight.value),
-        selectable: true,
-        hasControls: true,
+        selectable: false,
+        hasControls: false,
         // lockMovementX: true,
         // lockUniScaling: true,
-        lockRotation: true,
+        //lockRotation: true,
         // selectable: false
     });
 
@@ -254,18 +242,55 @@ function createRoom(inputName, inputWidth, inputHeight) {
         alert('Your Room is out of limits');
 
     } else {
-        canvas.add(rect);
+        formroom.remove();
+        canvas.clear().renderAll();
         arrayOverlap.push(rect);
-        addToSelect();
         let recinto1 = new Recinto(inputName.value, inputHeight.value, inputWidth.value);
         MyPlano.Recinto = recinto1;
-        arrayGroup.push(rect);
+        addToSelect();
+        arrayOverlap.forEach(function (x) {
+
+            if (x.type == "window" && x.side == "e") {
+                x.set('left', leftRoom + rect.width - heightWind1 / 2);
+            }
+            if (x.type == "window" && x.side == "s") {
+                x.set('left', leftRoom + rect.width + x.width - heightWind1 / 2);
+                x.set('top', topRoom + rect.height - heightWind1 / 2);
+            }
+
+
+            if (x.type == "door" && x.side == "e") {
+
+                if (x.flipX == true) {
+                    x.set('left', leftRoom + rect.width + x.width - heightDoor / 2 + 1);
+                    x.set('top', topRoom + x.width + 1)
+
+                } else {
+                    x.set('left', leftRoom + rect.width + heightDoor / 2 + 1);
+                    x.set('top', topRoom + x.width + 1)
+                }
+            }
+
+            if (x.type == "door" && x.side == "s") {
+
+                if (x.flipX == true) {
+                    x.set('left', rect.width);
+                    x.set('top', topRoom + rect.height + x.width - heightWind1 / 2 + 1);
+                } else {
+                    x.set('left', rect.width);
+                    x.set('top', topRoom + rect.height + heightWind1 / 2 + 1);
+                }
+            }
+
+            canvas.add(x);
+        })
+
     }
     return rect;
 };
 
 
-function createWindowForm(objeto, myplanoventanas) {
+function createWindowForm(Object,myplanoventanas) {
     $('.workPlace').empty();
 
     let formWindow = document.createElement('form');
@@ -354,41 +379,35 @@ function createWindowForm(objeto, myplanoventanas) {
     botonDelete.innerHTML = "Delete";
     formWindow.appendChild(botonDelete);
 
-    let wind1 = objeto;
-
+    let rect = Object;
 
     botonCreate.addEventListener("click", function () {
-        wind1 = createWindow(inputSide, inputWindName, inputDistance, inputWidth);
-
+        wind1 = createWindow(inputSide, inputWindName, inputDistance, inputWidth, formWindow);
+      
     })
 
     botonDelete.addEventListener("click", function () {
 
         formWindow.remove();
-
-
-
         canvas.remove(wind1);
-        let i = arrayOverlap.indexOf(wind1);
-        arrayOverlap.splice(i, 1);
         addToSelect();
 
-        if (!myplanoventanas == null) {
+        //if (!myplanoventanas == null) {
 
-            MyPlano.Ventanas.splice(MyPlano.Ventanas.indexOf(myplanoventanas), 1);
-        }
-        else {
-            MyPlano.Ventanas.splice((MyPlano.Ventanas.length - 1), 1);
-        }
+        //    MyPlano.Ventanas.splice(MyPlano.Ventanas.indexOf(myplanoventanas), 1);
+        //}
+        //else {
+        //    MyPlano.Ventanas.splice((MyPlano.Ventanas.length - 1), 1);
+        //}
 
     })
 }
 
 
-function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
+function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formWindow) {
     let heightWind1 = 10;
     let wind1;
-
+    let roomSize = canvas._objects.find(x => x.type == "room");
 
     if (inputSide.value.toLowerCase() === "n") {
         let topRoom = 100;
@@ -428,18 +447,25 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
 
                         alert("objects overlap");
                         seSolapa = true;
-
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
                     }
                 }
 
             });
             if (!seSolapa) {
+                formWindow.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(wind1);
                 let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
                 MyPlano.Ventanas.push(Ventana1);
-                canvas.add(wind1);
                 addToSelect();
-                // arrayGroup.push(wind1);
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
 
         }
@@ -449,8 +475,8 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
     if (inputSide.value.toLowerCase() === "s") {
         let topRoom = 100;
         let leftRoom = 100;
-        topRoom = topRoom + rect.height;
-        leftRoom = leftRoom + rect.width;
+        topRoom = topRoom + roomSize.height;
+        leftRoom = leftRoom + roomSize.width;
 
         wind1 = new fabric.Rect();
         wind1.set({
@@ -488,18 +514,27 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
 
                         alert("objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
 
             });
             if (!seSolapa) {
+                formWindow.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(wind1);
-                canvas.add(wind1);
                 let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
                 MyPlano.Ventanas.push(Ventana1);
                 addToSelect();
-                // arrayGroup.push(wind1);
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
+
             }
         }
     }
@@ -508,7 +543,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
         let topRoom = 100;
         let leftRoom = 100;
         topRoom;
-        leftRoom = leftRoom + rect.width;
+        leftRoom = leftRoom + roomSize.width;
 
         wind1 = new fabric.Rect();
         wind1.set({
@@ -546,18 +581,26 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
 
                         alert("objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
 
             });
             if (!seSolapa) {
+                formWindow.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(wind1);
-                canvas.add(wind1);
                 let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
                 MyPlano.Ventanas.push(Ventana1);
-                arrayGroup.push(wind1);
                 addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
         }
     }
@@ -565,7 +608,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
     if (inputSide.value.toLowerCase() === "o") {
         let topRoom = 100;
         let leftRoom = 100;
-        topRoom = topRoom + rect.height;
+        topRoom = topRoom + roomSize.height;
         leftRoom;
 
         wind1 = new fabric.Rect();
@@ -604,24 +647,32 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth) {
 
                         alert("objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
             });
             if (!seSolapa) {
+                formWindow.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(wind1);
-                arrayGroup.push(wind1);
                 let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
                 MyPlano.Ventanas.push(Ventana1);
-                canvas.add(wind1);
                 addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
         }
     }
     return wind1;
 }
 
-function createDoorForm(objeto, myplanopuertas) {
+function createDoorForm(Object,myplanopuertas) {
     $('.workPlace').empty();
 
     let formDoor = document.createElement('form');
@@ -754,38 +805,36 @@ function createDoorForm(objeto, myplanopuertas) {
     // submitelement.setAttribute("name", "dsubmit");
     botonDelete.innerHTML = "Delete";
     formDoor.appendChild(botonDelete);
-
-    let door1 = objeto;
+    let rect = Object;
 
     botonCreate.addEventListener("click", function () {
 
-        door1 = createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, doorAxisInput, inputWidth);
-
+        door1 = createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, doorAxisInput, inputWidth, formDoor);
+      
     })
 
     botonDelete.addEventListener("click", function () {
 
         formDoor.remove();
         canvas.remove(door1);
-        let i = arrayOverlap.indexOf(door1);
-        arrayOverlap.splice(i, 1);
         addToSelect();
-        if (!myplanopuertas == null) {
+        //if (!myplanopuertas == null) {
 
-            MyPlano.Puertas.splice(MyPlano.Puertas.indexOf(myplanopuertas), 1);
-        }
-        else {
-            MyPlano.Puertas.splice((MyPlano.Puertas.length - 1), 1);
-        }
+        //    MyPlano.Puertas.splice(MyPlano.Puertas.indexOf(myplanopuertas), 1);
+        //}
+        //else {
+        //    MyPlano.Puertas.splice((MyPlano.Puertas.length - 1), 1);
+        //}
     })
 }
 
 
-function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, doorAxisInput, inputWidth) {
+function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, doorAxisInput, inputWidth, formDoor) {
 
     let heightDoor = 10;
     let ejeX = Boolean(doorOpeningInput.value);
     let ejeY = Boolean(doorAxisInput.value);
+    let roomSize = canvas._objects.find(x => x.type == "room");
     let door1;
 
     if (inputSide.value.toLowerCase() === "n") {
@@ -838,17 +887,26 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
                         alert("Objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
 
             });
             if (!seSolapa) {
+                formDoor.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(door1);
-                canvas.add(door1);
-                addToSelect();
                 let Puerta1 = new Puerta(inputDoorName.value, inputDistance.value, inputWidth.value * -1, inputSide.value, Boolean(doorAxisInput.value), Boolean(doorOpeningInput.value));
                 MyPlano.Puertas.push(Puerta1);
+                addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
         }
     }
@@ -857,7 +915,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         let topRoom = 100;
         let leftRoom = 100;
         topRoom;
-        leftRoom = leftRoom + rect.width;
+        leftRoom = leftRoom + roomSize.width;
 
         let x = parseInt(inputWidth.value);
 
@@ -903,17 +961,27 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
                         alert("Objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
 
             });
             if (!seSolapa) {
+                formDoor.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(door1);
-                canvas.add(door1);
                 let Puerta1 = new Puerta(inputDoorName.value, inputDistance.value, inputWidth.value * -1, inputSide.value, Boolean(doorAxisInput.value), Boolean(doorOpeningInput.value));
                 MyPlano.Puertas.push(Puerta1);
                 addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
+
             }
         }
     }
@@ -921,8 +989,8 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
     if (inputSide.value.toLowerCase() === "s") {
         let topRoom = 100;
         let leftRoom = 100;
-        topRoom = topRoom + rect.height;
-        leftRoom = leftRoom + rect.width;
+        topRoom = topRoom + roomSize.height;
+        leftRoom = leftRoom + roomSize.width;
 
         let x = parseInt(inputWidth.value);
 
@@ -967,17 +1035,26 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
                         alert("Objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
 
             });
             if (!seSolapa) {
+                formDoor.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(door1);
-                canvas.add(door1);
                 let Puerta1 = new Puerta(inputDoorName.value, inputDistance.value, inputWidth.value * -1, inputSide.value, Boolean(doorAxisInput.value), Boolean(doorOpeningInput.value));
                 MyPlano.Puertas.push(Puerta1);
                 addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
         }
 
@@ -986,7 +1063,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
     if (inputSide.value.toLowerCase() === "o") {
         let topRoom = 100;
         let leftRoom = 100;
-        topRoom = topRoom + rect.height;
+        topRoom = topRoom + roomSize.height;
         leftRoom;
 
         let x = parseInt(inputWidth.value);
@@ -1032,26 +1109,33 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
                         alert("Objects overlap");
                         seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
 
                     }
                 }
 
             });
             if (!seSolapa) {
+                formDoor.remove();
+                canvas.clear().renderAll();
                 arrayOverlap.push(door1);
-                canvas.add(door1);
                 let Puerta1 = new Puerta(inputDoorName.value, inputDistance.value, inputWidth.value * -1, inputSide.value, Boolean(doorAxisInput.value), Boolean(doorOpeningInput.value));
                 MyPlano.Puertas.push(Puerta1);
                 addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
         }
     }
     return door1;
 }
 
-function Borrar(objeto) {
-    canvas.remove(objeto);
-}
+
 
 if (MyPlano.Ventanas[0] == null) {
 
@@ -1061,6 +1145,28 @@ if (MyPlano.Puertas[0] == null) {
 
     MyPlano.Puertas.splice(0, 1);
 }
+
+function Borrar(Object) {
+    canvas.remove(Object);
+}
+
+
+function addToSelect() {
+    select.innerHTML = "";
+    let defaultValue = document.createElement("option");
+    defaultValue.innerHTML = "Select your Object";
+    select.appendChild(defaultValue);
+    for (let i = 0; i < arrayOverlap.length; i++) {
+        let opt = arrayOverlap[i].name;
+        let value = arrayOverlap[i].name;
+        let el = document.createElement("option");
+        el.innerHTML = opt;
+        el.value = value;
+        select.appendChild(el);
+    }
+
+}
+
 
 MyPlano.Nombre = "Plano1";
 console.log(MyPlano);

@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ProyectoFabric"
+    "\\ProyectoFabric",
+    "\\ProyectoFabric\\Views",
+    "\\ProyectoFabric\\Views\\Home"
   ],
   "SelectedNode": "\\ProyectoFabric.sln",
   "PreviewInSolutionExplorer": false
