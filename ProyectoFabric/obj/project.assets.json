@@ -8581,23 +8581,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Raul\\.nuget\\packages\\": {},
+    "C:\\Users\\Dan\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
+      "projectUniqueName": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
       "projectName": "ProyectoFabric",
-      "projectPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
-      "packagesPath": "C:\\Users\\Raul\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\",
+      "projectPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
+      "packagesPath": "C:\\Users\\Dan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Raul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
