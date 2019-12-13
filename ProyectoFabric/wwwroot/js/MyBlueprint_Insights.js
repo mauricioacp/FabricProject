@@ -148,11 +148,47 @@ let rect = new fabric.Rect({
 if (rect.width > 350 || rect.height > 300) {
 }
 else {
-    canvas.add(rect);
     arrayOverlap.push(rect);
-    addToSelect();
     let recinto1 = new Recinto(recinto_nombre, parseInt(recinto_alto), parseInt(recinto_ancho));
     MyPlano.Recinto = recinto1;
+    addToSelect();
+    arrayOverlap.forEach(function (x) {
+
+        if (x.type == "window" && x.side == "e") {
+            x.set('left', leftRoom + rect.width - heightWind1 / 2);
+        }
+        if (x.type == "window" && x.side == "s") {
+            x.set('left', leftRoom + rect.width + x.width - heightWind1 / 2);
+            x.set('top', topRoom + rect.height - heightWind1 / 2);
+        }
+
+
+        if (x.type == "door" && x.side == "e") {
+
+            if (x.flipX == true) {
+                x.set('left', leftRoom + rect.width + x.width - heightDoor / 2 + 1);
+                x.set('top', topRoom + x.width + 1)
+
+            } else {
+                x.set('left', leftRoom + rect.width + heightDoor / 2 + 1);
+                x.set('top', topRoom + x.width + 1)
+            }
+        }
+
+        if (x.type == "door" && x.side == "s") {
+
+            if (x.flipX == true) {
+                x.set('left', rect.width);
+                x.set('top', topRoom + rect.height + x.width - heightWind1 / 2 + 1);
+            } else {
+                x.set('left', rect.width);
+                x.set('top', topRoom + rect.height + heightWind1 / 2 + 1);
+            }
+        }
+
+        canvas.add(x);
+    })
+
 }
 for (var a = 0; a < ventanas_distance.length; a++) {
    
