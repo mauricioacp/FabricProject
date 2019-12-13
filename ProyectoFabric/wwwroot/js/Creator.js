@@ -147,15 +147,15 @@ room.addEventListener("click", function () {
             // selectable: false
         });
 
-        function literal() {
-            var m = document.getElementById("recintoname").value;
-            var expreg = /[A-Za-z0-9]/;
+        //function literal() {
+        //    var m = document.getElementById("recintoname").value;
+        //    var expreg = /[A-Za-z0-9]/;
 
-            if (expreg.test(m))
-                return true;
-            else
-                return false;
-        }
+        //    if (expreg.test(m))
+        //        return true;
+        //    else
+        //        return false;
+        //}
         //Límites ancho: 
         if (rect.width > 350 || rect.height > 300) {
             
@@ -164,27 +164,33 @@ room.addEventListener("click", function () {
 
         }
 
-       
-        else if (literal() == true) 
-        {
-
-            swal("Name Validation", "Los caracteres", "error");
-
-        }
+      
         else if (parseInt(recinto_name.value) || (recinto_name.value == ""))
         {
             swal("Name Validation", "You must enter a Name for the Room", "error");
         }
 
-        else if (!parseInt(inputWidth.value) || (parseInt(inputWidth.value <=0)))
+        
+        else if (!parseInt(inputWidth.value))
         {
             swal("Width Validation", "You must enter a Number for the Width", "error");
         }
 
-        else if (!parseInt(inputHeight.value) || (parseInt(inputHeight.value <= 0)))
+        else if (inputWidth.value < 0)
         {
+            swal("Width Validation", "The Number is Negative ", "error");
+        } 
+
+        else if (!parseInt(inputHeight.value)) {
             swal("Height Validation", "You must enter a Number for the Height ", "error");
         } 
+        else if (inputHeight.value < 0)
+        {
+            swal("Height Validation", "The Number is Negative" ,"error");
+        }
+
+      
+
 
             else {
 
