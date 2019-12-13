@@ -84,7 +84,8 @@ room.addEventListener("click", function () {
     let recinto_name = document.createElement('input'); // Create Input Field for E-mail
     recinto_name.setAttribute("type", "text");
     recinto_name.setAttribute("class", "form-control");
-    recinto_name.setAttribute("placeholder", "Enter the Name")
+    recinto_name.setAttribute("placeholder", "Enter the Name");
+    recinto_name.setAttribute("id", "recintoname");
     formRoom.appendChild(recinto_name);
     let namebreak = document.createElement('br');
     formRoom.appendChild(namebreak);
@@ -145,22 +146,42 @@ room.addEventListener("click", function () {
             // lockRotation: true,
             // selectable: false
         });
+
+        function literal() {
+            var m = document.getElementById("recintoname").value;
+            var expreg = /[A-Za-z0-9]/;
+
+            if (expreg.test(m))
+                return true;
+            else
+                return false;
+        }
         //Límites ancho: 
         if (rect.width > 350 || rect.height > 300) {
+            
 
             swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
+
+        }
+
+       
+        else if (literal() == true) 
+        {
+
+            swal("Name Validation", "Los caracteres", "error");
 
         }
         else if (parseInt(recinto_name.value) || (recinto_name.value == ""))
         {
             swal("Name Validation", "You must enter a Name for the Room", "error");
         }
-        else if (!parseInt(inputWidth.value))
+
+        else if (!parseInt(inputWidth.value) || (parseInt(inputWidth.value <=0)))
         {
             swal("Width Validation", "You must enter a Number for the Width", "error");
         }
 
-        else if (!parseInt(inputHeight.value))
+        else if (!parseInt(inputHeight.value) || (parseInt(inputHeight.value <= 0)))
         {
             swal("Height Validation", "You must enter a Number for the Height ", "error");
         } 
