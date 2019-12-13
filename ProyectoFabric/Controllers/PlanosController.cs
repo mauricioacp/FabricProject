@@ -65,6 +65,7 @@ namespace ProyectoFabric.Controllers
 
         //[HttpPost]
         public async Task<IActionResult> CreateRootObjectPlano([FromBody]RootObject sketch)
+        
         {
 
             var algo = sketch;

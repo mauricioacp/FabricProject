@@ -63,18 +63,23 @@
         <button type="button" class="btn btn-secondary window">
         </button>
         <input id="appUserId" type="hidden" name="userid" value="@Model.Id" />
-        <button type="button" class="btn btn-secondary door">
-        </button>
+        <select class="form-control" id="sel1">
+            <option value="0">Select your object</option>
+        </select>
+        <div>
+            <button id="botonRedimension" type="button" class="btn btn-primary">Resize Room</button>
+        </div>
     </div>
 
     <div class="canvasTablas row">
         <div class="col-6 cajaCanvas">
 
+        
             <canvas width="400" height="400" id="canvas"></canvas>
 
         </div>
         <div class="col-6 workPlace">
-
+          
         </div>
 
     </div>
@@ -82,9 +87,15 @@
 </div>
 
 
+@*@section scripts {
+
+        <script src="~/js/Creator.js"></script>
+
+    }*@
+
 @section scripts {
 
-    <script src="~/js/Creator.js"></script>
+    <script src="~/js/NewCreator.js"></script>
 
 }
 
