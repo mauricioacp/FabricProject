@@ -1,7 +1,62 @@
 ﻿import { fabric } from "fabric";
 new fabric.Canvas("C");
 import * as $ from 'jquery';
+import { resolveAny } from "dns";
 
+class Recinto {
+    Nombre: any;
+    Altura: any;
+    Anchura: any;
+    constructor(nombre, altura, anchura) {
+        this.Nombre = nombre,
+            this.Altura = altura,
+            this.Anchura = anchura
+    }
+}
+class Ventana {
+    Nombre: any;
+    Distance: any;
+    Anchura: any;
+    orientacion: any;
+
+    constructor(nombre, distance, anchura, orientacion) {
+        this.Nombre = nombre,
+            this.Distance = distance,
+            this.Anchura = anchura,
+            this.orientacion = orientacion
+    }
+}
+class Puerta {
+    Nombre: any;
+    Altura: any;
+    Anchura: any;
+    Orientacion: any;
+    DoorAxis: any;
+    DoorOpening: any;
+    constructor(nombre, altura, anchura, orientacion, dooraxis, dooropening) {
+        this.Nombre = nombre,
+            this.Altura = altura,
+            this.Anchura = anchura,
+            this.Orientacion = orientacion,
+            this.DoorAxis = dooraxis,
+            this.DoorOpening = dooropening
+    }
+
+};
+class Plano {
+    userId: any;
+    Nombre: any;
+    Recinto: any;
+    Ventanas: any[];
+    Puertas: any[];
+    constructor(Nombre, Recinto, Ventana, Puertas, userId) {
+        this.userId = userId
+        this.Nombre = Nombre,
+            this.Recinto = Recinto,
+            this.Ventanas = [Ventana],
+            this.Puertas = [Puertas]
+    };
+}
 
 
 let recinto_nombre = (<HTMLInputElement>document.getElementById("recinto_nombre")).value;
@@ -18,9 +73,10 @@ const puertas_width:any = document.getElementsByClassName("puertas_width");
 const puertas_dooraxis:any =document.getElementsByClassName("puertas_dooraxis");
 const puertas_dooropening:any = document.getElementsByClassName("puertas_dooropening");
 
-//let userId:any = document.getElementById("appUserId");
+let userId = (<HTMLInputElement> document.getElementById("appUserId")).value;
+let MyPlano: Plano;
 
-//MyPlano.userId = userId.value;
+//MyPlano.userId = userId;
 let botonRedimension = document.getElementById("botonRedimension");
 let workplace = document.getElementsByClassName("workPlace")[0];
 let room = document.getElementById("room");
@@ -28,18 +84,52 @@ let canvas = new fabric.Canvas('canvas');
 let ctx = canvas.getContext();
 let arrayOverlap = [];
 let arrayGroup = [];
-let select = document.getElementById("sel1");
+let select:any = document.getElementById("sel1");
 
+select.addEventListener('change', function () {
+    //let valueselect:any = (select as HTMLInputElement).value;
+    let foundObject: any= arrayOverlap.find(element => element.name == this.value);
+  
+   
+    if (MyPlano.Ventanas[0] == null) {
 
+        MyPlano.Ventanas.splice(0, 1);
+    }
+    if (MyPlano.Puertas[0] == null) {
+
+        MyPlano.Puertas.splice(0, 1);
+    }
+    
+
+    if (foundObject.type == "room") {
+
+        let MyplanoObjectRecinto = MyPlano.Recinto.name == this;
+        //createRoomForm(foundObject, MyplanoObjectRecinto);
+    }
+
+    if (foundObject.type == "window") {
+
+        let MyplanoObjectVentanas = MyPlano.Ventanas.find(element => element.name == this);
+        //createWindowForm(foundObject, MyplanoObjectVentanas);
+
+    }
+
+    if (foundObject.type == "door") {
+
+        let MyplanoObject = MyPlano.Puertas.find(element => element.name == this);
+        //createDoorForm(foundObject, MyplanoObject);
+
+    }
+})
 function addToSelect() {
     select.innerHTML = "";
     let defaultValue = document.createElement("option");
     defaultValue.innerHTML = "Select your Object";
     select.appendChild(defaultValue);
     for (let i = 0; i < arrayOverlap.length; i++) {
-        let opt = arrayOverlap[i].name as string;
-        let value = arrayOverlap[i].name as string;
-        let el = document.createElement("option");
+        let opt:any = arrayOverlap[i].name ;
+        let value:any = arrayOverlap[i].name ;
+        let el:any = document.createElement("option");
         el.innerHTML = opt;
         el.value = value;
         select.appendChild(el);
@@ -91,6 +181,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
         let wind1 = new fabric.Rect();
 
         wind1.set({
+
             name:ventanas_nombres[a].value,
             left: leftRoom + parseInt(ventanas_distance[a].value),
             top: topRoom - heightWind1 / 2,

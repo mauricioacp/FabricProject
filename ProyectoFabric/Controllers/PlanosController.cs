@@ -28,7 +28,7 @@ namespace ProyectoFabric.Controllers
         private readonly IVentanas _ventanasServices;
         private readonly UserManager<AppUser> _userManager;
 
-        public PlanosController(IPlanos planosServices, UserManager<AppUser> userManager, IRecintos recintosServices, IPuertas puertasServices, IVentanas ventanasServices)
+        public PlanosController(IPlanos planosServices,UserManager<AppUser> userManager,IRecintos recintosServices,IPuertas puertasServices, IVentanas ventanasServices)
         {
             _planosServices = planosServices;
             _userManager = userManager;
@@ -44,14 +44,14 @@ namespace ProyectoFabric.Controllers
             return View(await _planosServices.GetPlanos());
         }
 
-
+        [Authorize(Roles = "Creator")]
         public async Task<IActionResult> MyBlueprints(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+          
 
             var plano = await _planosServices.GetPlanosByUserId(id);
             if (plano == null)
@@ -65,86 +65,71 @@ namespace ProyectoFabric.Controllers
 
         //[HttpPost]
         public async Task<IActionResult> CreateRootObjectPlano([FromBody]RootObject sketch)
-
+        
         {
-
-            var algo = sketch;
+            var MyFrontEndObjects = sketch;
             Models.Recinto recinto = new Models.Recinto()
             {
-                Alto = Double.Parse(algo.Recinto.Altura),
-                Ancho = Double.Parse(algo.Recinto.Anchura),
-                Nombre = algo.Recinto.Nombre
-
+                Alto = Double.Parse(MyFrontEndObjects.Recinto.Altura),
+                Ancho = Double.Parse(MyFrontEndObjects.Recinto.Anchura),
+                Nombre = MyFrontEndObjects.Recinto.Nombre
+                
             };
             await _recintosServices.CreateRecinto(recinto);
-
             for (int i = 0; i < 3; i++)
             {
-
+               
                 Thread.Sleep(1000);
             }
-            var user = await _userManager.FindByIdAsync(algo.userId);
-
-
+            var user = await _userManager.FindByIdAsync(MyFrontEndObjects.userId);
             //antes de crear todo lo demas doy 3 segundos para evitar fallos en los await
-            for (int i = 0; i < algo.Puertas.Count(); i++)
+            for (int i = 0; i < MyFrontEndObjects.Puertas.Count(); i++)
             {
                 Models.Puerta puerta = new Models.Puerta()
                 {
-                    Distance = Convert.ToInt32(algo.Puertas[i].Altura),
-                    Width = algo.Puertas[i].Anchura,
-
-                    DoorAxis = algo.Puertas[i].DoorAxis,
-                    DoorOpening = algo.Puertas[i].DoorOpening,
-                    WallSide = algo.Puertas[i].Orientacion,
-                    Nombre = algo.Puertas[i].Nombre,
+                    Distance =Convert.ToInt32(MyFrontEndObjects.Puertas[i].Altura),
+                    Width = MyFrontEndObjects.Puertas[i].Anchura,
+                    DoorAxis = MyFrontEndObjects.Puertas[i].DoorAxis,
+                    DoorOpening = MyFrontEndObjects.Puertas[i].DoorOpening,
+                    WallSide = MyFrontEndObjects.Puertas[i].Orientacion,
+                    Nombre = MyFrontEndObjects.Puertas[i].Nombre,
                     Recinto = recinto,
-
-
-
                 };
                 await _puertasServices.CreatePuerta(puerta);
             }
-            for (int i = 0; i < algo.Ventanas.Count(); i++)
+            for (int i = 0; i < MyFrontEndObjects.Ventanas.Count(); i++)
             {
                 Models.Ventana ventana = new Models.Ventana()
                 {
-                    Distance = Convert.ToInt32(algo.Ventanas[i].Distance),
-                    Width = algo.Ventanas[i].Anchura,
-                    WallSide = algo.Ventanas[i].orientacion,
-                    Nombre = algo.Ventanas[i].Nombre,
+                    Distance = Convert.ToInt32(MyFrontEndObjects.Ventanas[i].Distance),
+                    Width = MyFrontEndObjects.Ventanas[i].Anchura,
+                    WallSide = MyFrontEndObjects.Ventanas[i].orientacion,
+                    Nombre = MyFrontEndObjects.Ventanas[i].Nombre,
                     Recinto = recinto,
-
-
                 };
                 await _ventanasServices.CreateVentana(ventana);
             }
-
             Plano plano = new Plano()
             {
-                Nombre = algo.Nombre,
-                Recinto = recinto,
-                appUser = user,
-                CreationDate = DateTime.Now
-
+                Nombre = MyFrontEndObjects.Nombre,
+               Recinto=recinto,
+               appUser=user,
+               CreationDate=DateTime.Now
             };
             await _planosServices.CreatePlano(plano);
-
-
             return RedirectToAction("MyBlueprints", "Planos");
         }
 
 
-        public async Task<IActionResult> MyBlueprint_Insights(int? id)
-        {
-
+            public async Task<IActionResult> MyBlueprint_Insights(int? id)
+            {
+            
             if (id == null)
             {
                 return NotFound();
             }
 
             var plano = await _planosServices.GetPlanoById(id);
-
             if (plano == null)
             {
                 return NotFound();
@@ -152,7 +137,6 @@ namespace ProyectoFabric.Controllers
 
             return View(plano);
         }
-
         // GET: Planos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
