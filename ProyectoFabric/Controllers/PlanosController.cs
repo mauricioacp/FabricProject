@@ -44,7 +44,7 @@ namespace ProyectoFabric.Controllers
             return View(await _planosServices.GetPlanos());
         }
 
-        [Authorize(Roles = "Creator")]
+        
         public async Task<IActionResult> MyBlueprints(string id)
         {
             if (id == null)

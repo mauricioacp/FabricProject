@@ -86,6 +86,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
                 arrayOverlap.push(wind1);
 
                 canvas.add(wind1);
+                
             }
         }
     }
