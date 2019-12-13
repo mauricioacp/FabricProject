@@ -126,3 +126,10 @@ body {
 {
     margin-left:220px;
 }
+
+#creator {
+    background-color: beige;
+    border: 4px solid grey;
+    padding:30px;
+   
+}
