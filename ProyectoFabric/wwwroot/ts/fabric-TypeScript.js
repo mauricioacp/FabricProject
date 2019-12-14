@@ -1,4 +1,5 @@
-
+import { fabric } from "fabric";
+new fabric.Canvas("C");
 class Recinto {
     constructor(nombre, altura, anchura) {
         this.Nombre = nombre,

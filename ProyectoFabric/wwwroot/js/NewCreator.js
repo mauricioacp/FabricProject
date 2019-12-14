@@ -146,6 +146,7 @@ function createRoomForm(Object, myplanorecinto) {
 
     let inputName = document.createElement('input');
     inputName.setAttribute("type", "text");
+    inputName.setAttribute("name", inputName.value)
     formRoom.appendChild(inputName);
 
     let linebreak1 = document.createElement('br');
@@ -168,6 +169,7 @@ function createRoomForm(Object, myplanorecinto) {
 
     let inputHeight = document.createElement('input');
     inputHeight.setAttribute("type", "text");
+   
 
     formRoom.appendChild(inputHeight);
 
@@ -802,6 +804,7 @@ function createDoorForm(Object,myplanopuertas) {
 
     let botonDelete = document.createElement('button'); // Append Button
     botonDelete.setAttribute("type", "button");
+    botonDelete.setAttribute
     // submitelement.setAttribute("name", "dsubmit");
     botonDelete.innerHTML = "Delete";
     formDoor.appendChild(botonDelete);
@@ -1172,8 +1175,10 @@ MyPlano.Nombre = "Plano1";
 console.log(MyPlano);
 console.log(arrayOverlap);
 
+// Boton Guardar Plano
 
 let boton = document.getElementById("GuardarPlano");
+boton.setAttribute("boton", "btn btn-info");
 boton.addEventListener('click', function () {
     var postPlano = JSON.stringify(MyPlano);
     $.ajax({
