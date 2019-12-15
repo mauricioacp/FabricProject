@@ -53,52 +53,61 @@
 
 
 
-<div class="site-section">
+<ul class="nav nav-tabs">
 
 
-    <div class="btn-group toolbar" role="group" aria-label="Basic example">
-        <button id="GuardarPlano" type="button" class="btn btn-secondary room">
-            Guardar Plano
-        </button>
-        <button id="botonDeleteAll" type="button" class="btn btn-secondary window">
-        </button>
+    <li class="nav-item">
+        @*Boton Guardar Plano*@
+        <a role="button" id="GuardarPlano" class="nav-link room"> Guardar Plano</a>
+    </li>
+    <li class="nav-item">
+        @*Boton Borrar Todo*@
+        <a id="botonDeleteAll" role="button" class="nav link window">Delete All </a>
         <input id="appUserId" type="hidden" name="userid" value="@Model.Id" />
+    </li>
+    @*Select para seleccionar guardados*@
+    <li class="nav-item dropdown">
         <select class="form-control" id="sel1">
             <option value="0">Select your object</option>
         </select>
-        <div>
-            <button id="botonRedimension" type="button" class="btn btn-primary">Resize Room</button>
-        </div>
-    </div>
+    </li>
 
-    <div class="canvasTablas row">
+    @*Boton Redimension*@
+    <li class="nav-item">
+        <a id="botonRedimension" role="button" class="nav-link">Resize Room</a>
+    </li>
+</ul>
+
+@*Row compartida canvas e Inputs*@
+
+<div class="canvasTablas row">
+
         <div class="col-6 cajaCanvas">
 
-        
             <canvas width="500" height="500" id="canvas"></canvas>
 
         </div>
-        <div class="col-6 workPlace">
-          
+
+        <div class="col-5 workPlace">
+
         </div>
-
     </div>
+ </div>
 
-</div>
 
 
-@*@section scripts {
 
-        <script src="~/js/Creator.js"></script>
+    @*@section scripts {
 
-    }*@
+            <script src="~/js/Creator.js"></script>
 
-@section scripts {
+        }*@
 
-    <script src="~/js/NewCreator.js" defer></script>
+    @section scripts {
 
-}
+        <script src="~/js/NewCreator.js" defer></script>
 
+    }
 
 
 
@@ -149,117 +158,118 @@
 
 
 
-@*<script>
 
-        let altoRecinto;
-        let anchoRecinto;
-        let rect;
-        let canvas = new fabric.Canvas('canvas');
-        let ctx = canvas.getContext('2d');
-        let workplace = document.getElementsByClassName("workPlace")[0];
-        console.log(workplace);
-        let room = document.getElementById("room");
-        room.addEventListener("click", function () {
+    @*<script>
 
-            $('.workPlace').empty();
-            console.log('primer boton');
-            let createform = document.createElement('form'); // Create New Element Form
-            // createform.setAttribute("action", ""); // Setting Action Attribute on Form
-            // createform.setAttribute("method", "post"); // Setting Method Attribute on Form
-            workplace.appendChild(createform);
-            let heading = document.createElement('h3'); // Heading of Form
-            heading.innerHTML = "Room";
-            createform.appendChild(heading);
-            var line = document.createElement('hr'); // Giving Horizontal Row After Heading
-            createform.appendChild(line);
-            var linebreak = document.createElement('br');
-            createform.appendChild(linebreak);
-            var namelabel = document.createElement('label'); // Create Label for Name Field
-            namelabel.innerHTML = "Width :"; // Set Field Labels
-            createform.appendChild(namelabel);
-            var inputelement = document.createElement('input'); // Create Input Field for Name
-            inputelement.setAttribute("type", "text");
-            //inputelement.setAttribute("step", "0.01");
-            createform.appendChild(inputelement);
-            var linebreak = document.createElement('br');
-            createform.appendChild(linebreak);
-            var emaillabel = document.createElement('label'); // Create Label for E-mail Field
-            emaillabel.innerHTML = "Height :";
-            createform.appendChild(emaillabel);
-            var emailelement = document.createElement('input'); // Create Input Field for E-mail
-            emailelement.setAttribute("type", "text");
-            //emailelement.setAttribute("step", "0.01");
-            createform.appendChild(emailelement);
-            var messagebreak = document.createElement('br');
-            createform.appendChild(messagebreak);
-            var submitelement = document.createElement('button'); // Append Submit Button
-            submitelement.setAttribute("type", "button");
-            // submitelement.setAttribute("name", "dsubmit");
-            submitelement.innerHTML = "Añadir";
-            createform.appendChild(submitelement);
-            console.log(submitelement);
-            submitelement.addEventListener("click", function () {
-
-                console.log('boton2');
-                let topRecinto = 200;
-                let leftRecinto = 200;
-                rect = new fabric.Rect({
-                    left: leftRecinto,
-                    top: topRecinto,
-                    fill: 'red',
-                    stroke: 'black',
-
-                    strokeWidth: 2,
-                    // strokeUniform: true,
-                    width: inputelement.value,
-                    height: emailelement.value,
-                    selectable: true
-                    // hasControls: false,
-                    // lockMovementX: true,
-                    // lockScalingX: true
-                    // lockUniScaling: true,
-                    // lockRotation: true
-                     //selectable: false,
-                    ////
-                });
-                canvas.add(rect);
-
-                let sendcontroller = document.getElementById('controller');
-
-                let json = {
-                    Recinto: {
-                        Alto: parseFloat(emailelement.value),
-                        Ancho: parseFloat(inputelement.value),
-                        Nombre: "Recinto1"
-                    }
-                };
-
-                sendcontroller.addEventListener('click', function sendAjax() {
-
-                var postData = JSON.stringify(json);
-                $.ajax({
-                    url: '/Recintos/CreateRootObject',
-                    dataType: 'json',
-                    type: 'POST',
-                    data: postData,
-                    contentType: 'application/json',
-                    traditional: true,
-                    success: function (response) {
-                        console.log('ok');
-                        //window.location.reload();
-                    },
-                    error: function (response) {
-                        console.log(response);
-                        alert(response);
-                        //window.location.reload();
-                    }
-                });
-
-        });
+            let altoRecinto;
+            let anchoRecinto;
+            let rect;
+            let canvas = new fabric.Canvas('canvas');
+            let ctx = canvas.getContext('2d');
+            let workplace = document.getElementsByClassName("workPlace")[0];
+            console.log(workplace);
+            let room = document.getElementById("room");
+            room.addEventListener("click", function () {
 
+                $('.workPlace').empty();
+                console.log('primer boton');
+                let createform = document.createElement('form'); // Create New Element Form
+                // createform.setAttribute("action", ""); // Setting Action Attribute on Form
+                // createform.setAttribute("method", "post"); // Setting Method Attribute on Form
+                workplace.appendChild(createform);
+                let heading = document.createElement('h3'); // Heading of Form
+                heading.innerHTML = "Room";
+                createform.appendChild(heading);
+                var line = document.createElement('hr'); // Giving Horizontal Row After Heading
+                createform.appendChild(line);
+                var linebreak = document.createElement('br');
+                createform.appendChild(linebreak);
+                var namelabel = document.createElement('label'); // Create Label for Name Field
+                namelabel.innerHTML = "Width :"; // Set Field Labels
+                createform.appendChild(namelabel);
+                var inputelement = document.createElement('input'); // Create Input Field for Name
+                inputelement.setAttribute("type", "text");
+                //inputelement.setAttribute("step", "0.01");
+                createform.appendChild(inputelement);
+                var linebreak = document.createElement('br');
+                createform.appendChild(linebreak);
+                var emaillabel = document.createElement('label'); // Create Label for E-mail Field
+                emaillabel.innerHTML = "Height :";
+                createform.appendChild(emaillabel);
+                var emailelement = document.createElement('input'); // Create Input Field for E-mail
+                emailelement.setAttribute("type", "text");
+                //emailelement.setAttribute("step", "0.01");
+                createform.appendChild(emailelement);
+                var messagebreak = document.createElement('br');
+                createform.appendChild(messagebreak);
+                var submitelement = document.createElement('button'); // Append Submit Button
+                submitelement.setAttribute("type", "button");
+                // submitelement.setAttribute("name", "dsubmit");
+                submitelement.innerHTML = "Añadir";
+                createform.appendChild(submitelement);
+                console.log(submitelement);
+                submitelement.addEventListener("click", function () {
+
+                    console.log('boton2');
+                    let topRecinto = 200;
+                    let leftRecinto = 200;
+                    rect = new fabric.Rect({
+                        left: leftRecinto,
+                        top: topRecinto,
+                        fill: 'red',
+                        stroke: 'black',
+
+                        strokeWidth: 2,
+                        // strokeUniform: true,
+                        width: inputelement.value,
+                        height: emailelement.value,
+                        selectable: true
+                        // hasControls: false,
+                        // lockMovementX: true,
+                        // lockScalingX: true
+                        // lockUniScaling: true,
+                        // lockRotation: true
+                         //selectable: false,
+                        ////
+                    });
+                    canvas.add(rect);
+
+                    let sendcontroller = document.getElementById('controller');
+
+                    let json = {
+                        Recinto: {
+                            Alto: parseFloat(emailelement.value),
+                            Ancho: parseFloat(inputelement.value),
+                            Nombre: "Recinto1"
+                        }
+                    };
+
+                    sendcontroller.addEventListener('click', function sendAjax() {
+
+                    var postData = JSON.stringify(json);
+                    $.ajax({
+                        url: '/Recintos/CreateRootObject',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: postData,
+                        contentType: 'application/json',
+                        traditional: true,
+                        success: function (response) {
+                            console.log('ok');
+                            //window.location.reload();
+                        },
+                        error: function (response) {
+                            console.log(response);
+                            alert(response);
+                            //window.location.reload();
+                        }
+                    });
+
+            });
+
+                })
             })
-        })
 
 
 
-    </script>*@
+        </script>*@
