@@ -1168,7 +1168,7 @@ function addToSelect() {
 }
 
 
-MyPlano.Nombre = "Plano1";
+MyPlano.Nombre = 
 console.log(MyPlano);
 console.log(arrayOverlap);
 
