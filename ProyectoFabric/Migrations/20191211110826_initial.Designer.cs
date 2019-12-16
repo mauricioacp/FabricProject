@@ -10,8 +10,8 @@ using ProyectoFabric.Data;
 namespace ProyectoFabric.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191204110241_new-attributes")]
-    partial class newattributes
+    [Migration("20191211110826_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,6 +240,12 @@ namespace ProyectoFabric.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RecintoId")
                         .HasColumnType("int");
 
@@ -262,8 +268,8 @@ namespace ProyectoFabric.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Distance")
-                        .HasColumnType("float");
+                    b.Property<int>("Distance")
+                        .HasColumnType("int");
 
                     b.Property<bool>("DoorAxis")
                         .HasColumnType("bit");
@@ -280,8 +286,8 @@ namespace ProyectoFabric.Migrations
                     b.Property<string>("WallSide")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -318,8 +324,8 @@ namespace ProyectoFabric.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Distance")
-                        .HasColumnType("float");
+                    b.Property<int>("Distance")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -330,8 +336,8 @@ namespace ProyectoFabric.Migrations
                     b.Property<string>("WallSide")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -407,7 +413,7 @@ namespace ProyectoFabric.Migrations
             modelBuilder.Entity("ProyectoFabric.Models.Puerta", b =>
                 {
                     b.HasOne("ProyectoFabric.Models.Recinto", "Recinto")
-                        .WithMany()
+                        .WithMany("Puertas")
                         .HasForeignKey("RecintoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -416,7 +422,7 @@ namespace ProyectoFabric.Migrations
             modelBuilder.Entity("ProyectoFabric.Models.Ventana", b =>
                 {
                     b.HasOne("ProyectoFabric.Models.Recinto", "Recinto")
-                        .WithMany()
+                        .WithMany("Ventanas")
                         .HasForeignKey("RecintoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

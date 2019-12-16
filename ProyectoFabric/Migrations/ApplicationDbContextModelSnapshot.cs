@@ -411,7 +411,7 @@ namespace ProyectoFabric.Migrations
             modelBuilder.Entity("ProyectoFabric.Models.Puerta", b =>
                 {
                     b.HasOne("ProyectoFabric.Models.Recinto", "Recinto")
-                        .WithMany()
+                        .WithMany("Puertas")
                         .HasForeignKey("RecintoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -420,7 +420,7 @@ namespace ProyectoFabric.Migrations
             modelBuilder.Entity("ProyectoFabric.Models.Ventana", b =>
                 {
                     b.HasOne("ProyectoFabric.Models.Recinto", "Recinto")
-                        .WithMany()
+                        .WithMany("Ventanas")
                         .HasForeignKey("RecintoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

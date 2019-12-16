@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mauri\\source\\repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {}
+    "C:\\Users\\mauri\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mauri\\source\\repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {
+    "C:\\Users\\mauri\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mauri\\source\\repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
+        "projectUniqueName": "C:\\Users\\mauri\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
         "projectName": "ProyectoFabric",
-        "projectPath": "C:\\Users\\mauri\\source\\repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
+        "projectPath": "C:\\Users\\mauri\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
         "packagesPath": "C:\\Users\\mauri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mauri\\source\\repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\",
+        "outputPath": "C:\\Users\\mauri\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

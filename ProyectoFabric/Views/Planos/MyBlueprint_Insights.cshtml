@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-
+<input id="appUserId" type="hidden" name="name" value="@Model.appUserId" />
 <input id="recinto_nombre" type="hidden" name="RoomName" value="@Model.Recinto.Nombre" />
 <input id="recinto_ancho" type="hidden" name="RoomWidth" value="@Model.Recinto.Ancho" />
 <input id="recinto_alto" type="hidden" name="RoomHeight" value="@Model.Recinto.Alto" />
@@ -75,18 +75,66 @@
     <input class="puertas_dooraxis" type="hidden" name="name" value="@item.DoorAxis" />
     <input class="puertas_dooropening" type="hidden" name="name" value="@item.DoorOpening" />
 }
+<div class="site-block-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <a id="room" class="site-block-feature d-flex p-4 rounded mb-4">
+                    <div class="mr-3">
+                        <span class="icon flaticon-interior-design font-weight-light h2"></span>
+                    </div>
+                    <div class="text">
+                        <h3>Create Room</h3>
+                        <p>Made with Canvas</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a id="door" class="site-block-feature d-flex p-4 rounded mb-4">
+                    <div class="mr-3">
+                        <span class="icon flaticon-measuring font-weight-light h2"></span>
+                    </div>
+                    <div class="text">
+                        <h3>Door</h3>
+                        <p>Powered by Fabric.Js</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a id="window" class="site-block-feature d-flex p-4 rounded mb-4">
+                    <div class="mr-3">
+                        <span class="icon flaticon-window font-weight-light h2"></span>
+                    </div>
+                    <div class="text">
+                        <h3>Window</h3>
+                        <p>Make your own designs</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="site-section">
+    <select class="form-control" id="sel1">
+        <option value="0">Select your object</option>
+    </select>
+    <button id="GuardarPlano" type="button" class="btn btn-dark room">
+        Guardar Plano
+    </button>
+    <button id="botonDeleteAll" type="button" class="btn btn-danger window">
+    </button>
     <div class="canvasTablas row">
         <div class="col-6 cajaCanvas">
 
-            <canvas width="400" height="400" id="canvas"></canvas>
+            <canvas width="500" height="500" id="canvas"></canvas>
 
         </div>
-        <div id="edicion" class="col-4 workPlace">
+        <div id="edicion" class="col-6 workPlace">
             <div class="container">
 
-               
+
             </div>
         </div>
 
@@ -94,14 +142,14 @@
 
 </div>
 
-@*@section scripts {
+@section scripts {
 
         <script src="~/js/MyBlueprint_Insights.js"></script>
 
-    }*@
+    }
 
-@section scripts {
+@*@section scripts {
 
     <script src="~/ts/fabric-TypeScript.js" defer></script>
 
-}
+}*@

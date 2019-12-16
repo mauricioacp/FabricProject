@@ -5,8 +5,6 @@
             this.Anchura = anchura
     }
 }
-
-
 class Ventana {
 
     constructor(nombre, distance, anchura, orientacion) {
@@ -16,8 +14,6 @@ class Ventana {
             this.orientacion = orientacion
     }
 }
-
-
 class Puerta {
     constructor(nombre, altura, anchura, orientacion, dooraxis, dooropening) {
         this.Nombre = nombre,
@@ -29,8 +25,6 @@ class Puerta {
     }
 
 };
-
-
 class Plano {
     constructor(Nombre, Recinto, Ventana, Puertas, userId) {
         this.userId = userId
@@ -40,14 +34,8 @@ class Plano {
             this.Puertas = [Puertas]
     };
 }
-
-
-
-
 let userId = document.getElementById("appUserId").value;
 
-
-console.log(userId);
 let MyPlano = new Plano();
 MyPlano.userId = userId;
 let MiArray_Ventanas = [];
@@ -55,23 +43,26 @@ let MiArrat_Puertas = [];
 let canvas = new fabric.Canvas('canvas');
 let ctx = canvas.getContext('2d');
 let workplace = document.getElementsByClassName("workPlace")[0];
+let select = document.getElementById("sel1");
 let room = document.getElementById("room");
 let arrayOverlap = [];
 
-escala = new fabric.Rect({
-    left: 10,
-    top: 10,
-    fill: 'transparent',
-    stroke: 'solid black',
-    strokeWidth: 1,
-    strokeUniform: true,
-    width: 50,
-    height: 10,
-    selectable: false
-});
-arrayOverlap.push(escala);
-canvas.add(escala);
+select.addEventListener('change', function () {
+    let foundObject = arrayOverlap.find(element => element.name == this.value);
+    if (foundObject.type == "room") {
+      createRoomForm(foundObject);
+    }
+    if (foundObject.type == "window") {
+        createWindowForm(foundObject);
+    }
+    if (foundObject.type == "door") {
+        createDoorForm(foundObject);
+    }
+})
 room.addEventListener("click", function () {
+
+
+
     $('.workPlace').empty();
     let formRoom = document.createElement('form'); // Create New Element Form
     // createform.setAttribute("action", ""); // Setting Action Attribute on Form
@@ -234,43 +225,6 @@ room.addEventListener("click", function () {
 
 
         //Creating select options from local storage
-
-        let Select_Windows_Label = document.createElement('label'); // Create Label for E-mail Field
-        Select_Windows_Label.innerHTML = "Windows in Storage:";
-        formWindow.appendChild(Select_Windows_Label);
-        let windows_in_storage = document.createElement('select');
-        formWindow.appendChild(windows_in_storage);
-
-
-        //let window_from_LS = localStorage.getItem('Window');
-        // var optNull = document.createElement('option');
-        // optNull.setAttribute('label', '');
-        // optNull.setAttribute("value", "");
-        // windows_in_storage.appendChild(optNull);
-
-        // let myDom_inStorage = JSON.parse(localStorage.getItem('Window '));
-
-        // let myDom_inStorage = JSON.parse(localStorage.getItem());
-
-        // for (let i = 0; i < localStorage.length; i++) {
-
-
-        //     var opt = document.createElement('option');
-        //     // opt.setAttribute('label', 'window');
-        //     var x = localStorage.key(i);
-        //     opt.setAttribute('label', x);
-        //     opt.value = myDom_inStorage;
-
-        //     opt.innerHTML += x;
-        //     console.log(opt.value)
-        //     windows_in_storage.appendChild(opt);
-        // }
-
-        // var found = array.find(function (element) {
-        //     return element > 20;
-        // });
-
-        // End-Creating select options from local storage
 
         botonCreate.addEventListener("click", function () {
             let heightWind1 = 10;
@@ -851,86 +805,23 @@ room.addEventListener("click", function () {
 
         let boton = document.getElementById("GuardarPlano");
         boton.addEventListener('click', function () {
-
             var postPlano = JSON.stringify(MyPlano);
-
             $.ajax({
                 url: '/Planos/CreateRootObjectPlano',
                 dataType: 'json',
                 type: 'POST',
                 data: postPlano,
                 async: false,
-
                 contentType: 'application/json; charset=utf-8',
                 traditional: true,
                 success: function (response) {
-                  
                     console.log('ok');
-
-                    //window.location.reload();
                 },
                 error: function (response) {
                     console.log(response);
-                    alert(response);
-                    //window.location.reload();
                 }
             });
 })
 
 
 
-
-// Condiciones Solapamiento:
-
-// let A = leftRecinto + distanceWind1;
-// let B = leftRecinto + distanceWind1 + widthWind1; 
-
-// let C = leftRecinto + distanceWind2;
-// let D = leftRecinto + distanceWind2 + widthWind2; 
-
-// if( A>C && A<D) {
-//     alert('los elementos se solapan');
-// }
-// if(A<C && B>C){
-//     alert('los elementos se solapan')
-// }
-
-    //let json = {
-    //    Plano: {
-    //       X:MyPlano
-    //        Recinto: MyPlano.Recinto,
-    //        Ventanas: [MyPlano.Ventanas],
-    //        Puertas: [MyPlano.Puertas]
-    //    }
-    //};
-
-
-    //let json = {
-    //    Plano: {
-
-    //        Recinto: {
-    //            Nombre: MyPlano.Recinto.nombre,
-    //            Alto: MyPlano.Recinto.Altura,
-    //            Ancho: MyPlano.Recinto.Anchura,
-    //            Ventanas:[
-    //                {
-    //                    Nombre: MyPlano.Ventanas.Nombre,
-    //                    WallSide: MyPlano.Ventanas.orientacion,
-    //                    Distance: MyPlano.Ventanas.Distance,
-    //                    Width:MyPlano.Ventanas.Anchura
-    //                }],
-    //            Puertas: [
-    //                {
-    //                    Nombre: MyPlano.Puertas.Nombre,
-    //                    WallSide: MyPlano.Puertas.Orientacion,
-    //                    Distance: MyPlano.Puertas.Altura,
-    //                    Width: MyPlano.Puertas.Anchura,
-    //                    DoorOpening: MyPlano.Puertas.DoorOpening,
-    //                    DoorAxis:MyPlano.Puertas.DoorAxis
-    //                }]
-
-    //            }
-
-    //    }
-
-    //};    

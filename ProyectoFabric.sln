@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoFabric", "ProyectoFabric\ProyectoFabric.csproj", "{57C87651-7883-4B2B-BC7B-49F6336AD8B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProyectoFabric", "ProyectoFabric\ProyectoFabric.csproj", "{57C87651-7883-4B2B-BC7B-49F6336AD8B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoFabricTests", "ProyectoFabricTests\ProyectoFabricTests.csproj", "{4AAB6525-169B-45C7-B09B-CAD33517AD6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{57C87651-7883-4B2B-BC7B-49F6336AD8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C87651-7883-4B2B-BC7B-49F6336AD8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C87651-7883-4B2B-BC7B-49F6336AD8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AAB6525-169B-45C7-B09B-CAD33517AD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AAB6525-169B-45C7-B09B-CAD33517AD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AAB6525-169B-45C7-B09B-CAD33517AD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AAB6525-169B-45C7-B09B-CAD33517AD6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
