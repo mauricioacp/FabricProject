@@ -1,5 +1,4 @@
 ﻿@model List<ProyectoFabric.Models.Plano>
-
 <div class="site-blocks-cover overlay inner-page" style="background-image: url(/Assets/images/hero_bg_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
     <div class="container">
         <div class="row align-items-center">
@@ -10,34 +9,28 @@
         </div>
     </div>
 </div>
-
 <div class="site-section">
     <div class="container">
         <div class="row">
             @foreach (Plano plano in Model)
             {
-
-                <div class="site-section">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="site-section divplanos">
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="col-lg-6 mb-5 mb-lg-0 imagenplano">
                                 <div class="img-border">
                                     <img src="https://media.istockphoto.com/vectors/architectural-plan-of-a-house-layout-of-the-apartment-with-the-in-vector-id692744578" alt="Image" class="img-fluid">
                                 </div>
                             </div>
-                            <div class="col-lg-5 ml-auto">
+                            <div class="col-lg-5 ml-auto datosplano">
                                 <span class="sub-title">Blueprint</span>
                                 <h2 class="font-weight-bold text-black mb-5">@plano.Nombre</h2>
                                 <a asp-controller="Planos" asp-action="MyBlueprint_Insights" asp-route-id="@plano.Id"><h4 class="font-weight-bold text-black-opacity-5 mb-5">Edit</h4></a>
-
                                 @*Empieze del Acordeon*@
                                 <div class="accordion" id="accordionExample">
-
-                                    <h2 class="mb-0 border rounded mb-2 color">
-                                        <button class="btn " type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            <b> Room Name:  </b>: @plano.Recinto.Nombre
-                                        </button>
-                                    </h2>
+                                    <button class="btn collapsed btn-dark text-white " type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <b> Room Name:  </b>: @plano.Recinto.Nombre
+                                    </button>
 
                                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <table class="table">
@@ -45,29 +38,22 @@
                                                 <tr>
                                                     <th scope="col">Width</th>
                                                     <th scope="col">Height</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <tr>
                                                     <th scope="row">@plano.Recinto.Alto</th>
                                                     <td>@plano.Recinto.Ancho</td>
-
                                                 </tr>
-
                                             </tbody>
                                         </table>
                                     </div>
-
-                                    <h2 class="mb-0 border rounded mb-2">
-                                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h2>
+                                        <button class="btn collapsed btn-dark text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             Windows: @plano.Recinto.Ventanas.Count()
                                         </button>
                                     </h2>
-
                                     @*Inicio del Collapse2*@
-
                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                         <table class="table">
                                             <thead>
@@ -78,7 +64,6 @@
                                                     <th scope="col">Width</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
                                                 @foreach (Ventana item in plano.Recinto.Ventanas)
                                                 {
@@ -87,23 +72,18 @@
                                                         <td>@item.Distance</td>
                                                         <td>@item.WallSide</td>
                                                         <td>@item.Width</td>
-
                                                     </tr>
                                                 }
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
-
-                                <h2 class="mb-0 border rounded mb-2">
-                                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <h2>
+                                    <button class="btn collapsed btn-dark text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         Doors: @plano.Recinto.Puertas.Count()
                                     </button>
                                 </h2>
-
                                 @*Inicio del Collapse 3*@
-
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                     <table class="table">
                                         <thead>
@@ -116,37 +96,29 @@
                                                 <th scope="col">Door Axis</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
-
                                             @foreach (Puerta item in plano.Recinto.Puertas)
                                             {
-
                                                 <tr>
-                                                    <th scope="row">@item.Nombre</th>
+                                                    <td scope="row" 9>@item.Nombre</td>
                                                     <td>@item.Distance</td>
                                                     <td>@item.WallSide</td>
                                                     <td>@item.Width</td>
-
-
-                                                    if (@item.DoorOpening == true)
+                                                    @if (item.DoorOpening == true)
                                                     {
-
-                                                    <td>@item.DoorOpening</td>
+                                                        <td>@item.DoorOpening</td>
                                                     }
                                                     else
                                                     {
-                                                    <td>@item.DoorOpening</td>
+                                                        <td>@item.DoorOpening</td>
                                                     }
-
-
-                                                    if (item.DoorAxis == true)
+                                                    @if (item.DoorAxis == true)
                                                     {
-                                                    <td>@item.DoorAxis</td>
+                                                        <td>@item.DoorAxis</td>
                                                     }
                                                     else
                                                     {
-                                                    <td>@item.DoorAxis</td>
+                                                        <td>@item.DoorAxis</td>
                                                     }
                                                 </tr>
                                             }
@@ -156,18 +128,9 @@
                             </div>
                             @*Final del Collapse 3*@
                         </div>
-
                     </div>
                 </div>
-
-
             }
-
         </div>
     </div>
 </div>
-
-
-
-
-
