@@ -526,7 +526,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
         }
 
-        else if (parseInt(window_name.value) || (window_name.value == ""))
+        else if (parseInt(inputWindName.value) || (inputWindName.value == ""))
         {
             swal("Name Validation", "You must enter a Name for the Window", "error");
         }
@@ -534,7 +534,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         {
             swal("Width Validation", "You must enter a number for the Width", "error");
         }
-        else if (!parseInt(inputHeight.value)) {
+        else if (!parseInt(heightWind1.value)) {
             swal("Height Validation", "You must enter a number for the Height", "error");
         }
         else if (!parseInt(inputDistance.value)) {
@@ -611,20 +611,16 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
         }
-        else if (parseInt(window_name.value) || (window_name.value == "")) {
+        else if (parseInt(inputWindName.value) || (inputWindName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Window", "error");
         }
 
-        else if (parseInt(input)) {
+        else if (parseInt(inputWidth.value)) {
             swal("Width Validation", "You must enter a number for the Width", "error");
 
         }
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-
-        }
-        else if (!parseInt(inputHeight.value)) {
+        else if (!parseInt(heightWind1.value)) {
             swal("Height Validation", "You must enter a number for the Height", "error");
         }
         else if (!parseInt(inputDistance.value)) {
@@ -703,13 +699,13 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
         }
 
-        else if (parseInt(window_name.value) || (window_name.value == "")) {
+        else if (parseInt(inputWindName.value) || (inputWindName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Window", "error");
         }
         else if (!parseInt(inputWidth.value)) {
             swal("Width Validation", "You must enter a number for the Width", "error");
         }
-        else if (!parseInt(inputHeight.value)) {
+        else if (!parseInt(heightWind1.value)) {
             swal("Height Validation", "You must enter a number for the Height", "error");
         }
         else if (!parseInt(inputDistance.value)) {
@@ -786,14 +782,14 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(window_name.value) || (window_name.value == "")) {
+        else if (parseInt(inputWindName.value) || (inputWindName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Window", "error");
         }
 
         else if (!parseInt(inputWidth.value)) {
             swal("Width Validation", "You must enter a number for the Width", "error");
         }
-        else if (!parseInt(inputHeight.value)) {
+        else if (!parseInt(heightWind1.value)) {
             swal("Height Validation", "You must enter a number for the Height", "error");
         }
         else if (!parseInt(inputDistance.value)) {
@@ -1089,7 +1085,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         }
 
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
+        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
@@ -1179,7 +1175,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
+        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
@@ -1268,7 +1264,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
+        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
@@ -1356,7 +1352,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
+        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
@@ -1441,7 +1437,7 @@ function addToSelect() {
 }
 
 
-MyPlano.Nombre = "Plano1";
+MyPlano.Nombre = MyPlano.Nombre.value;
 console.log(MyPlano);
 console.log(arrayOverlap);
 

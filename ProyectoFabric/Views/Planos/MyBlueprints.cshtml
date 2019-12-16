@@ -17,27 +17,26 @@
             @foreach (Plano plano in Model)
             {
 
-                <div class="site-section">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="site-section divplanos">
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="col-lg-6 mb-5 mb-lg-0 imagenplano">
                                 <div class="img-border">
                                     <img src="https://media.istockphoto.com/vectors/architectural-plan-of-a-house-layout-of-the-apartment-with-the-in-vector-id692744578" alt="Image" class="img-fluid">
                                 </div>
                             </div>
-                            <div class="col-lg-5 ml-auto">
+                            <div class="col-lg-5 ml-auto datosplano">
                                 <span class="sub-title">Blueprint</span>
                                 <h2 class="font-weight-bold text-black mb-5">@plano.Nombre</h2>
                                 <a asp-controller="Planos" asp-action="MyBlueprint_Insights" asp-route-id="@plano.Id"><h4 class="font-weight-bold text-black-opacity-5 mb-5">Edit</h4></a>
 
                                 @*Empieze del Acordeon*@
-                                <div class="accordion" id="accordionExample">
 
-                                    <h2 class="mb-0 border rounded mb-2 color">
-                                        <button class="btn " type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="accordion" id="accordionExample">
+                                        <button class="btn collapsed btn-dark text-white "  type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                             <b> Room Name:  </b>: @plano.Recinto.Nombre
                                         </button>
-                                    </h2>
+                                   
 
                                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <table class="table">
@@ -60,8 +59,8 @@
                                         </table>
                                     </div>
 
-                                    <h2 class="mb-0 border rounded mb-2">
-                                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h2 >
+                                        <button class="btn collapsed btn-dark text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             Windows: @plano.Recinto.Ventanas.Count()
                                         </button>
                                     </h2>
@@ -96,8 +95,8 @@
                                     </div>
                                 </div>
 
-                                <h2 class="mb-0 border rounded mb-2">
-                                    <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <h2 >
+                                    <button class="btn collapsed btn-dark text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         Doors: @plano.Recinto.Puertas.Count()
                                     </button>
                                 </h2>
@@ -121,36 +120,36 @@
 
                                             @foreach (Puerta item in plano.Recinto.Puertas)
                                             {
-
-                                                <tr>
-                                                    <th scope="row">@item.Nombre</th>
-                                                    <td>@item.Distance</td>
-                                                    <td>@item.WallSide</td>
-                                                    <td>@item.Width</td>
-
-
-                                                    if (@item.DoorOpening == true)
-                                                    {
+                                            <tr>
+                                                <td scope="row" 9>@item.Nombre</td>
+                                                <td>@item.Distance</td>
+                                                <td>@item.WallSide</td>
+                                                <td>@item.Width</td>
+                                                @if (item.DoorOpening == true)
+                                                {
 
                                                     <td>@item.DoorOpening</td>
-                                                    }
-                                                    else
-                                                    {
+                                                }
+                                                else
+                                                {
                                                     <td>@item.DoorOpening</td>
-                                                    }
 
 
-                                                    if (item.DoorAxis == true)
-                                                    {
+
+                                                }
+                                                @if (item.DoorAxis == true)
+                                                {
                                                     <td>@item.DoorAxis</td>
-                                                    }
-                                                    else
-                                                    {
+                                                }
+                                                else
+                                                {
                                                     <td>@item.DoorAxis</td>
-                                                    }
-                                                </tr>
-                                            }
-                                        </tbody>
+                                                }
+
+
+                                            </tr>
+                                           }
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>
