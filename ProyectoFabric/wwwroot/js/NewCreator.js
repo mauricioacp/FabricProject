@@ -1,12 +1,12 @@
 ﻿
-class Recinto  {
+class Recinto {
     constructor(nombre, altura, anchura) {
         this.Nombre = nombre,
             this.Altura = altura,
             this.Anchura = anchura
     }
 }
- class Ventana {
+class Ventana {
 
     constructor(nombre, distance, anchura, orientacion) {
         this.Nombre = nombre,
@@ -38,13 +38,9 @@ class Plano {
 }
 
 
-
 let userId = document.getElementById("appUserId").value;
 let MyPlano = new Plano();
 MyPlano.userId = userId;
-
-
-
 
 let canvas = new fabric.Canvas('canvas');
 let ctx = canvas.getContext('2d');
@@ -68,15 +64,15 @@ select.addEventListener('change', function () {
     let foundObject = arrayOverlap.find(element => element.name == this.value);
     let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
     let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
-   
+
 
     if (MyPlano.Ventanas[0] == null) {
-        
+
         MyPlano.Ventanas.splice(0, 1);
-       
+
     }
     if (MyPlano.Puertas[0] == null) {
-       
+
 
         MyPlano.Puertas.splice(0, 1);
     }
@@ -142,7 +138,7 @@ function createRoomForm(Object, myplanorecinto) {
     let headingRoom = document.createElement('h3');
     headingRoom.innerHTML = "Room";
     headingRoom.setAttribute("class", 'room');
-    
+
     formRoom.appendChild(headingRoom);
 
     let line = document.createElement('hr');
@@ -166,7 +162,7 @@ function createRoomForm(Object, myplanorecinto) {
 
     let widthlabel = document.createElement('label');
     widthlabel.innerHTML = "Width :";
-   
+
     formRoom.appendChild(widthlabel);
 
     let inputWidth = document.createElement('input');
@@ -207,8 +203,8 @@ function createRoomForm(Object, myplanorecinto) {
 
     botonCreate.addEventListener("click", function () {
 
-       rect=createRoom(inputName, inputWidth, inputHeight,formRoom);
-      
+        rect = createRoom(inputName, inputWidth, inputHeight, formRoom);
+
     })
 
     botonDelete.addEventListener("click", function () {
@@ -228,7 +224,7 @@ function createRoomForm(Object, myplanorecinto) {
 }
 
 
-function createRoom(inputName, inputWidth, inputHeight,formroom) {
+function createRoom(inputName, inputWidth, inputHeight, formroom) {
 
     let heightWind1 = 10;
     let heightDoor = 10;
@@ -256,89 +252,84 @@ function createRoom(inputName, inputWidth, inputHeight,formroom) {
     });
 
     // VALIDADACIONES DEL RECINTO 
-    //Límites ancho: 
-    if (rect.width > 350 || rect.height > 300)
-    {
 
-
-        swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
-
-    }
-
-    else if (parseInt(inputName.value) || (inputName.value == "")) {
+    if (parseInt(inputName.value) || (inputName.value == "")) {
         swal("Name Validation", "You must enter a Name for the Room", "error");
-    }
 
+        if (!parseInt(inputWidth.value)) {
+            swal("Width Validation", "You must enter a Number for the Width", "error");
 
-    else if (!parseInt(inputWidth.value)) {
-        swal("Width Validation", "You must enter a Number for the Width", "error");
-    }
+            if (inputWidth.value < 0) {
+                swal("Width Validation", "The Number is Negative ", "error");
 
-    else if (inputWidth.value < 0) {
-        swal("Width Validation", "The Number is Negative ", "error");
-    }
+                //Límites ancho: 
+                if (rect.width > 350 || rect.height > 300) {
 
-    else if (!parseInt(inputHeight.value)) {
-        swal("Height Validation", "You must enter a Number for the Height ", "error");
-    }
-    else if (inputHeight.value < 0) {
-        swal("Height Validation", "The Number is Negative", "error");
-    }
+                    swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
 
-
-    else {
-        formroom.remove();
-        canvas.clear().renderAll();
-        arrayOverlap.push(rect);
-        let recinto1 = new Recinto(inputName.value, inputHeight.value, inputWidth.value);
-        MyPlano.Recinto = recinto1;
-        addToSelect();
-        arrayOverlap.forEach(function (x) {
-
-            if (x.type == "window" && x.side == "e") {
-                x.set('left', leftRoom + rect.width - heightWind1 / 2);
-            }
-            if (x.type == "window" && x.side == "s") {
-                x.set('left', leftRoom + rect.width + x.width - heightWind1 / 2);
-                x.set('top', topRoom + rect.height - heightWind1 / 2);
-            }
-
-
-            if (x.type == "door" && x.side == "e") {
-
-                if (x.flipX == true) {
-                    x.set('left', leftRoom + rect.width + x.width - heightDoor / 2 + 1);
-                    x.set('top', topRoom + x.width + 1)
-
-                } else {
-                    x.set('left', leftRoom + rect.width + heightDoor / 2 + 1);
-                    x.set('top', topRoom + x.width + 1)
                 }
+                else {
+
+                    formroom.remove();
+                    canvas.clear().renderAll();
+                    arrayOverlap.push(rect);
+                    let recinto1 = new Recinto(inputName.value, inputHeight.value, inputWidth.value);
+                    MyPlano.Recinto = recinto1;
+                    addToSelect();
+
+                    arrayOverlap.forEach(function (x) {
+
+                        if (x.type == "window" && x.side == "e") {
+                            x.set('left', leftRoom + rect.width - heightWind1 / 2);
+                        }
+                        if (x.type == "window" && x.side == "s") {
+                            x.set('left', leftRoom + rect.width + x.width - heightWind1 / 2);
+                            x.set('top', topRoom + rect.height - heightWind1 / 2);
+                        }
+
+
+                        if (x.type == "door" && x.side == "e") {
+
+                            if (x.flipX == true) {
+                                x.set('left', leftRoom + rect.width + x.width - heightDoor / 2 + 1);
+                                x.set('top', topRoom + x.width + 1)
+
+                            } else {
+                                x.set('left', leftRoom + rect.width + heightDoor / 2 + 1);
+                                x.set('top', topRoom + x.width + 1)
+                            }
+                        }
+
+                        if (x.type == "door" && x.side == "s") {
+
+                            if (x.flipX == true) {
+                                x.set('left', rect.width);
+                                x.set('top', topRoom + rect.height + x.width - heightWind1 / 2 + 1);
+                            } else {
+                                x.set('left', rect.width);
+                                x.set('top', topRoom + rect.height + heightWind1 / 2 + 1);
+                            }
+                        }
+
+                        canvas.add(x);
+                    })
+
+
+                    return rect;
+                };
+
             }
-
-            if (x.type == "door" && x.side == "s") {
-
-                if (x.flipX == true) {
-                    x.set('left', rect.width);
-                    x.set('top', topRoom + rect.height + x.width - heightWind1 / 2 + 1);
-                } else {
-                    x.set('left', rect.width);
-                    x.set('top', topRoom + rect.height + heightWind1 / 2 + 1);
-                }
-            }
-
-            canvas.add(x);
-        })
+        }
 
     }
-    return rect;
-};
+}
 
 
-function createWindowForm(Object,myplanoventanas) {
+
+function createWindowForm(Object, myplanoventanas) {
     $('.workPlace').empty();
 
-// FORMULARIO VENTANAS
+    // FORMULARIO VENTANAS
 
     let formWindow = document.createElement('form');
     formWindow.setAttribute("class", "formWindow");
@@ -432,7 +423,7 @@ function createWindowForm(Object,myplanoventanas) {
     widthlabel.setAttribute("class", "text-dark");
     formWindow.appendChild(widthlabel);
 
-   //Input Width Ventana
+    //Input Width Ventana
 
     let inputWidth = document.createElement('input');
     inputWidth.setAttribute("type", "text");
@@ -465,7 +456,7 @@ function createWindowForm(Object,myplanoventanas) {
 
     botonCreate.addEventListener("click", function () {
         wind1 = createWindow(inputSide, inputWindName, inputDistance, inputWidth, formWindow);
-      
+
     })
 
     // Eliminar Ventanas
@@ -518,67 +509,61 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
         let seSolapa = false;
 
-        //Límites ancho: 
-        if ((wind1.width + parseInt(inputDistance.value)) > rect.width)
-        {
-
-            swal("Overlap Error", "The object entered overlaps with the previous", "error");
-
-        }
-
-        else if (parseInt(window_name.value) || (window_name.value == ""))
-        {
+        if (parseInt(window_name.value) || (window_name.value == "")) {
             swal("Name Validation", "You must enter a Name for the Window", "error");
-        }
-        else if (!parseInt(inputWidth.value))
-        {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
-        else if (!parseInt(inputHeight.value)) {
-            swal("Height Validation", "You must enter a number for the Height", "error");
-        }
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
 
+            if (!parseInt(inputWidth.value)) {
+                swal("Width Validation", "You must enter a number for the Width", "error");
 
-        else {
+                if (!parseInt(inputDistance.value)) {
+                    swal("Distance Validation", "You must enter a number for the Distance", "error");
 
-            //Condiciones Solapamiento:
-            arrayOverlap.forEach(function (i) {
+                    //Límites ancho: 
+                    if ((wind1.width + parseInt(inputDistance.value)) > rect.width) {
 
-                if (i != rect) {
+                        swal("Overlap Error", "The object entered overlaps with the previous", "error");
 
-                    if (i.intersectsWithObject(wind1)) {
+                    }
+                    else {
 
-                        alert("objects overlap");
-                        seSolapa = true;
-                        canvas.clear().renderAll();
-                        addToSelect();
-                        arrayOverlap.forEach(function (x) {
-                            canvas.add(x);
-                        })
+                        //Condiciones Solapamiento:
+                        arrayOverlap.forEach(function (i) {
+
+                            if (i != rect) {
+
+                                if (i.intersectsWithObject(wind1)) {
+
+                                    alert("objects overlap");
+                                    seSolapa = true;
+                                    canvas.clear().renderAll();
+                                    addToSelect();
+                                    arrayOverlap.forEach(function (x) {
+                                        canvas.add(x);
+                                    })
+                                }
+                            }
+
+                        });
+
+                        if (!seSolapa) {
+                            formWindow.remove();
+                            canvas.clear().renderAll();
+                            arrayOverlap.push(wind1);
+                            let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
+                            MyPlano.Ventanas.push(Ventana1);
+                            addToSelect();
+                            arrayOverlap.forEach(function (x) {
+                                canvas.add(x);
+                            })
+                        }
                     }
                 }
-
-            });
-            if (!seSolapa) {
-                formWindow.remove();
-                canvas.clear().renderAll();
-                arrayOverlap.push(wind1);
-                let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
-                MyPlano.Ventanas.push(Ventana1);
-                addToSelect();
-                arrayOverlap.forEach(function (x) {
-                    canvas.add(x);
-                })
             }
 
         }
-
     }
 
-// CONDICIONES VENTANA SUR
+    // CONDICIONES VENTANA SUR
 
     if (inputSide.value.toLowerCase() === "s") {
         let topRoom = 100;
@@ -668,7 +653,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         }
     }
 
-// CONDICIONES VENTANA ESTE
+    // CONDICIONES VENTANA ESTE
 
 
     if (inputSide.value.toLowerCase() === "e") {
@@ -752,7 +737,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         }
     }
 
-// CONDICIONES VENTANA OESTE
+    // CONDICIONES VENTANA OESTE
 
 
     if (inputSide.value.toLowerCase() === "o") {
@@ -838,7 +823,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
 // FORMULARIO PUERTAS
 
-function createDoorForm(Object,myplanopuertas) {
+function createDoorForm(Object, myplanopuertas) {
     $('.workPlace').empty();
 
     let formDoor = document.createElement('form');
@@ -1005,7 +990,7 @@ function createDoorForm(Object,myplanopuertas) {
     // Boton Borrar Puerta
     let botonDelete = document.createElement('button'); // Append Button
     botonDelete.setAttribute("type", "button");
-    botonDelete.setAttribute("class","btn btn-outline-danger")
+    botonDelete.setAttribute("class", "btn btn-outline-danger")
     // submitelement.setAttribute("name", "dsubmit");
     botonDelete.innerHTML = "Delete";
     formDoor.appendChild(botonDelete);
@@ -1018,7 +1003,7 @@ function createDoorForm(Object,myplanopuertas) {
     botonCreate.addEventListener("click", function () {
 
         door1 = createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, doorAxisInput, inputWidth, formDoor);
-      
+
     })
 
     // BORRAR PUERTAS
@@ -1137,7 +1122,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         }
     }
 
-// ESPECIFICACION POR PAREDES. PARED ESTE
+    // ESPECIFICACION POR PAREDES. PARED ESTE
 
     if (inputSide.value.toLowerCase() === "e") {
         let topRoom = 100;
@@ -1228,7 +1213,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         }
     }
 
-// ESPECIFICACION POR PAREDES . PUERTAS PARED SUR
+    // ESPECIFICACION POR PAREDES . PUERTAS PARED SUR
 
     if (inputSide.value.toLowerCase() === "s") {
         let topRoom = 100;
@@ -1316,7 +1301,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
     }
 
-// ESPECIFICACION POR PAREDES . PUERTAS DEL LADO OESTE
+    // ESPECIFICACION POR PAREDES . PUERTAS DEL LADO OESTE
 
     if (inputSide.value.toLowerCase() === "o") {
         let topRoom = 100;
@@ -1464,6 +1449,7 @@ console.log(arrayOverlap);
 
 let boton = document.getElementById("GuardarPlano");
 boton.setAttribute("boton", "btn btn-info");
+
 boton.addEventListener('click', function () {
     var postPlano = JSON.stringify(MyPlano);
     $.ajax({
@@ -1480,5 +1466,6 @@ boton.addEventListener('click', function () {
         error: function (response) {
             console.log(response);
         }
-    });
+    })
 })
+    

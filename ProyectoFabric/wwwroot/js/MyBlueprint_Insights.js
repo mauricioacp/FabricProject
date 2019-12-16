@@ -35,6 +35,7 @@ class Plano {
     }
     ;
 }
+
 let recinto_nombre = document.getElementById("recinto_nombre").value;
 const recinto_alto = document.getElementById("recinto_alto").value;
 const recinto_ancho = document.getElementById("recinto_ancho").value;
@@ -59,6 +60,7 @@ let ctx = canvas.getContext();
 let arrayOverlap = [];
 let arrayGroup = [];
 let select = document.getElementById("sel1");
+
 select.addEventListener('change', function () {
    
     let foundObject = arrayOverlap.find(element => element.name == this.value);
