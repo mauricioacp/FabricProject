@@ -78,8 +78,11 @@ body {
 
 
 #canvas {
-    border: 2px solid black;
-    margin: 1rem;
+    margin-top:5%;
+    margin-bottom:5%;
+    margin-left:10%;
+    border: 4px solid black;
+ 
 }
 
 .toolbar {
@@ -99,7 +102,9 @@ body {
 }
 
 .canvasTablas {
-    margin: 1rem;
+    margin: 2%;
+    background-image: url("/imagenes/fondoweb.png");
+    padding:3%;
 }
 
 .labelform {
@@ -113,3 +118,43 @@ body {
     background-color:antiquewhite;
 }
 
+
+/*Form Window*/
+
+.formWindow
+{
+    border:4px solid grey;
+    background-color:beige;
+    padding:7%;
+    margin-right:11%;
+
+}
+
+/*Formulario Door*/
+
+.formDoor {
+    border: 4px solid grey;
+    background-color: beige;
+    padding: 7%;
+    margin-right: 11%;
+}
+
+
+/*Form Room*/
+
+.formRoom {
+    border: 4px solid grey;
+    background-color: beige;
+    padding: 7%;
+    margin-right: 11%;
+}
+
+.cajaCanvas 
+{
+    margin-right:8%;
+}
+
+.btn-outline-success 
+{
+    margin-right:55%;
+}
