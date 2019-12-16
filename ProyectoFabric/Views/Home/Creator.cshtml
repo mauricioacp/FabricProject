@@ -11,89 +11,107 @@
     </div>
 </div>
 
-<div class="site-block-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <a id="room" class="site-block-feature d-flex p-4 rounded mb-4">
-                    <div class="mr-3">
-                        <span class="icon flaticon-interior-design font-weight-light h2"></span>
-                    </div>
-                    <div class="text">
-                        <h3>Create Room</h3>
-                        <p>Made with Canvas</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4">
-                <a id="door" class="site-block-feature d-flex p-4 rounded mb-4">
-                    <div class="mr-3">
-                        <span class="icon flaticon-measuring font-weight-light h2"></span>
-                    </div>
-                    <div class="text">
-                        <h3>Door</h3>
-                        <p>Powered by Fabric.Js</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4">
-                <a id="window" class="site-block-feature d-flex p-4 rounded mb-4">
-                    <div class="mr-3">
-                        <span class="icon flaticon-window font-weight-light h2"></span>
-                    </div>
-                    <div class="text">
-                        <h3>Window</h3>
-                        <p>Make your own designs</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+<br />
+
 
 
 
         <input id="appUserId" type="hidden" name="userid" value="@Model.Id" />
-<ul class="nav nav-tabs">
 
 
-    <li class="nav-item">
-        @*Boton Guardar Plano*@
-        <a role="button" id="GuardarPlano" class="nav-link room"> Guardar Plano</a>
-    </li>
-    <li class="nav-item">
-        @*Boton Borrar Todo*@
-        <a id="botonDeleteAll" role="button" class="nav link window">Delete All </a>
-    </li>
-    @*Select para seleccionar guardados*@
-    <li class="nav-item dropdown">
-        <select class="form-control" id="sel1">
-            <option value="0">Select your object</option>
-        </select>
-    </li>
+<div class="site-section holamundo">
+    
+        <div class="container">
+            <div class="row">
+                <div class="mr-2">
+                    <select class="form-control bg-primary" id="sel1">
+                        <option value="0">Select your object</option>
+                    </select>
+                </div>
+                <div class="col-lg-2">
+                    <a id="GuardarPlano" class="site-block-feature d-flex p-4 rounded mb-1">
+                        <div class="mr-3">
+                            <span class="icon icon-save2 font-weight-bolder h5 bg-success"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Save Design</h3>
 
-    @*Boton Redimension*@
-    <li class="nav-item">
-        <a id="botonRedimension" role="button" class="nav-link">Resize Room</a>
-    </li>
-</ul>
+                        </div>
+                    </a>
+                </div>
 
-@*Row compartida canvas e Inputs*@
+                <div class="col-lg-2">
+                    <a id="botonDeleteAll" class="site-block-feature d-flex p-4 rounded mb-1">
+                        <div class="mr-3">
+                            <span class="icon icon-delete_forever font-weight-light h5 bg-danger"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Delete All</h3>
 
-<div class="canvasTablas row">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2">
+                    <a id="room" class="site-block-feature d-flex p-4 rounded mb-1">
+                        <div class="mr-3">
+                            <span class="icon flaticon-interior-design font-weight-light h5"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Create Room</h3>
 
-        <div class="col-6 cajaCanvas">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2">
+                    <a id="door" class="site-block-feature d-flex p-4 rounded mb-1">
+                        <div class="mr-3">
+                            <span class="icon flaticon-measuring font-weight-light h5"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Door</h3>
 
-            <canvas width="500" height="500" id="canvas"></canvas>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2">
+                    <a id="window" class="site-block-feature d-flex p-4 rounded mb-1">
+                        <div class="mr-3">
+                            <span class="icon flaticon-window font-weight-light h5"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Window</h3>
 
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-6 cajaCanvas offset-1" style="margin:0%">
+                <div class="row">
+                    <div class="col-3 offset-3">                       
+                    <label style="font:bold" class="text-danger">
+                        Blueprint Name:
+                    <input class="form-control" id="nombreplano" type="text"  />
+                    </label>
+                    </div>
+                <div class="avatar avatar-md mr-3 mb-2 mt-1 col-2">
+                    <a ><img src="~/images/compass.png" alt="compass" /></a>
+                    <h4 style="font:bold" class="text-danger">  10:1 m</h4>
+                </div>
+                </div>
+                <div class="offset-2">
 
-        <div class="col-5 workPlace">
+                <canvas style="margin:0%" width="500" height="500" id="canvas"></canvas>
+                </div>
 
+            </div>
+
+            <div class="col-5 workPlace">
+
+            </div>
         </div>
     </div>
- </div>
-
 
 
 
@@ -109,167 +127,3 @@
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @*<script>
-
-            let altoRecinto;
-            let anchoRecinto;
-            let rect;
-            let canvas = new fabric.Canvas('canvas');
-            let ctx = canvas.getContext('2d');
-            let workplace = document.getElementsByClassName("workPlace")[0];
-            console.log(workplace);
-            let room = document.getElementById("room");
-            room.addEventListener("click", function () {
-
-                $('.workPlace').empty();
-                console.log('primer boton');
-                let createform = document.createElement('form'); // Create New Element Form
-                // createform.setAttribute("action", ""); // Setting Action Attribute on Form
-                // createform.setAttribute("method", "post"); // Setting Method Attribute on Form
-                workplace.appendChild(createform);
-                let heading = document.createElement('h3'); // Heading of Form
-                heading.innerHTML = "Room";
-                createform.appendChild(heading);
-                var line = document.createElement('hr'); // Giving Horizontal Row After Heading
-                createform.appendChild(line);
-                var linebreak = document.createElement('br');
-                createform.appendChild(linebreak);
-                var namelabel = document.createElement('label'); // Create Label for Name Field
-                namelabel.innerHTML = "Width :"; // Set Field Labels
-                createform.appendChild(namelabel);
-                var inputelement = document.createElement('input'); // Create Input Field for Name
-                inputelement.setAttribute("type", "text");
-                //inputelement.setAttribute("step", "0.01");
-                createform.appendChild(inputelement);
-                var linebreak = document.createElement('br');
-                createform.appendChild(linebreak);
-                var emaillabel = document.createElement('label'); // Create Label for E-mail Field
-                emaillabel.innerHTML = "Height :";
-                createform.appendChild(emaillabel);
-                var emailelement = document.createElement('input'); // Create Input Field for E-mail
-                emailelement.setAttribute("type", "text");
-                //emailelement.setAttribute("step", "0.01");
-                createform.appendChild(emailelement);
-                var messagebreak = document.createElement('br');
-                createform.appendChild(messagebreak);
-                var submitelement = document.createElement('button'); // Append Submit Button
-                submitelement.setAttribute("type", "button");
-                // submitelement.setAttribute("name", "dsubmit");
-                submitelement.innerHTML = "Añadir";
-                createform.appendChild(submitelement);
-                console.log(submitelement);
-                submitelement.addEventListener("click", function () {
-
-                    console.log('boton2');
-                    let topRecinto = 200;
-                    let leftRecinto = 200;
-                    rect = new fabric.Rect({
-                        left: leftRecinto,
-                        top: topRecinto,
-                        fill: 'red',
-                        stroke: 'black',
-
-                        strokeWidth: 2,
-                        // strokeUniform: true,
-                        width: inputelement.value,
-                        height: emailelement.value,
-                        selectable: true
-                        // hasControls: false,
-                        // lockMovementX: true,
-                        // lockScalingX: true
-                        // lockUniScaling: true,
-                        // lockRotation: true
-                         //selectable: false,
-                        ////
-                    });
-                    canvas.add(rect);
-
-                    let sendcontroller = document.getElementById('controller');
-
-                    let json = {
-                        Recinto: {
-                            Alto: parseFloat(emailelement.value),
-                            Ancho: parseFloat(inputelement.value),
-                            Nombre: "Recinto1"
-                        }
-                    };
-
-                    sendcontroller.addEventListener('click', function sendAjax() {
-
-                    var postData = JSON.stringify(json);
-                    $.ajax({
-                        url: '/Recintos/CreateRootObject',
-                        dataType: 'json',
-                        type: 'POST',
-                        data: postData,
-                        contentType: 'application/json',
-                        traditional: true,
-                        success: function (response) {
-                            console.log('ok');
-                            //window.location.reload();
-                        },
-                        error: function (response) {
-                            console.log(response);
-                            alert(response);
-                            //window.location.reload();
-                        }
-                    });
-
-            });
-
-                })
-            })
-
-
-
-        </script>*@

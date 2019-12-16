@@ -6,13 +6,20 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    <div class="row">
+        <div class="col-3 p-0">
 
-    <a class="text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+            <a class="text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        </div>
+        <div class="col-3 p-0">
+
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button  type="submit" class="nav-link btn btn-link p-0 text-light">Logout</button>
+            </form>
+        </div>
+    </div>
 
 
-    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-    </form>
 
 }
 else

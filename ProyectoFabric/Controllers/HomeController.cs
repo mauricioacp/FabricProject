@@ -26,6 +26,10 @@ namespace ProyectoFabric.Controllers
         {
             return View();
         }
+         public IActionResult AboutUs()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Creator(string id)
         {

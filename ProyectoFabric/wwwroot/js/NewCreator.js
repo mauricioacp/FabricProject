@@ -1,12 +1,12 @@
 ﻿
-class Recinto {
+class Recinto  {
     constructor(nombre, altura, anchura) {
         this.Nombre = nombre,
             this.Altura = altura,
             this.Anchura = anchura
     }
 }
-class Ventana {
+ class Ventana {
 
     constructor(nombre, distance, anchura, orientacion) {
         this.Nombre = nombre,
@@ -38,9 +38,13 @@ class Plano {
 }
 
 
+
 let userId = document.getElementById("appUserId").value;
 let MyPlano = new Plano();
 MyPlano.userId = userId;
+
+
+
 
 let canvas = new fabric.Canvas('canvas');
 let ctx = canvas.getContext('2d');
@@ -48,6 +52,7 @@ let workplace = document.getElementsByClassName("workPlace")[0];
 let select = document.getElementById("sel1");
 let room = document.getElementById("room");
 let arrayOverlap = [];
+
 
 // BOTONES REDIMENSIONA Y ELIMINAR TODO (Recinto, Ventanas y Puertas)
 let botonRedimension = document.getElementById("botonRedimension");
@@ -64,15 +69,15 @@ select.addEventListener('change', function () {
     let foundObject = arrayOverlap.find(element => element.name == this.value);
     let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
     let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
-
+   
 
     if (MyPlano.Ventanas[0] == null) {
-
+        
         MyPlano.Ventanas.splice(0, 1);
-
+       
     }
     if (MyPlano.Puertas[0] == null) {
-
+       
 
         MyPlano.Puertas.splice(0, 1);
     }
@@ -81,8 +86,8 @@ select.addEventListener('change', function () {
     if (foundObject.type == "room") {
         let i = arrayOverlap.indexOf(foundObject);
         arrayOverlap.splice(i, 1);
-        MyPlano.Recinto.remove();
         let MyplanoObjectRecinto = MyPlano.Recinto.name == this.value;
+        MyPlano.Recinto == null
 
         createRoomForm(foundObject, MyplanoObjectRecinto);
     }
@@ -138,7 +143,7 @@ function createRoomForm(Object, myplanorecinto) {
     let headingRoom = document.createElement('h3');
     headingRoom.innerHTML = "Room";
     headingRoom.setAttribute("class", 'room');
-
+    
     formRoom.appendChild(headingRoom);
 
     let line = document.createElement('hr');
@@ -148,40 +153,77 @@ function createRoomForm(Object, myplanorecinto) {
     formRoom.appendChild(linebreak);
 
     let nameLabel = document.createElement('label');
+    nameLabel.setAttribute("class", "labelsforms");
     nameLabel.innerHTML = "Name :";
     formRoom.appendChild(nameLabel);
 
     let inputName = document.createElement('input');
     inputName.setAttribute("type", "text");
     inputName.setAttribute("class", "form-control")
-    inputName.setAttribute("placeholder", "Enter the Name")
+ 
+   
+    if (Object == null) {
+
+        inputName.setAttribute("placeholder", "Enter Name");
+    }
+    else {
+        inputName.setAttribute("placeholder", Object.name);
+
+    }
+
     formRoom.appendChild(inputName);
 
     let linebreak1 = document.createElement('br');
     formRoom.appendChild(linebreak1);
 
     let widthlabel = document.createElement('label');
+    widthlabel.setAttribute("class", "labelsforms");
     widthlabel.innerHTML = "Width :";
-
+   
     formRoom.appendChild(widthlabel);
 
     let inputWidth = document.createElement('input');
-    inputWidth.setAttribute("type", "text");
+    inputWidth.setAttribute("type", "number");
+    inputWidth.setAttribute("step", "0.01");
+    inputWidth.required = true;
     inputWidth.setAttribute("class", "form-control")
+    if (Object == null) {
+
+ 
     inputWidth.setAttribute("placeholder", "Enter the Width");
+    }
+    else {
+
+    inputWidth.setAttribute("placeholder", Object.width);
+
+    }
     formRoom.appendChild(inputWidth);
 
     let linebreak0 = document.createElement('br');
     formRoom.appendChild(linebreak0);
 
     let heightlabel = document.createElement('label');
+    heightlabel.setAttribute("class", "labelsforms");
     heightlabel.innerHTML = "Height :";
     formRoom.appendChild(heightlabel);
 
     let inputHeight = document.createElement('input');
-    inputHeight.setAttribute("type", "text");
+    inputHeight.setAttribute("type", "number");
+    inputHeight.setAttribute("step", "0.01");
     inputHeight.setAttribute("class", "form-control");
-    inputHeight.setAttribute("placeholder", "Enter the Height");
+    inputHeight.required = true;
+    if (Object == null) {
+
+
+        inputHeight.setAttribute("placeholder", "Enter the Width");
+
+    }
+    else {
+
+        inputHeight.setAttribute("placeholder", Object.height);
+      
+
+    }
     formRoom.appendChild(inputHeight);
 
     let messagebreak = document.createElement('br');
@@ -203,8 +245,8 @@ function createRoomForm(Object, myplanorecinto) {
 
     botonCreate.addEventListener("click", function () {
 
-        rect = createRoom(inputName, inputWidth, inputHeight, formRoom);
-
+       rect=createRoom(inputName, inputWidth, inputHeight,formRoom);
+      
     })
 
     botonDelete.addEventListener("click", function () {
@@ -224,7 +266,7 @@ function createRoomForm(Object, myplanorecinto) {
 }
 
 
-function createRoom(inputName, inputWidth, inputHeight, formroom) {
+function createRoom(inputName, inputWidth, inputHeight,formroom) {
 
     let heightWind1 = 10;
     let heightDoor = 10;
@@ -237,7 +279,7 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
         type: "room",
         left: leftRoom,
         top: topRoom,
-        fill: 'transparent',
+        fill: 'white',
         stroke: 'solid black',
         strokeWidth: 1,
         strokeUniform: true,
@@ -252,84 +294,133 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
     });
 
     // VALIDADACIONES DEL RECINTO 
-
-    if (parseInt(inputName.value) || (inputName.value == "")) {
-        swal("Name Validation", "You must enter a Name for the Room", "error");
-
-        if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a Number for the Width", "error");
-
-            if (inputWidth.value < 0) {
-                swal("Width Validation", "The Number is Negative ", "error");
-
-                //Límites ancho: 
-                if (rect.width > 350 || rect.height > 300) {
-
-                    swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
-
-                }
-                else {
-
-                    formroom.remove();
-                    canvas.clear().renderAll();
-                    arrayOverlap.push(rect);
-                    let recinto1 = new Recinto(inputName.value, inputHeight.value, inputWidth.value);
-                    MyPlano.Recinto = recinto1;
-                    addToSelect();
-
-                    arrayOverlap.forEach(function (x) {
-
-                        if (x.type == "window" && x.side == "e") {
-                            x.set('left', leftRoom + rect.width - heightWind1 / 2);
-                        }
-                        if (x.type == "window" && x.side == "s") {
-                            x.set('left', leftRoom + rect.width + x.width - heightWind1 / 2);
-                            x.set('top', topRoom + rect.height - heightWind1 / 2);
-                        }
+    //Límites ancho: 
+    if (rect.width > 350 || rect.height > 300)
+    {
 
 
-                        if (x.type == "door" && x.side == "e") {
-
-                            if (x.flipX == true) {
-                                x.set('left', leftRoom + rect.width + x.width - heightDoor / 2 + 1);
-                                x.set('top', topRoom + x.width + 1)
-
-                            } else {
-                                x.set('left', leftRoom + rect.width + heightDoor / 2 + 1);
-                                x.set('top', topRoom + x.width + 1)
-                            }
-                        }
-
-                        if (x.type == "door" && x.side == "s") {
-
-                            if (x.flipX == true) {
-                                x.set('left', rect.width);
-                                x.set('top', topRoom + rect.height + x.width - heightWind1 / 2 + 1);
-                            } else {
-                                x.set('left', rect.width);
-                                x.set('top', topRoom + rect.height + heightWind1 / 2 + 1);
-                            }
-                        }
-
-                        canvas.add(x);
-                    })
-
-
-                    return rect;
-                };
-
-            }
-        }
+        swal("Size Validation", "The size of the enclosure is bigger than the plane", "error");
 
     }
-}
+
+    else if (parseInt(inputName.value) || (inputName.value == "")) {
+        swal("Name Validation", "You must enter a Name for the Room", "error");
+    }
 
 
+    else if (!parseInt(inputWidth.value)) {
+        swal("Width Validation", "You must enter a Number for the Width", "error");
+    }
 
-function createWindowForm(Object, myplanoventanas) {
+    else if (inputWidth.value < 0) {
+        swal("Width Validation", "The Number is Negative ", "error");
+    }
+
+    else if (!parseInt(inputHeight.value)) {
+        swal("Height Validation", "You must enter a Number for the Height ", "error");
+    }
+    else if (inputHeight.value < 0) {
+        swal("Height Validation", "The Number is Negative", "error");
+    }
+
+
+    else {
+        formroom.remove();
+        canvas.clear().renderAll();
+        arrayOverlap.push(rect);
+        let recinto1 = new Recinto(inputName.value, inputHeight.value, inputWidth.value);
+        MyPlano.Recinto = recinto1;
+        addToSelect();
+        //Redimensionado de objetos al cambiar las medidas de Room. 
+        arrayOverlap.forEach(function (x) {
+            if (x.type == "window" && x.side == "n") {
+                x.set('left', leftRoom + x.distance);
+                x.set('top', topRoom - heightWind1 / 2);
+                if (x.distance + x.width > rect.width) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "window" && x.side == "e") {
+                x.set('left', leftRoom + rect.width - heightWind1 / 2);
+                x.set('top', topRoom + x.distance);
+                if (x.distance + x.height > rect.height) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "window" && x.side == "s") {
+                x.set('left', leftRoom + rect.width - x.distance);
+                x.set('top', topRoom + rect.height - heightWind1 / 2);
+                if (x.distance + x.width * (-1) > rect.width) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "window" && x.side == "o") {
+                x.set('top', topRoom + rect.height - x.distance);
+                if (x.distance + x.height * (-1) > rect.height) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "door" && x.side == "n") {
+                if (x.flipX == true) {
+                    x.set('left', leftRoom + x.distance + x.height + 1);
+                    x.set('top', topRoom - x.height - heightDoor / 2)
+                } else {
+                    x.set('left', leftRoom + x.distance + x.height + 1);
+                    x.set('top', topRoom - heightDoor / 2)
+                }
+                if (x.distance + x.height > rect.width) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "door" && x.side == "e") {
+                if (x.flipX == true) {
+                    x.set('left', leftRoom + rect.width + x.width - heightDoor / 2 + 1);
+                    x.set('top', topRoom + x.distance + x.height + 1)
+                } else {
+                    x.set('left', leftRoom + rect.width + heightDoor / 2 + 1);
+                    x.set('top', topRoom + x.distance + x.height + 1)
+                }
+                if (x.distance + x.height > rect.height) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "door" && x.side == "s") {
+                if (x.flipX == true) {
+                    x.set('left', leftRoom + rect.width - x.distance - x.height);
+                    x.set('top', topRoom + rect.height + x.width - heightWind1 / 2 + 1);
+                } else {
+                    x.set('left', leftRoom + rect.width - x.distance - x.height);
+                    x.set('top', topRoom + rect.height + heightWind1 / 2 + 1);
+                }
+                if (x.distance + x.height > rect.width) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+            if (x.type == "door" && x.side == "o") {
+                if (x.flipX == true) {
+                    x.set('left', leftRoom - x.width + heightDoor / 2);
+                    x.set('top', topRoom + rect.height - x.distance - x.height);
+                } else {
+                    x.set('left', leftRoom - heightWind1 / 2);
+                    x.set('top', topRoom + rect.height - x.distance - x.height);
+                }
+                if (x.distance + x.height > rect.height) {
+                    alert(x.name + ' is out of the room size')
+                }
+            }
+
+            canvas.add(x);
+        })
+
+    }
+    return rect;
+};
+
+
+function createWindowForm(Object,myplanoventanas) {
     $('.workPlace').empty();
 
-    // FORMULARIO VENTANAS
+// FORMULARIO VENTANAS
 
     let formWindow = document.createElement('form');
     formWindow.setAttribute("class", "formWindow");
@@ -342,34 +433,42 @@ function createWindowForm(Object, myplanoventanas) {
     let line = document.createElement('hr');
     formWindow.appendChild(line);
 
-    let linebreak = document.createElement('br');
-    formWindow.appendChild(linebreak);
 
 
     // Label Nombre Ventana
 
     let nameWindLabel = document.createElement('label');
     nameWindLabel.innerHTML = "Name :";
-    nameWindLabel.setAttribute("class", "text-dark");
+    nameWindLabel.setAttribute("class", "labelsforms");
     formWindow.appendChild(nameWindLabel);
 
     // Input Nombre Ventana
 
     let inputWindName = document.createElement('input');
     inputWindName.setAttribute("type", "text");
+
     inputWindName.setAttribute("class", "form-control ");
-    inputWindName.setAttribute("placeholder", "Enter the name of the Window");
+ 
+    if (Object == null) {
+
+
+        nameWindLabel.setAttribute("placeholder", "Enter Name");
+
+    }
+    else {
+
+        nameWindLabel.setAttribute("placeholder", Object.name);
+
+
+    }
     formWindow.appendChild(inputWindName);
 
-    let linebreak0 = document.createElement('br');
-    formWindow.appendChild(linebreak0);
-
-
+   
     // Label RoomSide
 
     let sideLabel = document.createElement('label');
     sideLabel.innerHTML = "Room Side :";
-    sideLabel.setAttribute("class", "text-dark");
+    sideLabel.setAttribute("class", "labelsforms");
     formWindow.appendChild(sideLabel);
 
     // Select Ventana
@@ -397,42 +496,67 @@ function createWindowForm(Object, myplanoventanas) {
     optionO.setAttribute("value", "o");
     inputSide.appendChild(optionO);
 
-    let messagebreak = document.createElement('br');
-    formWindow.appendChild(messagebreak);
 
     // Label Distance Ventana
     let distanceLabel = document.createElement('label');
     distanceLabel.innerHTML = "Distance :";
-    distanceLabel.setAttribute("class", "text-dark");
+    distanceLabel.setAttribute("class", "labelsforms");
+   
     formWindow.appendChild(distanceLabel);
 
     //Input Distance Ventana
     let inputDistance = document.createElement('input');
-    inputDistance.setAttribute("type", "text");
+    inputDistance.setAttribute("type", "number");
+    inputDistance.setAttribute("step", "0.01");
     inputDistance.setAttribute("class", "form-control");
-    inputDistance.setAttribute("placeholder", "Enter the Distance");
+   
+    inputDistance.required = true;
+    if (Object == null) {
+
+
+        inputDistance.setAttribute("placeholder", "Enter the Distance");
+
+    }
+    else {
+
+        inputDistance.setAttribute("placeholder", Object.distance);
+
+
+    }
+   
     formWindow.appendChild(inputDistance);
 
-    let messagebreak1 = document.createElement('br');
-    formWindow.appendChild(messagebreak1);
 
     //Label Width Ventanas
 
     let widthlabel = document.createElement('label');
     widthlabel.innerHTML = "Width :";
-    widthlabel.setAttribute("class", "text-dark");
+    widthlabel.setAttribute("class", "labelsforms");
     formWindow.appendChild(widthlabel);
 
-    //Input Width Ventana
+   //Input Width Ventana
 
     let inputWidth = document.createElement('input');
-    inputWidth.setAttribute("type", "text");
+  
+    inputWidth.setAttribute("type", "number");
+    inputWidth.setAttribute("step", "0.01");
+    inputWidthq.required = true;
     inputWidth.setAttribute("class", "form-control");
-    inputWidth.setAttribute("placeholder", "Enter the Width");
+    if (Object == null) {
+
+        inputWidth.setAttribute("placeholder", "Enter the Width");
+
+    }
+    else {
+
+        inputWidth.setAttribute("placeholder", Object.width);
+    }
+   
     formWindow.appendChild(inputWidth);
 
-    let linebreak1 = document.createElement('br');
-    formWindow.appendChild(linebreak1);
+
+    let messagebreak = document.createElement('br');
+    formWindow.appendChild(messagebreak);
 
     // Boton Create Ventanas
 
@@ -456,7 +580,7 @@ function createWindowForm(Object, myplanoventanas) {
 
     botonCreate.addEventListener("click", function () {
         wind1 = createWindow(inputSide, inputWindName, inputDistance, inputWidth, formWindow);
-
+      
     })
 
     // Eliminar Ventanas
@@ -496,6 +620,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             type: "window",
             side: inputSide.value.toLowerCase(),
             left: leftRoom + parseInt(inputDistance.value),
+            distance:parseInt(inputDistance.value),
             top: topRoom - heightWind1 / 2,
             fill: 'transparent',
             stroke: 'blue',
@@ -509,61 +634,67 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
         let seSolapa = false;
 
-        if (parseInt(window_name.value) || (window_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Window", "error");
+        //Límites ancho: 
+        if ((wind1.width + parseInt(inputDistance.value)) > rect.width)
+        {
 
-            if (!parseInt(inputWidth.value)) {
-                swal("Width Validation", "You must enter a number for the Width", "error");
+            swal("Overlap Error", "The object entered overlaps with the previous", "error");
 
-                if (!parseInt(inputDistance.value)) {
-                    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        }
 
-                    //Límites ancho: 
-                    if ((wind1.width + parseInt(inputDistance.value)) > rect.width) {
+        //else if (parseInt(inputWindName.value) || (inputWindName.value == ""))
+        //{
+        //    swal("Name Validation", "You must enter a Name for the Window", "error");
+        //}
+        //else if (!parseInt(inputWidth.value))
+        //{
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Height Validation", "You must enter a number for the Height", "error");
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
 
-                        swal("Overlap Error", "The object entered overlaps with the previous", "error");
 
-                    }
-                    else {
+        else {
 
-                        //Condiciones Solapamiento:
-                        arrayOverlap.forEach(function (i) {
+            //Condiciones Solapamiento:
+            arrayOverlap.forEach(function (i) {
 
-                            if (i != rect) {
+                if (i != rect) {
 
-                                if (i.intersectsWithObject(wind1)) {
+                    if (i.intersectsWithObject(wind1)) {
 
-                                    alert("objects overlap");
-                                    seSolapa = true;
-                                    canvas.clear().renderAll();
-                                    addToSelect();
-                                    arrayOverlap.forEach(function (x) {
-                                        canvas.add(x);
-                                    })
-                                }
-                            }
-
-                        });
-
-                        if (!seSolapa) {
-                            formWindow.remove();
-                            canvas.clear().renderAll();
-                            arrayOverlap.push(wind1);
-                            let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
-                            MyPlano.Ventanas.push(Ventana1);
-                            addToSelect();
-                            arrayOverlap.forEach(function (x) {
-                                canvas.add(x);
-                            })
-                        }
+                        alert("objects overlap");
+                        seSolapa = true;
+                        canvas.clear().renderAll();
+                        addToSelect();
+                        arrayOverlap.forEach(function (x) {
+                            canvas.add(x);
+                        })
                     }
                 }
+
+            });
+            if (!seSolapa) {
+                formWindow.remove();
+                canvas.clear().renderAll();
+                arrayOverlap.push(wind1);
+                let Ventana1 = new Ventana(inputWindName.value, inputDistance.value, inputWidth.value * -1, inputSide.value);
+                MyPlano.Ventanas.push(Ventana1);
+                addToSelect();
+                arrayOverlap.forEach(function (x) {
+                    canvas.add(x);
+                })
             }
 
         }
+
     }
 
-    // CONDICIONES VENTANA SUR
+// CONDICIONES VENTANA SUR
 
     if (inputSide.value.toLowerCase() === "s") {
         let topRoom = 100;
@@ -576,6 +707,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             name: inputWindName.value,
             type: "window",
             side: inputSide.value.toLowerCase(),
+            distance: parseInt(inputDistance.value),
             left: (leftRoom - parseInt(inputDistance.value)),
             top: topRoom - heightWind1 / 2,
             fill: 'transparent',
@@ -596,25 +728,25 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
 
         }
-        else if (parseInt(window_name.value) || (window_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Window", "error");
-        }
+        //else if (parseInt(inputWindName.value) || (inputWindName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Window", "error");
+        //}
 
-        else if (parseInt(input)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
+        //else if (parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
 
-        }
+        //}
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
 
-        }
-        else if (!parseInt(inputHeight.value)) {
-            swal("Height Validation", "You must enter a number for the Height", "error");
-        }
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Height Validation", "You must enter a number for the Height", "error");
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
 
 
         else {
@@ -653,7 +785,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         }
     }
 
-    // CONDICIONES VENTANA ESTE
+// CONDICIONES VENTANA ESTE
 
 
     if (inputSide.value.toLowerCase() === "e") {
@@ -667,6 +799,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             name: inputWindName.value,
             type: "window",
             side: inputSide.value.toLowerCase(),
+            distance: parseInt(inputDistance.value),
             left: (leftRoom - heightWind1 / 2),
             top: topRoom + parseInt(inputDistance.value),
             fill: 'transparent',
@@ -688,18 +821,18 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
         }
 
-        else if (parseInt(window_name.value) || (window_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Window", "error");
-        }
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
-        else if (!parseInt(inputHeight.value)) {
-            swal("Height Validation", "You must enter a number for the Height", "error");
-        }
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //else if (parseInt(inputWindName.value) || (inputWindName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Window", "error");
+        //}
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Height Validation", "You must enter a number for the Height", "error");
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
 
 
         else {
@@ -737,7 +870,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         }
     }
 
-    // CONDICIONES VENTANA OESTE
+// CONDICIONES VENTANA OESTE
 
 
     if (inputSide.value.toLowerCase() === "o") {
@@ -752,6 +885,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             type: "window",
             side: inputSide.value.toLowerCase(),
             left: (leftRoom - heightWind1 / 2),
+            distance: parseInt(inputDistance.value),
             top: topRoom - parseInt(inputDistance.value),
             fill: 'transparent',
             stroke: 'blue',
@@ -771,19 +905,19 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(window_name.value) || (window_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Window", "error");
-        }
+        //else if (parseInt(inputWindName.value) || (inputWindName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Window", "error");
+        //}
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
-        else if (!parseInt(inputHeight.value)) {
-            swal("Height Validation", "You must enter a number for the Height", "error");
-        }
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
+        //else if (!parseInt(inputHeight.value)) {
+        //    swal("Height Validation", "You must enter a number for the Height", "error");
+        //}
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
         else {
 
             //Condiciones Solapamiento:
@@ -823,25 +957,28 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
 // FORMULARIO PUERTAS
 
-function createDoorForm(Object, myplanopuertas) {
+function createDoorForm(Object,myplanopuertas) {
     $('.workPlace').empty();
-
+    let div1 = document.createElement('div');
+    div1.setAttribute('class', 'row');
+    let div2 = document.createElement('div');
+    div1.setAttribute('class', 'col-sm');
+    let div3 = document.createElement('div');
+    div1.setAttribute('class', 'col-sm');
+    div1.appendChild(div2); 
+    div1.appendChild(div3); 
     let formDoor = document.createElement('form');
     formDoor.setAttribute("class", "formDoor");
     workplace.appendChild(formDoor);
 
-    let headingDoor = document.createElement('h3');
+    let headingDoor = document.createElement('h4');
     headingDoor.innerHTML = "Door";
     formDoor.appendChild(headingDoor);
-
-    let line = document.createElement('hr');
-    formDoor.appendChild(line);
-
     // Label Name Puerta
 
     let nameWindLabel = document.createElement('label');
     nameWindLabel.innerHTML = "Name :";
-    nameWindLabel.setAttribute("class", "text-dark");
+    nameWindLabel.setAttribute("class", "labelsforms");
     formDoor.appendChild(nameWindLabel);
 
     // Input Name Puerta
@@ -849,17 +986,23 @@ function createDoorForm(Object, myplanopuertas) {
     let inputDoorName = document.createElement('input');
     inputDoorName.setAttribute("type", "text");
     inputDoorName.setAttribute("class", "form-control");
-    inputDoorName.setAttribute("placeholder", "Enter the Door name");
+    if (Object == null) {
+
+        inputDoorName.setAttribute("placeholder", "Enter Door name");
+
+    }
+    else {
+
+        inputDoorName.setAttribute("placeholder", Object.name);
+
+    }
+  
     formDoor.appendChild(inputDoorName);
-
-    let linebreak0 = document.createElement('br');
-    formDoor.appendChild(linebreak0);
-
-    let linebreak = document.createElement('br');
-    formDoor.appendChild(linebreak);
 
     // Laber Orientacion Puerta
     let sideLabel = document.createElement('label'); // Create Label for E-mail Field
+    sideLabel.setAttribute("class", "labelsforms");
+  
     sideLabel.innerHTML = "Room Side :";
     formDoor.appendChild(sideLabel);
 
@@ -889,50 +1032,71 @@ function createDoorForm(Object, myplanopuertas) {
     optionO.setAttribute("value", "o");
     inputSide.appendChild(optionO);
 
-    let messagebreak = document.createElement('br');
-    formDoor.appendChild(messagebreak);
-
     // Label Distance Puerta
     let distanceLabel = document.createElement('label'); // Create Label for E-mail Field
     distanceLabel.innerHTML = "Distance:";
-    distanceLabel.setAttribute("class", "text-dark");
+        distanceLabel.setAttribute("class", "labelsforms");
+
     formDoor.appendChild(distanceLabel);
 
     // Input Distance Puerta
 
     let inputDistance = document.createElement('input'); // Create Input Field for E-mail
-    inputDistance.setAttribute("type", "text");
+    inputDistance.setAttribute("type", "number");
+    inputDistance.setAttribute("step", "0.01");
+    inputDistance.required = true;
     inputDistance.setAttribute("class", "form-control");
-    inputDistance.setAttribute("placeholder", "Enter the Distance");
+  
+  
+
+    if (Object == null) {
+
+
+        inputDistance.setAttribute("placeholder", "Enter the Distance");
+    }
+    else {
+
+
+        inputDistance.setAttribute("placeholder", Object.distance);
+
+    }
     // inputHeight.setAttribute("name", "demail");
     formDoor.appendChild(inputDistance);
-
-    let messagebreak1 = document.createElement('br');
-    formDoor.appendChild(messagebreak1);
 
     // Label Width Puerta
     let widthlabel = document.createElement('label'); // Create Label for Name Field
     widthlabel.innerHTML = "Width :"; // Set Field Labels
-    widthlabel.setAttribute("class", "text-dark");
+    widthlabel.setAttribute("class", "labelsforms");
     formDoor.appendChild(widthlabel);
 
     // Input Width Puerta
 
     let inputWidth = document.createElement('input'); // Create Input Field for Name
-    inputWidth.setAttribute("type", "text");
+    inputWidth.setAttribute("type", "number");
+    inputWidth.setAttribute("step", "0.01");
+    inputWidthq.required = true;
     inputWidth.setAttribute("class", "form-control");
-    inputWidth.setAttribute("placeholder", "Enter the Width");
+
+    if (Object == null) {
+
+
+        inputWidth.setAttribute("placeholder", "Enter the Width");
+
+    }
+    else {
+
+        inputWidth.setAttribute("placeholder",Object.width);
+    }
+
+    
     // inputWidth.setAttribute("name", "dname");
     formDoor.appendChild(inputWidth);
-
-    let linebreak1 = document.createElement('br');
-    formDoor.appendChild(linebreak1);
 
     // Label Apertura Puerta
 
     let doorOpeningLabel = document.createElement('label'); // Create Label for Name Field
     doorOpeningLabel.innerHTML = "Door Opening :"; // Set Field Labels
-    doorOpeningLabel.setAttribute("class", "text-dark");
+    doorOpeningLabel.setAttribute("class", "labelsforms");
     formDoor.appendChild(doorOpeningLabel);
 
     // Select Apertura Puerta
@@ -950,14 +1114,10 @@ function createDoorForm(Object, myplanopuertas) {
     optionInside.setAttribute('value', '');
     optionInside.setAttribute('label', 'Inside');
     doorOpeningInput.appendChild(optionInside);
-
-    let linebreak2 = document.createElement('br');
-    formDoor.appendChild(linebreak2);
-
     // Label Eje Puerta
     let doorAxisLabel = document.createElement('label'); // Create Label for Name Field
     doorAxisLabel.innerHTML = "Door Axis :"; // Set Field Labels
-    doorAxisLabel.setAttribute("class", "text-dark");
+    doorAxisLabel.setAttribute("class", "labelsforms");
     formDoor.appendChild(doorAxisLabel);
 
     // Input Eje Puerta
@@ -975,9 +1135,9 @@ function createDoorForm(Object, myplanopuertas) {
     optionRight.setAttribute('label', 'Right');
     doorAxisInput.appendChild(optionRight);
 
-    let linebreak3 = document.createElement('br');
-    formDoor.appendChild(linebreak3);
 
+    let messagebreak = document.createElement('br');
+    formDoor.appendChild(messagebreak);
 
     // Boton Crear Puerta
     let botonCreate = document.createElement('button'); // Append Button
@@ -990,7 +1150,7 @@ function createDoorForm(Object, myplanopuertas) {
     // Boton Borrar Puerta
     let botonDelete = document.createElement('button'); // Append Button
     botonDelete.setAttribute("type", "button");
-    botonDelete.setAttribute("class", "btn btn-outline-danger")
+    botonDelete.setAttribute("class","btn btn-outline-danger")
     // submitelement.setAttribute("name", "dsubmit");
     botonDelete.innerHTML = "Delete";
     formDoor.appendChild(botonDelete);
@@ -1003,7 +1163,7 @@ function createDoorForm(Object, myplanopuertas) {
     botonCreate.addEventListener("click", function () {
 
         door1 = createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, doorAxisInput, inputWidth, formDoor);
-
+      
     })
 
     // BORRAR PUERTAS
@@ -1053,6 +1213,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             left: leftRoom + parseInt(inputDistance.value) + x + 1,
             top: topRoom,
             type: "door",
+            distance: parseInt(inputDistance.value),
             side: inputSide.value.toLowerCase(),
             fill: 'transparent',
             stroke: 'brown',
@@ -1074,17 +1235,17 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         }
 
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Door", "error");
-        }
+        //else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Door", "error");
+        //}
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
 
 
         else {
@@ -1122,7 +1283,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         }
     }
 
-    // ESPECIFICACION POR PAREDES. PARED ESTE
+// ESPECIFICACION POR PAREDES. PARED ESTE
 
     if (inputSide.value.toLowerCase() === "e") {
         let topRoom = 100;
@@ -1142,6 +1303,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         door1.set({
             name: inputDoorName.value,
             left: leftRoom,
+            distance: parseInt(inputDistance.value),
             top: topRoom + parseInt(inputDistance.value) + x + 1,
             type: "door",
             side: inputSide.value.toLowerCase(),
@@ -1164,17 +1326,17 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Door", "error");
-        }
+        //else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Door", "error");
+        //}
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
 
 
         else {
@@ -1213,7 +1375,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         }
     }
 
-    // ESPECIFICACION POR PAREDES . PUERTAS PARED SUR
+// ESPECIFICACION POR PAREDES . PUERTAS PARED SUR
 
     if (inputSide.value.toLowerCase() === "s") {
         let topRoom = 100;
@@ -1238,6 +1400,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             side: inputSide.value.toLowerCase(),
             fill: 'transparent',
             stroke: 'brown',
+            distance: parseInt(inputDistance.value),
             perPixelTargetFind: true,
             strokeWidth: 1,
             strokeUniform: true,
@@ -1253,17 +1416,17 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Door", "error");
-        }
+        //else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Door", "error");
+        //}
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
 
         else {
 
@@ -1301,7 +1464,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
     }
 
-    // ESPECIFICACION POR PAREDES . PUERTAS DEL LADO OESTE
+// ESPECIFICACION POR PAREDES . PUERTAS DEL LADO OESTE
 
     if (inputSide.value.toLowerCase() === "o") {
         let topRoom = 100;
@@ -1325,6 +1488,7 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             type: "door",
             side: inputSide.value.toLowerCase(),
             fill: 'transparent',
+            distance: parseInt(inputDistance.value),
             stroke: 'brown',
             perPixelTargetFind: true,
             strokeWidth: 1,
@@ -1341,17 +1505,17 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(door_name.value) || (door_name.value == "")) {
-            swal("Name Validation", "You must enter a Name for the Door", "error");
-        }
+        //else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        //    swal("Name Validation", "You must enter a Name for the Door", "error");
+        //}
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
-        }
+        //else if (!parseInt(inputWidth.value)) {
+        //    swal("Width Validation", "You must enter a number for the Width", "error");
+        //}
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
-        }
+        //else if (!parseInt(inputDistance.value)) {
+        //    swal("Distance Validation", "You must enter a number for the Distance", "error");
+        //}
         else {
 
             //Condiciones Solapamiento:
@@ -1449,7 +1613,6 @@ console.log(arrayOverlap);
 
 let boton = document.getElementById("GuardarPlano");
 boton.setAttribute("boton", "btn btn-info");
-
 boton.addEventListener('click', function () {
     var postPlano = JSON.stringify(MyPlano);
     $.ajax({
@@ -1466,6 +1629,5 @@ boton.addEventListener('click', function () {
         error: function (response) {
             console.log(response);
         }
-    })
+    });
 })
-    
