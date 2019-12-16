@@ -265,7 +265,7 @@ function createRoom(inputName, inputWidth, inputHeight,formroom) {
 
     }
 
-    else if (parseInt(recinto_name.value) || (recinto_name.value == "")) {
+    else if (parseInt(inputName.value) || (inputName.value == "")) {
         swal("Name Validation", "You must enter a Name for the Room", "error");
     }
 
