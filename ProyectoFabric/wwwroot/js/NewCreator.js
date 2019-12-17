@@ -48,8 +48,7 @@ let workplace = document.getElementsByClassName("workPlace")[0];
 let select = document.getElementById("sel1");
 let room = document.getElementById("room");
 let arrayOverlap = [];
-let nombrePlano = document.getElementById('nombreplano');
-MyPlano.Nombre = nombrePlano.value;
+
 // BOTON ELIMINAR TODO (Recinto, Ventanas y Puertas)
 
 let botonDeleteAll = document.getElementById("botonDeleteAll");
@@ -288,8 +287,8 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
         strokeUniform: true,
         width: parseInt(inputWidth.value),
         height: parseInt(inputHeight.value),
-        selectable: true,
-        hasControls: false,
+        selectable: false,
+        //hasControls: false,
         // lockMovementX: true,
         // lockUniScaling: true,
         //lockRotation: true,
@@ -542,7 +541,7 @@ function createWindowForm(Object, myplanoventanas) {
 
     // Label Distance Ventana
     let distanceLabel = document.createElement('label');
-    distanceLabel.innerHTML = "Distance :";
+    distanceLabel.innerHTML = "Distance from edge: Top-Left (N), Top-Right(E), Bottom-Left(W), Bottom-Right(S)";
     distanceLabel.setAttribute("class", "labelsforms");
 
     formWindow.appendChild(distanceLabel);
@@ -1220,7 +1219,7 @@ function createDoorForm(Object, myplanopuertas) {
 
     // Label Distance Puerta
     let distanceLabel = document.createElement('label'); // Create Label for E-mail Field
-    distanceLabel.innerHTML = "Distance:";
+    distanceLabel.innerHTML = "Distance from edge: Top-Left (N), Top-Right(E), Bottom-Left(W), Bottom-Right(S)";
     distanceLabel.setAttribute("class", "labelsforms");
 
     formDoor.appendChild(distanceLabel);
@@ -1886,6 +1885,10 @@ if (MyPlano.Puertas[0] == null) {
 let boton = document.getElementById("GuardarPlano");
 boton.setAttribute("boton", "btn btn-info");
 boton.addEventListener('click', function () {
+    let nombrePlano = document.getElementById('nombreplano').value;
+    MyPlano.Nombre = nombrePlano;
+
+
     var postPlano = JSON.stringify(MyPlano);
     $.ajax({
         url: '/Planos/CreateRootObjectPlano',

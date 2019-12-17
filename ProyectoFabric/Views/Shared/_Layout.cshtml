@@ -84,20 +84,11 @@
                                     <ul class="site-menu js-clone-nav d-none d-lg-block">
                                         <li class="has-children active">
 
-                                            <a href="index.html">Home</a>
+                                            <a asp-controller="Home" asp-action="Index">Home</a>
                                             <ul class="dropdown arrow-top">
 
-                                                <li><a href="#">Rooms</a></li>
-                                                <li><a href="#">Doors</a></li>
-                                                <li><a href="#">Windows</a></li>
-                                                <li class="has-children">
-                                                    <a href="#">Blueprint</a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="#">Room</a></li>
-                                                        <li><a href="#">Doors</a></li>
-                                                        <li><a href="#">Windows</a></li>
-                                                    </ul>
-                                                </li>
+                                                <li><a asp-controller="Planos" asp-action="Index">Planos</a></li>
+                 
                                             </ul>
                                         </li>
                                         <li><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
@@ -118,8 +109,8 @@
                                                 </ul>
                                             }
                                         </li>
-                                        <li>
-                                        <a asp-controller="Home" asp-action="Index">About E.C Designs</a></li>
+   
+                                
                                         
                                         @if (_signInManager.IsSignedIn(User))
                                         {

@@ -76,7 +76,7 @@ namespace ProyectoFabric.Controllers
                 
             };
             await _recintosServices.CreateRecinto(recinto);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                
                 Thread.Sleep(1000);
