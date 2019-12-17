@@ -52,8 +52,7 @@ const puertas_dooropening = document.getElementsByClassName("puertas_dooropening
 let userId = document.getElementById("appUserId").value;
 let MyPlano=new Plano();
 MyPlano.userId = userId;
-let nombrePlano = document.getElementById('nombreplano');
-MyPlano.Nombre = nombrePlano.value;
+
 let botonRedimension = document.getElementById("botonRedimension");
 let select = document.getElementById("sel1");
 let workplace = document.getElementsByClassName("workPlace")[0];
@@ -196,8 +195,8 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             left: leftRoom + parseInt(ventanas_distance[a].value),
             top: topRoom - heightWind1 / 2,
             fill: 'transparent',
-            stroke: 'black',
-            strokeWidth: 2,
+            stroke: 'blue',
+            strokeWidth: 1,
             strokeUniform: true,
             width: width_positivo,
             height: heightWind1,
@@ -241,7 +240,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             left: (leftRoom - parseInt(ventanas_distance[a].value)),
             top: topRoom - heightWind1 / 2,
             fill: 'transparent',
-            stroke: 'black',
+            stroke: 'blue',
             strokeWidth: 1,
             strokeUniform: true,
             width: width_positivo * -1,
@@ -284,8 +283,8 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             left: (leftRoom - heightWind1 / 2),
             top: topRoom + parseInt(ventanas_distance[a].value),
             fill: 'transparent',
-            stroke: 'black',
-            strokeWidth: 2,
+            stroke: 'blue',
+            strokeWidth: 1,
             strokeUniform: true,
             width: heightWind1,
             height: positivo,
@@ -332,8 +331,8 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             left: (leftRoom - heightWind1 / 2),
             top: topRoom - parseInt(ventanas_distance[a].value),
             fill: 'transparent',
-            stroke: 'black',
-            strokeWidth: 2,
+            stroke: 'blue',
+            strokeWidth: 1,
             strokeUniform: true,
             width: heightWind1,
             height: positivo * -1,
@@ -395,9 +394,9 @@ for (var a = 0; a < puertas_distance.length; a++) {
             left: leftRoom + parseInt(puertas_distance[a].value) + x + 1,
             top: topRoom - x,
             fill: 'transparent',
-            stroke: 'black',
+            stroke: 'brown',
             perPixelTargetFind: true,
-            strokeWidth: 2,
+            strokeWidth: 1,
             strokeUniform: true,
             angle: 90,
             flipX: ejeX,
@@ -826,12 +825,6 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
     // Expresiones regulares para validacion
     var exp = /[A-Za-z0-9]/;
     var exp1 = /[0-9]/;
-
-
-
-
-
-
     // VALIDADACIONES DEL RECINTO 
     //Límites ancho: 
 
@@ -1034,6 +1027,12 @@ function createWindowForm(Object, myplanoventanas) {
     inputSide.setAttribute("class", "form-control ");
     formWindow.appendChild(inputSide);
 
+    let optionDefault = document.createElement('option');
+    optionDefault.setAttribute('label', 'Enter Side');
+    optionDefault.setAttribute("value", "d");
+    inputSide.appendChild(optionDefault);
+
+
     let optionN = document.createElement('option');
     optionN.setAttribute('label', 'North');
     optionN.setAttribute("value", "n");
@@ -1057,7 +1056,7 @@ function createWindowForm(Object, myplanoventanas) {
 
     // Label Distance Ventana
     let distanceLabel = document.createElement('label');
-    distanceLabel.innerHTML = "Distance :";
+    distanceLabel.innerHTML = "Distance from edge: Top-Left (N), Top-Right(E), Bottom-Left(W), Bottom-Right(S)";
     distanceLabel.setAttribute("class", "labelsforms");
     formWindow.appendChild(distanceLabel);
 
@@ -1157,6 +1156,11 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
     let heightWind1 = 10;
     let wind1;
     let roomSize = canvas._objects.find(x => x.type == "room");
+
+    if (inputSide.value.toLowerCase() === "d") {
+        swal("Side Validation", "You must enter a Side", "error");
+    }
+
 
     if (inputSide.value.toLowerCase() === "n") {
         let topRoom = 100;
@@ -1675,6 +1679,12 @@ function createDoorForm(Object, myplanopuertas) {
     inputSide.setAttribute("class", "form-control");
     formDoor.appendChild(inputSide);
 
+    let optionDefault = document.createElement('option');
+    optionDefault.setAttribute('label', 'Enter Side');
+    optionDefault.setAttribute("value", "d");
+    inputSide.appendChild(optionDefault);
+
+
     let optionN = document.createElement('option');
     optionN.setAttribute('label', 'North');
     optionN.setAttribute("value", "n");
@@ -1697,7 +1707,7 @@ function createDoorForm(Object, myplanopuertas) {
 
     // Label Distance Puerta
     let distanceLabel = document.createElement('label'); // Create Label for E-mail Field
-    distanceLabel.innerHTML = "Distance:";
+    distanceLabel.innerHTML = "Distance from edge: Top-Left (N), Top-Right(E), Bottom-Left(W), Bottom-Right(S)";
     distanceLabel.setAttribute("class", "labelsforms");
     formDoor.appendChild(distanceLabel);
 
@@ -1838,6 +1848,11 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
     let ejeY = Boolean(doorAxisInput.value);
     let roomSize = canvas._objects.find(x => x.type == "room");
     let door1;
+
+    if (inputSide.value.toLowerCase() === "d") {
+        swal("Side Validation", "You must enter a Side", "error");
+    }
+
 
     if (inputSide.value.toLowerCase() === "n") {
 
@@ -2318,12 +2333,16 @@ if (MyPlano.Puertas[0] == null) {
 }
 
 
-MyPlano.Nombre = "Plano1";
+
 console.log(MyPlano);
 console.log(arrayOverlap);
 
 let boton = document.getElementById("GuardarPlano");
 boton.addEventListener('click', function () {
+    let nombrePlano = document.getElementById('nombreplano').value;
+    MyPlano.Nombre = nombrePlano;
+
+
     var postPlano = JSON.stringify(MyPlano);
     $.ajax({
         url: '/Planos/CreateRootObjectPlano',
