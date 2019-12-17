@@ -826,12 +826,6 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
     // Expresiones regulares para validacion
     var exp = /[A-Za-z0-9]/;
     var exp1 = /[0-9]/;
-
-
-
-
-
-
     // VALIDADACIONES DEL RECINTO 
     //Límites ancho: 
 
