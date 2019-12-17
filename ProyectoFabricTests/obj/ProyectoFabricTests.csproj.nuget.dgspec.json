@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj": {}
+    "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj": {
+    "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj",
+        "projectUniqueName": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj",
         "projectName": "ProyectoFabricTests",
-        "projectPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj",
-        "packagesPath": "C:\\Users\\Dan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\obj\\",
+        "projectPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\ProyectoFabricTests.csproj",
+        "packagesPath": "C:\\Users\\Raul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabricTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Raul\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {
-                "projectPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj"
+              "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {
+                "projectPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj"
               }
             }
           }
@@ -84,20 +84,20 @@
         }
       }
     },
-    "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {
+    "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
+        "projectUniqueName": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
         "projectName": "ProyectoFabric",
-        "projectPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
-        "packagesPath": "C:\\Users\\Dan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dan\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\",
+        "projectPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\ProyectoFabric.csproj",
+        "packagesPath": "C:\\Users\\Raul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Raul\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Dan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Raul\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
