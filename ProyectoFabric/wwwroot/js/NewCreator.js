@@ -51,13 +51,6 @@ let arrayOverlap = [];
 let nombrePlano = document.getElementById('nombreplano');
 MyPlano.Nombre = nombrePlano.value;
 
-var SelectObject = function (ObjectName) {
-    canvas.getObjects().forEach(function (x) {
-        if (x.id === ObjectName) {
-            canvas.setActiveObject(x);
-        }
-    })
-}
 
 // BOTON ELIMINAR TODO (Recinto, Ventanas y Puertas)
 
@@ -204,7 +197,7 @@ function createRoomForm(Object, myplanorecinto) {
     else {
 
         inputWidth.setAttribute("value", Object.width);
-        
+
 
     }
     formRoom.appendChild(inputWidth);
@@ -505,6 +498,11 @@ function createWindowForm(Object, myplanoventanas) {
     inputSide.setAttribute("class", "form-control ");
     formWindow.appendChild(inputSide);
 
+    let optionDefault = document.createElement('option');
+    optionDefault.setAttribute('label', 'Enter Side');
+    optionDefault.setAttribute("value", "d");
+    inputSide.appendChild(optionDefault);
+
     let optionN = document.createElement('option');
     optionN.setAttribute('label', 'North');
     optionN.setAttribute("value", "n");
@@ -641,6 +639,10 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
     let wind1;
     let roomSize = canvas._objects.find(x => x.type == "room");
 
+    if (inputSide.value.toLowerCase() === "d") {
+        swal("Side Validation", "You must enter a Side", "error");
+    }
+
     if (inputSide.value.toLowerCase() === "n") {
         let topRoom = 100;
         let leftRoom = 100;
@@ -679,7 +681,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Overlap Error", "The object entered overlaps with the previous", "error");
 
         }
-
+        
         else if ((inputWindName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Window", "error");
         }
@@ -1144,6 +1146,11 @@ function createDoorForm(Object, myplanopuertas) {
     inputSide.setAttribute("class", "form-control");
     formDoor.appendChild(inputSide);
 
+    let optionDefault = document.createElement('option');
+    optionDefault.setAttribute('label', 'Enter Side');
+    optionDefault.setAttribute("value", "d");
+    inputSide.appendChild(optionDefault);
+
     let optionN = document.createElement('option');
     optionN.setAttribute('label', 'North');
     optionN.setAttribute("value", "n");
@@ -1326,6 +1333,9 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
     let roomSize = canvas._objects.find(x => x.type == "room");
     let door1;
 
+    if (inputSide.value.toLowerCase() === "d") {
+        swal("Side Validation", "You must enter a Side", "error");
+    }
     // PARED NORTE:
 
     if (inputSide.value.toLowerCase() === "n") {
