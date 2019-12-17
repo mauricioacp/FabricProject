@@ -214,3 +214,9 @@ font:bold;
 table, th, td, tr {
     border: 2px solid black;
 }
+
+#meme {
+  width:350px;
+  height:350px;
+  
+}

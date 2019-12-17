@@ -1,37 +1,35 @@
 ﻿@model IEnumerable<ProyectoFabric.Models.Plano>
+<div class="site-blocks-cover overlay" style="        background-image: url(/Assets/images/hero_bg_1.jpg);
+" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row align-items-center text-center justify-content-center">
+            <div class="col-md-8">
+                <span class="sub-text">Serikat Challenge</span>
+                <h1>Easy Canvas Designs</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="site-half">  
+    <div class="img-bg-1" style="background-size:70%; background-image:url(/images/3jph40.jpg);" >
+        @*<img class="img-fluid" id="meme"  src="~/images/3jph40.jpg"  >*@
+    </div>
+    <div class="container">
+        <div class="row no-gutters align-items-stretch">
+            <div class="col-md-12 col-lg-7 ml-lg-auto py-5">
+                <span class="sub-title">¿Cómo funciona?</span>
+                <h2 class="font-weight-bold text-black font-secondary mb-4">Detrás del Recinto</h2>
+                <p>Tecnología Usada</p>
+                <ul class="list-unstyled ul-check primary">
+                    <li>Posee medidas iniciales predeterminadas (ancho y alto) que definen su estructuran y sirven como referencia para los objetos posteriores</li>
+                    <li>Dentro del Objeto plano se construye un Objeto Recinto así como Objetos Ventanas y Puertas</li>
+                    <li>Es usado para guardar todos los valores introducidos por el usuario en cada etapa del proceso</li>
+                    <li>Se asigna el plano a un Usuario, de modo que pueda modificar su plano después de creado</li>
+                    <li>Es la base de toda la construcción en 2d de la etiqueta Canvas usando la librería "Fabric.js"</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-              
-            </th>
-         
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-              
-            </td>
-           
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
