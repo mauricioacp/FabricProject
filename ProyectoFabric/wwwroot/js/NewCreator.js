@@ -51,17 +51,20 @@ let arrayOverlap = [];
 let nombrePlano = document.getElementById('nombreplano');
 MyPlano.Nombre = nombrePlano.value;
 
-var SelectObject = function (ObjectName) {
-    canvas.getObjects().forEach(function (x) {
-        if (x.id === ObjectName) {
-            canvas.setActiveObject(x);
-        }
-    })
-}
+
+
+//var SelectObject = function (ObjectName) {
+//    canvas.getObjects().forEach(function (x) {
+//        if (x.id === ObjectName) {
+//            canvas.setActiveObject(x);
+//        }
+//    })
+//}
 
 // BOTON ELIMINAR TODO (Recinto, Ventanas y Puertas)
 
 let botonDeleteAll = document.getElementById("botonDeleteAll");
+
 
 botonDeleteAll.addEventListener('click', function () {
     canvas.clear().renderAll();
@@ -282,11 +285,11 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
     let heightDoor = 10;
     let topRoom = 100;
     let leftRoom = 100;
-
+    
     rect = new fabric.Rect({
 
         name: inputName.value,
-        title: inputName.value,
+        //title: inputName.value,
         type: "room",
         left: leftRoom,
         top: topRoom,
@@ -310,6 +313,11 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
     // Expresiones regulares para validacion
     var exp = /[A-Za-z0-9]/;
     var exp1 = /[0-9]/;
+
+
+    
+
+
 
     // VALIDADACIONES DEL RECINTO 
     //Límites ancho: 
@@ -1305,13 +1313,7 @@ function createDoorForm(Object, myplanopuertas) {
         formDoor.remove();
         canvas.remove(door1);
         addToSelect();
-        //if (!myplanopuertas == null) {
-
-        //    MyPlano.Puertas.splice(MyPlano.Puertas.indexOf(myplanopuertas), 1);
-        //}
-        //else {
-        //    MyPlano.Puertas.splice((MyPlano.Puertas.length - 1), 1);
-        //}
+      
     })
 }
 
