@@ -12,49 +12,7 @@
         </div>
     </div>
 </div>
-<div class="site-section about-section">
-    <div class="container">
-        <div class="row align-items-center mb-5 pb-5">
-            <div class="col-lg-7 img-years mb-5 mb-lg-0">
-                <span class="experience">
-                    <span class="years">User: @Model.appUser.Nombre</span>
-                    <span class="caption">Blueprint: @Model.Recinto.Nombre</span>
-                </span>
-                <img src="/Assets/images/about_1.png" alt="Image" class="img-fluid">
-            </div>
-            <div class="col-lg-4 ml-auto">
-                <span class="sub-title">Read this</span>
-                <h3 class="mb-4">Re-Design Canvas</h3>
 
-                <p><a href="#" class="btn btn-primary btn-lg rounded-0">Instructions</a></p>
-            </div>
-        </div>
-
-
-    </div>
-</div>
-
-<div class="site-half">
-    <div class="img-bg-1" style="background-image: url('/Assets/images/hero_bg_1.jpg');"></div>
-    <div class="container">
-        <div class="row no-gutters align-items-stretch">
-            <div class="col-md-12 col-lg-7 ml-lg-auto py-5">
-                <span class="sub-title">Architectural Design</span>
-                <h2 class="font-weight-bold text-black font-secondary mb-4">Why Choose Us</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus aliquid eius facilis voluptatem eligendi magnam accusamus vel commodi asperiores sint rem reprehenderit nobis nesciunt veniam qui fugit doloremque numquam quod.</p>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora distinctio ipsam nesciunt recusandae repellendus asperiores amet.</p>
-
-                <ul class="list-unstyled ul-check primary">
-                    <li>Lorem ipsum dolor sit amet consectetur</li>
-                    <li>Consectetur tempora distinctio ipsam</li>
-                    <li>Recusandae repellendus asperiores amet</li>
-                    <li>Lorem ipsum dolor sit amet consectetur</li>
-                    <li>Consectetur tempora distinctio ipsam</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 <input id="appUserId" type="hidden" name="name" value="@Model.appUserId" />
 <input id="recinto_nombre" type="hidden" name="RoomName" value="@Model.Recinto.Nombre" />
 <input id="recinto_ancho" type="hidden" name="RoomWidth" value="@Model.Recinto.Ancho" />
@@ -75,81 +33,110 @@
     <input class="puertas_dooraxis" type="hidden" name="name" value="@item.DoorAxis" />
     <input class="puertas_dooropening" type="hidden" name="name" value="@item.DoorOpening" />
 }
-<div class="site-block-1">
+<br />
+<div class="site-section holamundo">
+
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <a id="room" class="site-block-feature d-flex p-4 rounded mb-4">
+            <div class="mr-2">
+                <select class="form-control bg-primary" id="sel1">
+                    <option value="0">Select your object</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <a id="GuardarPlano" class="site-block-feature d-flex p-4 rounded mb-1">
                     <div class="mr-3">
-                        <span class="icon flaticon-interior-design font-weight-light h2"></span>
+                        <span class="icon icon-save2 font-weight-bolder h5 bg-success"></span>
+                    </div>
+                    <div class="text">
+                        <h3>Save Design</h3>
+
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-2">
+                <a id="botonDeleteAll" class="site-block-feature d-flex p-4 rounded mb-1">
+                    <div class="mr-3">
+                        <span class="icon icon-delete_forever font-weight-light h5 bg-danger"></span>
+                    </div>
+                    <div class="text">
+                        <h3>Delete All</h3>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a id="room" class="site-block-feature d-flex p-4 rounded mb-1">
+                    <div class="mr-3">
+                        <span class="icon flaticon-interior-design font-weight-light h5"></span>
                     </div>
                     <div class="text">
                         <h3>Create Room</h3>
-                        <p>Made with Canvas</p>
+
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4">
-                <a id="door" class="site-block-feature d-flex p-4 rounded mb-4">
+            <div class="col-lg-2">
+                <a id="door" class="site-block-feature d-flex p-4 rounded mb-1">
                     <div class="mr-3">
-                        <span class="icon flaticon-measuring font-weight-light h2"></span>
+                        <span class="icon flaticon-measuring font-weight-light h5"></span>
                     </div>
                     <div class="text">
                         <h3>Door</h3>
-                        <p>Powered by Fabric.Js</p>
+
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4">
-                <a id="window" class="site-block-feature d-flex p-4 rounded mb-4">
+            <div class="col-lg-2">
+                <a id="window" class="site-block-feature d-flex p-4 rounded mb-1">
                     <div class="mr-3">
-                        <span class="icon flaticon-window font-weight-light h2"></span>
+                        <span class="icon flaticon-window font-weight-light h5"></span>
                     </div>
                     <div class="text">
                         <h3>Window</h3>
-                        <p>Make your own designs</p>
+
                     </div>
                 </a>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="site-section">
-    <select class="form-control" id="sel1">
-        <option value="0">Select your object</option>
-    </select>
-    <button id="GuardarPlano" type="button" class="btn btn-dark room">
-        Guardar Plano
-    </button>
-    <button id="botonDeleteAll" type="button" class="btn btn-danger window">
-    </button>
-    <div class="canvasTablas row">
-        <div class="col-6 cajaCanvas">
-
-            <canvas width="500" height="500" id="canvas"></canvas>
-
-        </div>
-        <div id="edicion" class="col-6 workPlace">
-            <div class="container">
-
-
+    <div class="row">
+        <div class="col-6 cajaCanvas offset-1" style="margin:0%">
+            <div class="row">
+                <div class="col-3 offset-3">
+                    <label style="font:bold" class="text-danger">
+                        Blueprint Name:
+                        <input class="form-control" id="nombreplano" type="text" />
+                    </label>
+                </div>
+                <div class="avatar avatar-md mr-3 mb-2 mt-1 col-2">
+                    <a><img src="~/images/compass.png" alt="compass" /></a>
+                    <h4 style="font:bold" class="text-danger">  10:1 m</h4>
+                </div>
             </div>
+            <div class="offset-2">
+
+                <canvas style="margin:0%" width="500" height="500" id="canvas"></canvas>
+            </div>
+
         </div>
 
-    </div>
+        <div class="col-5 workPlace">
 
+        </div>
+    </div>
 </div>
+
 
 @section scripts {
 
-        <script src="~/js/MyBlueprint_Insights.js"></script>
+    <script src="~/js/MyBlueprint_Insights.js"></script>
 
-    }
+}
 
 @*@section scripts {
 
-    <script src="~/ts/fabric-TypeScript.js" defer></script>
+        <script src="~/ts/fabric-TypeScript.js" defer></script>
 
-}*@
+    }*@

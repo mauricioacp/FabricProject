@@ -216,6 +216,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
                 addToSelect();
              
                 canvas.add(wind1);
+                
             }
         }
     }

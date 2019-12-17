@@ -100,7 +100,7 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
                                         <li class="has-children">
 
                                             @if (_signInManager.IsSignedIn(User))
@@ -113,7 +113,6 @@
                                                     @if (await _userManager.IsInRoleAsync(user, "Creator"))
                                                     {
 
-                                                        @*<li><a asp-controller="Planos" asp-action="MyBlueprints" asp-route="@user.Id">My Blueprints</a></li>*@
                                                         <li><a asp-controller="Planos" asp-action="MyBlueprints" asp-route-id="@user.Id">Manage Blueprints</a></li>
                                                     }
                                                 </ul>
@@ -138,8 +137,8 @@
         <div class="container-fluid">
                 @RenderBody()
         </div>
-        <footer class="site-footer border-top">
-            
+       <footer class="site-footer border-top">
+            <div class="footer-copyright text-center py-3">© 2019 Copyright: EASY CANVAS DESIGN (BBK BOOTCAMP SERIKAT CHALLENGE) </div>
         </footer>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
