@@ -24,7 +24,6 @@ class Puerta {
             this.DoorOpening = dooropening;
     }
 }
-;
 class Plano {
     constructor(Nombre, Recinto, Ventana, Puertas, userId) {
         this.userId = userId;
@@ -35,6 +34,7 @@ class Plano {
     }
     ;
 }
+
 let recinto_nombre = document.getElementById("recinto_nombre").value;
 const recinto_alto = document.getElementById("recinto_alto").value;
 const recinto_ancho = document.getElementById("recinto_ancho").value;
@@ -48,76 +48,21 @@ const puertas_wallside = document.getElementsByClassName("puertas_wallside");
 const puertas_width = document.getElementsByClassName("puertas_width");
 const puertas_dooraxis = document.getElementsByClassName("puertas_dooraxis");
 const puertas_dooropening = document.getElementsByClassName("puertas_dooropening");
+
 let userId = document.getElementById("appUserId").value;
 let MyPlano=new Plano();
 MyPlano.userId = userId;
+
 let botonRedimension = document.getElementById("botonRedimension");
+let select = document.getElementById("sel1");
 let workplace = document.getElementsByClassName("workPlace")[0];
 let room = document.getElementById("room");
+
 let canvas = new fabric.Canvas('canvas');
 let ctx = canvas.getContext();
 let arrayOverlap = [];
 let arrayGroup = [];
-let select = document.getElementById("sel1");
-select.addEventListener('change', function () {
-   
-    let foundObject = arrayOverlap.find(element => element.name == this.value);
-    let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
-    let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
 
-
-    if (MyPlano.Ventanas[0] == null) {
-
-        MyPlano.Ventanas.splice(0, 1);
-
-    }
-    if (MyPlano.Puertas[0] == null) {
-
-
-        MyPlano.Puertas.splice(0, 1);
-    }
-
-
-    if (foundObject.type == "room") {
-        let i = arrayOverlap.indexOf(foundObject);
-        arrayOverlap.splice(i, 1);
-        let MyplanoObjectRecinto = MyPlano.Recinto.name == this.value;
-        MyPlano.Recinto==null
-        createRoomForm(foundObject, MyplanoObjectRecinto);
-    }
-
-    if (foundObject.type == "window") {
-        let i = arrayOverlap.indexOf(foundObject);
-        arrayOverlap.splice(i, 1);
-        let y = MyPlano.Ventanas.indexOf(foundVentanas);
-        MyPlano.Ventanas.splice(y, 1);
-        createWindowForm(foundObject, foundVentanas);
-
-    }
-
-    if (foundObject.type == "door") {
-        let i = arrayOverlap.indexOf(foundObject);
-        arrayOverlap.splice(i, 1);
-        let y = MyPlano.Puertas.indexOf(foundPuertas);
-        MyPlano.Puertas.splice(y, 1);
-        createDoorForm(foundObject, foundPuertas);
-
-    }
-});
-function addToSelect() {
-    select.innerHTML = "";
-    let defaultValue = document.createElement("option");
-    defaultValue.innerHTML = "Select your Object";
-    select.appendChild(defaultValue);
-    for (let i = 0; i < arrayOverlap.length; i++) {
-        let opt = arrayOverlap[i].name;
-        let value = arrayOverlap[i].name;
-        let el = document.createElement("option");
-        el.innerHTML = opt;
-        el.value = value;
-        select.appendChild(el);
-    }
-}
 let heightWind1 = 10;
 let heightDoor = 10;
 let topRoom = 100;
@@ -137,22 +82,20 @@ let rect = new fabric.Rect({
     width: parseInt(recinto_ancho),
     height: parseInt(recinto_alto),
     selectable: false
-    // hasControls: false,
-    // lockMovementX: true,
-    // lockScalingX: true
-    // lockUniScaling: true,
-    // lockRotation: true,
-    // selectable: false
+   
 });
 
 if (rect.width > 350 || rect.height > 300) {
+    alert("The Room size is off limits");
 }
 else {
     arrayOverlap.push(rect);
     let recinto1 = new Recinto(recinto_nombre, parseInt(recinto_alto), parseInt(recinto_ancho));
     MyPlano.Recinto = recinto1;
     addToSelect();
+
     arrayOverlap.forEach(function (x) {
+
         if (x.type == "window" && x.side == "n") {
             x.set('left', leftRoom + x.distance);
             x.set('top', topRoom - heightWind1 / 2);
@@ -180,6 +123,7 @@ else {
                 alert(x.name + ' is out of the room size')
             }
         }
+
         if (x.type == "door" && x.side == "n") {
             if (x.flipX == true) {
                 x.set('left', leftRoom + x.distance + x.height + 1);
@@ -228,10 +172,12 @@ else {
                 alert(x.name + ' is out of the room size')
             }
         }
+
         canvas.add(x);
     })
 
 }
+
 for (var a = 0; a < ventanas_distance.length; a++) {
    
     let heightWind1 = 10;
@@ -417,6 +363,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
         }
     }
 }
+
 for (var a = 0; a < puertas_distance.length; a++) {
 
     let heightDoor = 10;
@@ -640,11 +587,54 @@ for (var a = 0; a < puertas_distance.length; a++) {
         }
     }
 }
-botonDeleteAll.addEventListener('click', function () {
-    canvas.clear().renderAll();
-    arrayOverlap = [];
-    addToSelect();
-})
+
+
+
+select.addEventListener('change', function () {
+
+    let foundObject = arrayOverlap.find(element => element.name == this.value);
+    let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
+    let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
+
+
+    if (MyPlano.Ventanas[0] == null) {
+
+        MyPlano.Ventanas.splice(0, 1);
+
+    }
+    if (MyPlano.Puertas[0] == null) {
+
+
+        MyPlano.Puertas.splice(0, 1);
+    }
+
+
+    if (foundObject.type == "room") {
+        let i = arrayOverlap.indexOf(foundObject);
+        arrayOverlap.splice(i, 1);
+        let MyplanoObjectRecinto = MyPlano.Recinto.name == this.value;
+        MyPlano.Recinto == null
+        createRoomForm(foundObject, MyplanoObjectRecinto);
+    }
+
+    if (foundObject.type == "window") {
+        let i = arrayOverlap.indexOf(foundObject);
+        arrayOverlap.splice(i, 1);
+        let y = MyPlano.Ventanas.indexOf(foundVentanas);
+        MyPlano.Ventanas.splice(y, 1);
+        createWindowForm(foundObject, foundVentanas);
+
+    }
+
+    if (foundObject.type == "door") {
+        let i = arrayOverlap.indexOf(foundObject);
+        arrayOverlap.splice(i, 1);
+        let y = MyPlano.Puertas.indexOf(foundPuertas);
+        MyPlano.Puertas.splice(y, 1);
+        createDoorForm(foundObject, foundPuertas);
+
+    }
+});
 
 
 room.addEventListener("click", function () {
@@ -667,6 +657,7 @@ room.addEventListener("click", function () {
 
     })
 })
+
 
 function createRoomForm(Object, myplanorecinto) {
     $('.workPlace').empty();
@@ -700,7 +691,7 @@ function createRoomForm(Object, myplanorecinto) {
         inputName.setAttribute("placeholder", "Enter Name");
     }
     else {
-        inputName.setAttribute("placeholder", Object.name);
+        inputName.setAttribute("value", Object.name);
 
     }
 
@@ -725,7 +716,7 @@ function createRoomForm(Object, myplanorecinto) {
     }
     else {
 
-        inputWidth.setAttribute("placeholder", Object.width);
+        inputWidth.setAttribute("value", Object.width);
 
     }
     formRoom.appendChild(inputWidth);
@@ -749,7 +740,7 @@ function createRoomForm(Object, myplanorecinto) {
     }
     else {
 
-        inputHeight.setAttribute("placeholder", Object.height);
+        inputHeight.setAttribute("value", Object.height);
 
 
     }
@@ -877,7 +868,6 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
 };
 
 
-
 function createWindowForm(Object, myplanoventanas) {
     $('.workPlace').empty();
 
@@ -916,7 +906,7 @@ function createWindowForm(Object, myplanoventanas) {
     }
     else {
 
-        nameWindLabel.setAttribute("placeholder", Object.name);
+        nameWindLabel.setAttribute("value", Object.name);
 
 
     }
@@ -974,7 +964,7 @@ function createWindowForm(Object, myplanoventanas) {
     }
     else {
 
-        inputDistance.setAttribute("placeholder", Object.distance);
+        inputDistance.setAttribute("value", Object.distance);
 
 
     }
@@ -1001,7 +991,7 @@ function createWindowForm(Object, myplanoventanas) {
     }
     else {
 
-        inputWidth.setAttribute("placeholder", Object.width);
+        inputWidth.setAttribute("value", Object.width);
     }
     formWindow.appendChild(inputWidth);
 
@@ -1326,6 +1316,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
     return wind1;
 }
 
+
 function createDoorForm(Object, myplanopuertas) {
     $('.workPlace').empty();
     let div1 = document.createElement('div');
@@ -1362,7 +1353,7 @@ function createDoorForm(Object, myplanopuertas) {
     }
     else {
 
-        inputDoorName.setAttribute("placeholder", Object.name);
+        inputDoorName.setAttribute("value", Object.name);
 
     }
     formDoor.appendChild(inputDoorName);
@@ -1418,7 +1409,7 @@ function createDoorForm(Object, myplanopuertas) {
     else {
 
 
-        inputDistance.setAttribute("placeholder", Object.distance);
+        inputDistance.setAttribute("value", Object.distance);
 
     }
     // inputHeight.setAttribute("name", "demail");
@@ -1443,7 +1434,7 @@ function createDoorForm(Object, myplanopuertas) {
     }
     else {
 
-        inputWidth.setAttribute("placeholder", Object.width);
+        inputWidth.setAttribute("value", Object.width);
     }
 
     // inputWidth.setAttribute("name", "dname");
@@ -1851,7 +1842,30 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
     return door1;
 }
 
+function addToSelect() {
+    select.innerHTML = "";
+    let defaultValue = document.createElement("option");
+    defaultValue.innerHTML = "Select your Object";
+    select.appendChild(defaultValue);
+    for (let i = 0; i < arrayOverlap.length; i++) {
+        let opt = arrayOverlap[i].name;
+        let value = arrayOverlap[i].name;
+        let el = document.createElement("option");
+        el.innerHTML = opt;
+        el.value = value;
+        select.appendChild(el);
+    }
+}
 
+botonDeleteAll.addEventListener('click', function () {
+    canvas.clear().renderAll();
+    arrayOverlap = [];
+    addToSelect();
+})
+
+function Borrar(Object) {
+    canvas.remove(Object);
+}
 
 if (MyPlano.Ventanas[0] == null) {
 
@@ -1862,20 +1876,10 @@ if (MyPlano.Puertas[0] == null) {
     MyPlano.Puertas.splice(0, 1);
 }
 
-function Borrar(Object) {
-    canvas.remove(Object);
-}
-
-
-
-
-
-
 
 MyPlano.Nombre = "Plano1";
 console.log(MyPlano);
 console.log(arrayOverlap);
-
 
 let boton = document.getElementById("GuardarPlano");
 boton.addEventListener('click', function () {

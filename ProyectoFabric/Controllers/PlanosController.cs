@@ -82,7 +82,7 @@ namespace ProyectoFabric.Controllers
                 Thread.Sleep(1000);
             }
             var user = await _userManager.FindByIdAsync(MyFrontEndObjects.userId);
-            //antes de crear todo lo demas doy 3 segundos para evitar fallos en los await
+            //antes de crear todo lo demas doy 1 segundos para evitar fallos en los await
             for (int i = 0; i < MyFrontEndObjects.Puertas.Count(); i++)
             {
                 Models.Puerta puerta = new Models.Puerta()
