@@ -808,3 +808,4 @@ C:\Users\mauri\Source\Repos\mauricioacp\FabricProject\ProyectoFabric\obj\Debug\n
 C:\Users\mauri\Source\Repos\mauricioacp\FabricProject\ProyectoFabric\obj\Debug\netcoreapp3.0\ProyectoFabric.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\mauri\Source\Repos\mauricioacp\FabricProject\ProyectoFabric\obj\Debug\netcoreapp3.0\Razor\Views\Home\AboutUs.cshtml.g.cs
 C:\Users\Dan\Source\Repos\mauricioacp\FabricProject\ProyectoFabric\obj\Debug\netcoreapp3.0\Razor\Views\Home\AboutUs.cshtml.g.cs
+C:\Users\Raul\Source\Repos\mauricioacp\FabricProject\ProyectoFabric\obj\Debug\netcoreapp3.0\Razor\Views\Home\AboutUs.cshtml.g.cs

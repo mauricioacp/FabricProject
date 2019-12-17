@@ -345,6 +345,10 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
         swal("Width Validation", "You must enter a Width for the Room", "error");
     }
 
+    else if ((inputWidth.value <= 0)) {
+        swal("Width Validation", "Negative values and zero values are not allowed", "error");
+    }
+
     else if (!exp1.test(dataWidth)) {
         swal("Width Validation", "The Special Caharcters/Letters are not allowed in the Width", "error");
     }
@@ -357,6 +361,10 @@ function createRoom(inputName, inputWidth, inputHeight, formroom) {
 
     else if (!exp1.test(dataHeight)) {
         swal("Height Validation", "The Special Caharcters/Letters are not allowed in the Height", "error");
+    }
+
+    else if ((inputHeight.value <= 0)) {
+        swal("Height Validation", "Negative values and zero values are not allowed", "error");
     }
     else {
         formroom.remove();
@@ -710,11 +718,23 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         }
 
 
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values are not allowed", "error");
+        }
+
+
         // Distance Validations
 
         else if ((inputDistance.value == "")) {
             swal("Distance Validation", "You must enter a Distance for the Window", "error");
         }
+
+
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
+        }
+
+
 
         else if (!exp1.test(dataDistance)) {
             swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
@@ -819,6 +839,9 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Validation", "You must enter a Width for the Window", "error");
         }
 
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
 
         // Distance Validations
 
@@ -830,7 +853,9 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
         }
 
-
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
+        }
 
         else {
 
@@ -933,6 +958,9 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Validation", "You must enter a Width for the Window", "error");
         }
 
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
 
         // Distance Validations
 
@@ -944,7 +972,9 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
         }
 
-
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
+        }
 
         else {
 
@@ -1045,6 +1075,10 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Width Validation", "You must enter a Width for the Window", "error");
         }
 
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
+
 
         // Distance Validations
 
@@ -1054,6 +1088,10 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
 
         else if (!exp1.test(dataDistance)) {
             swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
+        }
+
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
         }
 
         else {
@@ -1402,6 +1440,10 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
             swal("Width Validation", "The Special Caharcters/Letters are not allowed in the Width", "error");
         }
 
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
+
 
 
         // Distance Validations
@@ -1412,6 +1454,10 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
 
         else if (!exp1.test(dataDistance)) {
             swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
+        }
+
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
         }
 
 
@@ -1486,7 +1532,6 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         });
 
         let seSolapa = false;
-
         var dataName = inputDoorName.value;
         var dataDistance = inputDistance.value;
         var dataWidth = inputWidth.value;
@@ -1495,25 +1540,55 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         var exp = /[A-Za-z0-9]/;
         var exp1 = /[0-9]/;
 
-        //Límites ancho: 
-        if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.height) {
 
+        //Límites ancho pared: 
+
+        if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.width) {
 
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        // Name Validations
+
+        else if ((inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
+
+        else if (!exp.test(dataName)) {
+            swal("Name Validation", "Special characters are not allowed in the name", "error");
         }
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
+
+        // Width Validations
+
+        else if ((inputWidth.value == "")) {
+            swal("Width Validation", "You must enter a Width for the Door", "error");
         }
 
+        else if (!exp1.test(dataWidth)) {
+            swal("Width Validation", "The Special Caharcters/Letters are not allowed in the Width", "error");
+        }
+
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
+
+
+
+        // Distance Validations
+
+        else if ((inputDistance.value == "")) {
+            swal("Distance Validation", "You must enter a Distance for the Door", "error");
+        }
+
+        else if (!exp1.test(dataDistance)) {
+            swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
+        }
+
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
+        }
 
         else {
 
@@ -1596,23 +1671,55 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         var exp = /[A-Za-z0-9]/;
         var exp1 = /[0-9]/;
 
+
+        //Límites ancho pared: 
+
         if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.width) {
 
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        // Name Validations
+
+        else if ((inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
+
+        else if (!exp.test(dataName)) {
+            swal("Name Validation", "Special characters are not allowed in the name", "error");
         }
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
+
+        // Width Validations
+
+        else if ((inputWidth.value == "")) {
+            swal("Width Validation", "You must enter a Width for the Door", "error");
         }
 
+        else if (!exp1.test(dataWidth)) {
+            swal("Width Validation", "The Special Caharcters/Letters are not allowed in the Width", "error");
+        }
+
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
+
+
+
+        // Distance Validations
+
+        else if ((inputDistance.value == "")) {
+            swal("Distance Validation", "You must enter a Distance for the Door", "error");
+        }
+
+        else if (!exp1.test(dataDistance)) {
+            swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
+        }
+
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
+        }
         else {
 
             //Condiciones Solapamiento:
@@ -1694,21 +1801,54 @@ function createDoor(inputDoorName, inputDistance, inputSide, doorOpeningInput, d
         var exp = /[A-Za-z0-9]/;
         var exp1 = /[0-9]/;
 
-        if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.height) {
+
+        //Límites ancho pared: 
+
+        if ((parseInt(inputDistance.value) + parseInt(inputWidth.value)) > rect.width) {
 
             swal("Width Error", "The width of the object is bigger than the width of the wall", "error");
         }
 
-        else if (parseInt(inputDoorName.value) || (inputDoorName.value == "")) {
+        // Name Validations
+
+        else if ((inputDoorName.value == "")) {
             swal("Name Validation", "You must enter a Name for the Door", "error");
         }
 
-        else if (!parseInt(inputWidth.value)) {
-            swal("Width Validation", "You must enter a number for the Width", "error");
+
+        else if (!exp.test(dataName)) {
+            swal("Name Validation", "Special characters are not allowed in the name", "error");
         }
 
-        else if (!parseInt(inputDistance.value)) {
-            swal("Distance Validation", "You must enter a number for the Distance", "error");
+
+        // Width Validations
+
+        else if ((inputWidth.value == "")) {
+            swal("Width Validation", "You must enter a Width for the Door", "error");
+        }
+
+        else if (!exp1.test(dataWidth)) {
+            swal("Width Validation", "The Special Caharcters/Letters are not allowed in the Width", "error");
+        }
+
+        else if ((inputWidth.value <= 0)) {
+            swal("Width Validation", "Negative values and zero values are not allowed", "error");
+        }
+
+
+
+        // Distance Validations
+
+        else if ((inputDistance.value == "")) {
+            swal("Distance Validation", "You must enter a Distance for the Door", "error");
+        }
+
+        else if (!exp1.test(dataDistance)) {
+            swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
+        }
+
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero values are not allowed", "error");
         }
         else {
 
