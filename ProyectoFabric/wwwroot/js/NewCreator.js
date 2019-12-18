@@ -66,7 +66,7 @@ select.addEventListener('change', function () {
     let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
     let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
 
-    this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+    this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
 
     if (MyPlano.Ventanas[0] == null) {
 
@@ -111,14 +111,14 @@ select.addEventListener('change', function () {
 
 room.addEventListener("click", function () {
 
-    this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+    this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
     createRoomForm();
 
     let wind = document.getElementById("window");
 
     wind.addEventListener("click", function () {
 
-        this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+        this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
         createWindowForm();
 
     })
@@ -127,7 +127,7 @@ room.addEventListener("click", function () {
 
     door.addEventListener("click", function () {
 
-        this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+        this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
         createDoorForm();
 
     })

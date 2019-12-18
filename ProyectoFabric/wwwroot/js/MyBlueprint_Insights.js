@@ -194,6 +194,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             side: ventanas_wallside[a].value.toLowerCase(),
             left: leftRoom + parseInt(ventanas_distance[a].value),
             top: topRoom - heightWind1 / 2,
+            distance: parseInt(ventanas_distance[a].value),
             fill: 'transparent',
             stroke: 'blue',
             strokeWidth: 1,
@@ -238,6 +239,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             type: "window",
             side: ventanas_wallside[a].value.toLowerCase(),
             left: (leftRoom - parseInt(ventanas_distance[a].value)),
+            distance: parseInt(ventanas_distance[a].value),
             top: topRoom - heightWind1 / 2,
             fill: 'transparent',
             stroke: 'blue',
@@ -283,6 +285,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             left: (leftRoom - heightWind1 / 2),
             top: topRoom + parseInt(ventanas_distance[a].value),
             fill: 'transparent',
+            distance: parseInt(ventanas_distance[a].value),
             stroke: 'blue',
             strokeWidth: 1,
             strokeUniform: true,
@@ -332,6 +335,7 @@ for (var a = 0; a < ventanas_distance.length; a++) {
             top: topRoom - parseInt(ventanas_distance[a].value),
             fill: 'transparent',
             stroke: 'blue',
+            distance: parseInt(ventanas_distance[a].value),
             strokeWidth: 1,
             strokeUniform: true,
             width: heightWind1,
@@ -393,6 +397,7 @@ for (var a = 0; a < puertas_distance.length; a++) {
             side: puertas_wallside[a].value.toLowerCase(),
             left: leftRoom + parseInt(puertas_distance[a].value) + x + 1,
             top: topRoom - x,
+            distance: parseInt(puertas_distance[a].value),
             fill: 'transparent',
             stroke: 'brown',
             perPixelTargetFind: true,
@@ -447,6 +452,7 @@ for (var a = 0; a < puertas_distance.length; a++) {
             type: "door",
             side: puertas_wallside[a].value.toLowerCase(),
             top: topRoom + parseInt(puertas_distance[a].value) + x + 1,
+            distance: parseInt(puertas_distance[a].value),
             fill: 'transparent',
             stroke: 'brown',
             perPixelTargetFind: true,
@@ -503,6 +509,7 @@ for (var a = 0; a < puertas_distance.length; a++) {
             type: "door",
             fill: 'transparent',
             stroke: 'brown',
+            distance: parseInt(puertas_distance[a].value),
             perPixelTargetFind: true,
             strokeWidth: 1,
             strokeUniform: true,
@@ -537,6 +544,7 @@ for (var a = 0; a < puertas_distance.length; a++) {
         let ejeX = Boolean(puertas_dooropening[a].value);
         let ejeY = Boolean(puertas_dooraxis[a].value);
         let topRoom = 100;
+
         let leftRoom = 100;
         topRoom = topRoom + roomSize.height;
         leftRoom;
@@ -555,6 +563,7 @@ for (var a = 0; a < puertas_distance.length; a++) {
             type: "door",
             top: topRoom - parseInt(puertas_distance[a].value) - x,
             fill: 'transparent',
+            distance: parseInt(puertas_distance[a].value),
             stroke: 'brown',
             perPixelTargetFind: true,
             strokeWidth: 1,
@@ -596,7 +605,7 @@ select.addEventListener('change', function () {
     let foundVentanas = MyPlano.Ventanas.find(element => element.name == this.value);
     let foundPuertas = MyPlano.Puertas.find(element => element.name == this.value);
 
-    this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+    this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
 
     if (MyPlano.Ventanas[0] == null) {
 
@@ -641,14 +650,14 @@ select.addEventListener('change', function () {
 room.addEventListener("click", function () {
 
 
-    this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+    this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
     createRoomForm();
 
     let wind = document.getElementById("window");
 
     wind.addEventListener("click", function () {
 
-        this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+        this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
         createWindowForm();
 
     })
@@ -657,7 +666,7 @@ room.addEventListener("click", function () {
 
     door.addEventListener("click", function () {
 
-        this.onclick = window.scrollTo({ top: 865, behavior: "smooth" });
+        this.onclick = window.scrollTo({ top: 823, behavior: "smooth" });
         createDoorForm();
 
     })
@@ -1003,12 +1012,12 @@ function createWindowForm(Object, myplanoventanas) {
     if (Object == null) {
 
 
-        nameWindLabel.setAttribute("placeholder", "Enter Name");
+        inputWindName.setAttribute("placeholder", "Enter Name");
 
     }
     else {
 
-        nameWindLabel.setAttribute("value", Object.name);
+        inputWindName.setAttribute("value", Object.name);
 
 
     }

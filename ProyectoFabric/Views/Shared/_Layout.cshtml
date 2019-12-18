@@ -97,7 +97,7 @@
                                             @if (_signInManager.IsSignedIn(User))
                                             {
                                                 AppUser user = await _userManager.GetUserAsync(User);
-                                                <a href="projects.html">My Section</a>
+                                                <a href="/Identity/Account/Manage">My Section</a>
                                                 <ul class="dropdown arrow-top">
                                                     <li><a href="/Identity/Account/Manage">Profile</a></li>
 
