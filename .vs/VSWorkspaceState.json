@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ProyectoFabric"
+    "\\ProyectoFabric",
+    "\\ProyectoFabric\\Views",
+    "\\ProyectoFabric\\Views\\Home"
   ],
-  "SelectedNode": "\\package-lock.json",
+  "SelectedNode": "\\ProyectoFabric.sln",
   "PreviewInSolutionExplorer": false
 }

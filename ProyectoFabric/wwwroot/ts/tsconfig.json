@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-   
+
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "ES6"
+    "target": "ES6",
+    "strictNullChecks": false
   },
  
   "exclude": [
