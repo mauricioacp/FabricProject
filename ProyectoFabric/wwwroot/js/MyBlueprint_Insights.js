@@ -436,9 +436,11 @@ for (var a = 0; a < puertas_distance.length; a++) {
         let ejeY = Boolean(puertas_dooraxis[a].value);
         let topRoom = 100;
         let leftRoom = 100;
+
         topRoom;
         leftRoom = leftRoom + roomSize.width;
         let x = width_positivo;
+
         if (puertas_dooropening[a].value == false) {
             leftRoom = leftRoom + heightDoor / 2 + 1;
         }
@@ -449,10 +451,10 @@ for (var a = 0; a < puertas_distance.length; a++) {
         door1.set({
             name: puertas_nombres[a].value,
             left: leftRoom,
+            distance: parseInt(puertas_distance[a].value),
+            top: topRoom + parseInt(puertas_distance[a].value) + x + 1,
             type: "door",
             side: puertas_wallside[a].value.toLowerCase(),
-            top: topRoom + parseInt(puertas_distance[a].value) + x + 1,
-            distance: parseInt(puertas_distance[a].value),
             fill: 'transparent',
             stroke: 'brown',
             perPixelTargetFind: true,
@@ -1146,7 +1148,7 @@ function createWindowForm(Object, myplanoventanas) {
     botonDelete.addEventListener("click", function () {
 
         formWindow.remove();
-        canvas.remove(wind1);
+        canvas.remove(Object);
         addToSelect();
 
         //if (!myplanoventanas == null) {
@@ -1170,6 +1172,7 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
         swal("Side Validation", "You must enter a Side", "error");
     }
 
+    
 
     if (inputSide.value.toLowerCase() === "n") {
         let topRoom = 100;
@@ -1593,8 +1596,8 @@ function createWindow(inputSide, inputWindName, inputDistance, inputWidth, formW
             swal("Distance Validation", "The Special Caharcters/Letters are not allowed in the Distance", "error");
         }
 
-        else if ((inputHeight.value <= 0)) {
-            swal("Height Validation", "Negative values and zero are not allowed", "error");
+        else if ((inputDistance.value <= 0)) {
+            swal("Distance Validation", "Negative values and zero are not allowed", "error");
         }
 
         else {
@@ -1843,7 +1846,7 @@ function createDoorForm(Object, myplanopuertas) {
     botonDelete.addEventListener("click", function () {
 
         formDoor.remove();
-        canvas.remove(door1);
+        canvas.remove(Object);
         addToSelect();
       
     })
@@ -2358,7 +2361,7 @@ boton.addEventListener('click', function () {
         dataType: 'json',
         type: 'POST',
         data: postPlano,
-        async: false,
+        
         contentType: 'application/json; charset=utf-8',
         traditional: true,
         success: function (response) {
