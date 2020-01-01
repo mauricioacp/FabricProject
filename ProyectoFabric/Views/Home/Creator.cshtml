@@ -19,99 +19,100 @@
         <input id="appUserId" type="hidden" name="userid" value="@Model.Id" />
 
 
-<div class="site-section holamundo">
-    
-        <div class="container">
-            <div class="row">
-                <div class="mr-2">
-                    <select class="form-control bg-primary" id="sel1">
-                        <option value="0">Select your object</option>
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <a id="GuardarPlano" class="site-block-feature d-flex p-4 rounded mb-1">
-                        <div class="mr-3">
-                            <span class="icon icon-save2 font-weight-bolder h5 bg-success"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Save Design</h3>
+        <div class="site-section holamundo">
 
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-2">
-                    <a id="botonDeleteAll" class="site-block-feature d-flex p-4 rounded mb-1">
-                        <div class="mr-3">
-                            <span class="icon icon-delete_forever font-weight-light h5 bg-danger"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Delete All</h3>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a id="room" class="site-block-feature d-flex p-4 rounded mb-1">
-                        <div class="mr-3">
-                            <span class="icon flaticon-interior-design font-weight-light h5"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Create Room</h3>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a id="door" class="site-block-feature d-flex p-4 rounded mb-1">
-                        <div class="mr-3">
-                            <span class="icon flaticon-measuring font-weight-light h5"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Door</h3>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-2">
-                    <a id="window" class="site-block-feature d-flex p-4 rounded mb-1">
-                        <div class="mr-3">
-                            <span class="icon flaticon-window font-weight-light h5"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Window</h3>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6 cajaCanvas offset-1" style="margin:0%">
+            <div class="container">
                 <div class="row">
-                    <div class="col-3 offset-3">                       
-                    <label style="font:bold" class="text-danger">
-                        Blueprint Name:
-                    <input class="form-control" id="nombreplano" type="text"  />
-                    </label>
+
+                    <div class="col-lg-2">
+                        <a id="GuardarPlano" class="site-block-feature d-flex p-4 rounded mb-1">
+                            <div class="mr-3" style="width:90% !important">
+                                <span class="icon icon-save2 font-weight-bolder h5 bg-success"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Save Design</h3>
+
+                            </div>
+                        </a>
                     </div>
-                <div class="avatar avatar-md mr-3 mb-2 mt-1 col-2">
-                    <a ><img src="~/images/compass.png" alt="compass" /></a>
-                    <h4 style="font:bold" class="text-danger">  10:1 m</h4>
-                </div>
-                </div>
-                <div class="offset-2">
 
-                <canvas style="margin:0%" width="500" height="500" id="canvas"></canvas>
-                </div>
+                    <div class="col-lg-2">
+                        <a id="botonDeleteAll" class="site-block-feature d-flex p-4 rounded mb-1">
+                            <div class="mr-3">
+                                <span class="icon icon-delete_forever font-weight-light h5 bg-danger"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Delete All</h3>
 
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-2">
+                        <a id="room" class="site-block-feature d-flex p-4 rounded mb-1">
+                            <div class="mr-3">
+                                <span class="icon flaticon-interior-design font-weight-light h5"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Create Room</h3>
+
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-2">
+                        <a id="door" class="site-block-feature d-flex p-4 rounded mb-1">
+                            <div class="mr-3">
+                                <span class="icon flaticon-measuring font-weight-light h5"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Door</h3>
+
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-2">
+                        <a id="window" class="site-block-feature d-flex p-4 rounded mb-1">
+                            <div class="mr-3">
+                                <span class="icon flaticon-window font-weight-light h5"></span>
+                            </div>
+                            <div class="text">
+                                <h3>Window</h3>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-6 cajaCanvas offset-1" style="margin:0%">
+                    <div class="row">
+                        <div class="col-3 offset-3">
+                            <label style="font:bold" class="text-danger">
+                                Blueprint Name:
+                                <input class="form-control" id="nombreplano" type="text" />
+                            </label>
+                        </div>
+                        <div class="avatar avatar-md mr-3 mb-2 mt-1 col-2">
+                            <a><img src="~/images/compass.png" alt="compass" /></a>
+                            <h4 style="font:bold" class="text-danger">  10:1 m</h4>
+                        </div>
+                        <div class="mr-2" style="margin-top:3%">
+                            <select class="form-control bg-primary" id="sel1" >
+                                <option value="0">Select your object</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="offset-2">
 
-            <div class="col-5 workPlace">
+                        <canvas style="margin:0%" width="500" height="500" id="canvas"></canvas>
+                    </div>
 
+                </div>
+
+                <div class="col-5 workPlace">
+
+                </div>
             </div>
         </div>
-    </div>
 
 
 
