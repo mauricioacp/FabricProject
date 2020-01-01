@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="ProyectoFabric20191219100914" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\mauri\\Source\\Repos\\mauricioacp\\FabricProject\\ProyectoFabric\\obj\\Release\\netcoreapp3\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
